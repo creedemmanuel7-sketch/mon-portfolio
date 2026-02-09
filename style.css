@@ -171,6 +171,11 @@ h2 {
     text-align: center;
 }
 
+.contact-details {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
 .social-links {
     margin-top: 2rem;
     display: flex;
@@ -207,6 +212,7 @@ footer {
     .hero h1 {
         font-size: 2.5rem;
     }
+
     nav ul {
         display: none;
     }
