@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../finance-analyzer"
+		},
+		{
+			"path": "../student-manager"
+		},
+		{
+			"path": "../tontine-app"
+		}
+	],
+	"settings": {}
+}
