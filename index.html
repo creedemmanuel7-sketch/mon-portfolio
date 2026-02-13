@@ -1,119 +1,185 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio | Étudiant IA & Big Data</title>
+    <title>Crédo ADJIGNON | Ingénieur IA & Big Data</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
+    <!-- Background Animation Layer -->
+    <div class="bg-animation">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
     <header>
         <nav>
-            <div class="logo">Dev<span>Student</span></div>
+            <div class="logo">Crédo<span>.ai</span></div>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#parcours">Parcours</a></li>
                 <li><a href="#projets">Projets</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="accueil" class="hero">
-        <div class="content">
-            <h1>Bonjour, je suis <span class="highlight">Étudiant Développeur</span></h1>
-            <p>Passionné par la manipulation des données et les mathématiques. Je transforme des algorithmes complexes
-                en solutions concrètes pour la santé et la finance.</p>
-            <div class="cta-buttons">
-                <a href="#projets" class="btn primary">Voir mes projets</a>
-                <a href="#contact" class="btn secondary">Me contacter</a>
+    <main>
+        <!-- Section Accueil (Hero) -->
+        <section id="accueil" class="hero">
+            <div class="hero-container">
+                <div class="hero-image animate__animated animate__zoomIn">
+                    <div class="image-wrapper">
+                        <!-- Remplacez le lien ci-dessous par votre photo une fois genérée -->
+                        <img src="images/credson.jpeg" alt="Crédo ADJIGNON">
+                    </div>
+                </div>
+                <div class="hero-content animate__animated animate__fadeInRight">
+                    <span class="badge-ai">Explorateur IA & Big Data</span>
+                    <h1>Bonjour, je suis <span class="highlight">Crédo ADJIGNON</span></h1>
+                    <p class="description">
+                        Étudiant à l'<strong>ESGIS Togo</strong>, je me spécialise dans la transformation des données en
+                        intelligence exploitable.
+                        Passionné par les mathématiques et l'algorithmique, je construis l'avenir de la tech, un projet
+                        à la fois.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#projets" class="btn primary">Découvrir mes travaux</a>
+                        <a href="#contact" class="btn secondary">Discutons</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projets">
-        <h2>Mes Projets <span class="badge">7</span></h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Ce Portfolio</h3>
-                    <p>Mon tout premier projet : un site web professionnel pour présenter mon parcours et mes
-                        compétences.</p>
-                    <span class="tech-stack">HTML • CSS • Git</span>
+        <!-- Section IA & Apprentissage -->
+        <section id="parcours" class="about-modern">
+            <div class="glass-card">
+                <h2>Vision & Apprentissage</h2>
+                <div class="grid-about">
+                    <div class="about-text">
+                        <p>Dans un monde en constante mutation, je crois fermement que l'adaptabilité est la clé. Mon
+                            approche du développement repose sur deux piliers :</p>
+                        <ul>
+                            <li><i class="fas fa-microchip"></i> <strong>Intelligence Artificielle</strong> : J'utilise
+                                quotidiennement les IA (LLMs, outils d'assistance au code) pour accélérer mon
+                                apprentissage et optimiser mes solutions.</li>
+                            <li><i class="fas fa-search"></i> <strong>Recherche Continue</strong> : Chaque jour est une
+                                opportunité de veille technologique pour maîtriser les derniers frameworks et paradigmes
+                                du Big Data.</li>
+                        </ul>
+                    </div>
+                    <div class="stats-mini">
+                        <div class="stat-item">
+                            <span class="stat-num">7+</span>
+                            <span class="stat-lab">Projets validés</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">365</span>
+                            <span class="stat-lab">Jours d'innovation</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Analyseur de Finances</h3>
-                    <p>Un outil en C qui traite des fichiers CSV pour calculer des stats financières et détecter des
-                        anomalies de budget.</p>
-                    <span class="tech-stack">Langage C • File I/O • Algorithmique</span>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Gestionnaire de Notes</h3>
-                    <p>Programme en C avec algorithmes de tri (Bubble Sort) pour classer des étudiants et générer des
-                        feedbacks automatiques.</p>
-                    <span class="tech-stack">Langage C • Algorithmes de Tri • Logique Métier</span>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Simulateur de Tontine</h3>
-                    <p>Application en C gérant des cycles de cotisations avec rotation automatique des bénéficiaires via
-                        l'opérateur modulo.</p>
-                    <span class="tech-stack">Langage C • Modulo • Structures</span>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Code Explorer</h3>
-                    <p>Analyseur statique de fichiers source C pour calculer des statistiques de lignes, caractères et
-                        documentation.</p>
-                    <span class="tech-stack">Langage C • Parsing • Stats</span>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Data Viz Python</h3>
-                    <p>Analyseur de données utilisant Pandas et Matplotlib pour générer des graphiques statistiques à
-                        partir de fichiers CSV.</p>
-                    <span class="tech-stack">Python • Pandas • Matplotlib</span>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <h3>Web Scraper PRO</h3>
-                    <p>Automate Python extrayant des news tech en temps réel, avec traduction automatique en français et collecte de métadonnées.</p>
-                    <span class="tech-stack">Python • BeautifulSoup4 • Requests • NLP</span>
-                </div>
-            </div>
-            <!-- Future projects will go here -->
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-        <h2>Travaillons Ensemble</h2>
-        <p>Tu as un projet ou tu veux juste discuter ? N'hésite pas !</p>
-        <div class="contact-details">
-            <p>📧 Email : <a href="mailto:creedemmanuel7@gmail.com" class="highlight">creedemmanuel7@gmail.com</a></p>
-            <p>📍 Localisation : <span class="highlight">Lomé, Togo</span></p>
-        </div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/crédo-adjignon-1a15b4382" class="social-btn"
-                target="_blank">LinkedIn</a>
-            <a href="https://github.com/creedemmanuel7-sketch" class="social-btn" target="_blank">GitHub</a>
-        </div>
-    </section>
+        <!-- Section Projets -->
+        <section id="projets">
+            <h2>Mon Laboratoire <span class="badge">7</span></h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-info">
+                        <div class="icon-box"><i class="fas fa-globe"></i></div>
+                        <h3>Web Scraper PRO</h3>
+                        <p>Automate Python extrayant des news tech en temps réel, avec traduction automatique et analyse
+                            de métadonnées.</p>
+                        <span class="tech-stack">Python • BS4 • NLP</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-info">
+                        <div class="icon-box"><i class="fas fa-chart-bar"></i></div>
+                        <h3>Data Viz Python</h3>
+                        <p>Analyse statistique et génération de graphiques professionnels à partir de gros volumes de
+                            données CSV.</p>
+                        <span class="tech-stack">Pandas • Matplotlib</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-info">
+                        <div class="icon-box"><i class="fas fa-code"></i></div>
+                        <h3>Code Explorer</h3>
+                        <p>Analyseur statique effectuant des statistiques avancées sur les fichiers sources en langage
+                            C.</p>
+                        <span class="tech-stack">Langage C • Parsing</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-info">
+                        <div class="icon-box"><i class="fas fa-users"></i></div>
+                        <h3>Simulateur de Tontine</h3>
+                        <p>Algorithme de rotation financière automatisée gérant les cycles de contributions et les
+                            bénéficiaires.</p>
+                        <span class="tech-stack">Langage C • Logique Modulo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more">
+                <a href="https://github.com/creedemmanuel7-sketch" target="_blank" class="btn-text">Voir tout sur GitHub
+                    <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact">
+            <div class="contact-card animate__animated animate__fadeInUp">
+                <h2>Prêt pour le prochain défi ?</h2>
+                <p>Je suis ouvert aux opportunités en IA, Data Science et développement logiciel au Togo ou à
+                    l'international.</p>
+
+                <div class="contact-grid">
+                    <a href="mailto:creedemmanuel7@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/crédo-adjignon-1a15b4382" target="_blank" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/creedemmanuel7-sketch" target="_blank" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i> Lomé, Togo
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 - Créé avec <span class="heart">❤️</span> au Togo</p>
+        <p>&copy; 2026 - Crédo ADJIGNON | Ingénieur IA | Design via Principes HMI</p>
     </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
