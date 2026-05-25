@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ff0066",
+              "background-light": "#f8f5f7",
+              "background-dark": "#230f17",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(60px) brightness(1.1);
+            -webkit-backdrop-filter: blur(60px) brightness(1.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-glow {
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.4);
+        }
+        .text-spaced {
+            letter-spacing: 0.2em;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<div class="relative min-h-screen w-full flex flex-col">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center scale-110" data-alt="Majestic coastal mountains at twilight with shimmering water reflections" style="background-image: linear-gradient(to bottom, rgba(35, 15, 23, 0.3), rgba(35, 15, 23, 0.8)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQxb90GjPNQith3E1q3WftYMlzSaxbpiBU8SDm9Gy47JDuRXOOZKNs2XU_6wwvCOEsu9iBVijLD27qPay8-bimHkgzmquU5Lnf9UeRMrirIQEUVMFU9lSjPtYTJd5AH5BknUxHgZV3coFSCuhnZ6mxF7lN00RXVV_-42HhcBciLcgecP-fHHHQbZ86PxWDI5uX-9fHQbwIEdZPlxLSXR32CJjH67yxHS85ApOD0kSD0UQc_ViaTpfwmlvPcaqiKxbRTnBWKX51hNen')">
+</div>
+</div>
+<!-- Content Wrapper -->
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 md:px-20 backdrop-blur-md border-b border-white/5">
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">deployed_code</span>
+</div>
+<h2 class="text-slate-100 text-lg font-black tracking-tight uppercase">Crédo Adjignon</h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-slate-100/70 hover:text-white text-sm font-medium transition-colors" href="#">Accueil</a>
+<a class="text-slate-100/70 hover:text-white text-sm font-medium transition-colors" href="#">Parcours</a>
+<a class="text-slate-100/70 hover:text-white text-sm font-medium transition-colors" href="#">Projets</a>
+<a class="text-slate-100/70 hover:text-white text-sm font-medium transition-colors" href="#">Contact</a>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full text-sm font-bold transition-all hero-glow">
+                        Hire Me
+                    </button>
+</nav>
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Hero Section -->
+<main class="flex-grow flex items-center justify-center px-4 py-20">
+<div class="liquid-glass max-w-4xl w-full rounded-3xl p-12 md:p-24 flex flex-col items-center text-center gap-8 shadow-2xl border border-white/10">
+<div class="flex flex-col gap-4">
+<h1 class="text-white text-5xl md:text-8xl font-black leading-none tracking-tighter">
+                            CRÉDO ADJIGNON
+                        </h1>
+<h2 class="text-primary text-xs md:text-sm font-bold tracking-[0.3em] uppercase opacity-90">
+                            Ingénieur IA &amp; Big Data
+                        </h2>
+</div>
+<p class="text-slate-100/60 max-w-lg text-lg font-light leading-relaxed">
+                        Architecturer le futur de la donnée à travers des modèles intelligents et des infrastructures massives.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-4">
+<button class="bg-primary hover:scale-105 transition-transform text-white px-10 py-4 rounded-full text-base font-bold hero-glow">
+                            Get Started
+                        </button>
+<button class="bg-white/5 hover:bg-white/10 backdrop-blur-sm text-white px-10 py-4 rounded-full text-base font-bold border border-white/10 transition-all">
+                            Voir Projets
+                        </button>
+</div>
+</div>
+</main>
+<!-- Content Sections -->
+<section class="bg-background-dark/80 backdrop-blur-xl py-24 px-6 md:px-20 border-t border-white/5">
+<div class="max-w-6xl mx-auto">
+<div class="grid md:grid-cols-2 gap-20">
+<!-- Parcours -->
+<div>
+<h2 class="text-white text-3xl font-bold mb-12 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">timeline</span>
+                                Parcours Professionnel
+                            </h2>
+<div class="space-y-0 relative border-l border-primary/20 ml-3">
+<!-- Item 1 -->
+<div class="pb-12 pl-8 relative">
+<div class="absolute -left-[13px] top-0 size-6 rounded-full bg-background-dark border-2 border-primary flex items-center justify-center">
+<div class="size-2 rounded-full bg-primary"></div>
+</div>
+<p class="text-primary text-xs font-bold mb-1 tracking-widest uppercase">2022 - Présent</p>
+<h3 class="text-white text-xl font-bold">Senior AI Engineer</h3>
+<p class="text-slate-400 mt-2 text-sm leading-relaxed">Développement de pipelines de machine learning distribués et optimisation de modèles LLM pour l'entreprise.</p>
+</div>
+<!-- Item 2 -->
+<div class="pb-12 pl-8 relative">
+<div class="absolute -left-[13px] top-0 size-6 rounded-full bg-background-dark border-2 border-primary/40 flex items-center justify-center">
+<div class="size-2 rounded-full bg-primary/40"></div>
+</div>
+<p class="text-primary/60 text-xs font-bold mb-1 tracking-widest uppercase">2020 - 2022</p>
+<h3 class="text-white text-xl font-bold">Data Architect</h3>
+<p class="text-slate-400 mt-2 text-sm leading-relaxed">Conception d'architectures Cloud hybrides et gouvernance des données massives.</p>
+</div>
+<!-- Item 3 -->
+<div class="pb-4 pl-8 relative">
+<div class="absolute -left-[13px] top-0 size-6 rounded-full bg-background-dark border-2 border-primary/20 flex items-center justify-center">
+<div class="size-2 rounded-full bg-primary/20"></div>
+</div>
+<p class="text-primary/40 text-xs font-bold mb-1 tracking-widest uppercase">2018 - 2020</p>
+<h3 class="text-white text-xl font-bold">Big Data Specialist</h3>
+<p class="text-slate-400 mt-2 text-sm leading-relaxed">Expertise sur l'écosystème Hadoop/Spark et traitement de flux temps réel.</p>
+</div>
+</div>
+</div>
+<!-- Projets Vedettes -->
+<div>
+<h2 class="text-white text-3xl font-bold mb-12 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                                Projets Vedettes
+                            </h2>
+<div class="grid gap-6">
+<div class="liquid-glass p-6 rounded-2xl group cursor-pointer hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="size-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">neurology</span>
+</div>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary transition-colors">north_east</span>
+</div>
+<h4 class="text-white font-bold text-lg mb-2">Neural Nexus Engine</h4>
+<p class="text-slate-400 text-sm">Système prédictif haute performance traitant 1M+ transactions/sec.</p>
+</div>
+<div class="liquid-glass p-6 rounded-2xl group cursor-pointer hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="size-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">database</span>
+</div>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary transition-colors">north_east</span>
+</div>
+<h4 class="text-white font-bold text-lg mb-2">Oceanic Data Lake</h4>
+<p class="text-slate-400 text-sm">Migration et orchestration de 5PB de données multi-cloud.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-background-dark py-12 px-6 md:px-20 border-t border-white/5 text-center">
+<div class="flex justify-center gap-6 mb-8">
+<a class="size-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">alternate_email</span>
+</a>
+<a class="size-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+<a class="size-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">contacts</span>
+</a>
+</div>
+<p class="text-slate-500 text-xs font-medium tracking-widest uppercase">
+                    © 2024 CRÉDO ADJIGNON — Conçu pour l'Excellence
+                </p>
+</footer>
+</div>
+</div>
+</body></html>

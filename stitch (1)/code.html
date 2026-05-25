@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crédo ADJIGNON | Monochrome Glass in Deep Space</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Space Grotesk for that modern, orbital feel -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- BEGIN: Custom Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            'deep-space': '#000000',
+            'glass-border': 'rgba(255, 255, 255, 0.1)',
+            'silver-gray': '#A1A1AA',
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'orbit': 'orbit 20s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            orbit: {
+              'from': { transform: 'rotate(0deg) translateX(10px) rotate(0deg)' },
+              'to': { transform: 'rotate(360deg) translateX(10px) rotate(-360deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Custom Configuration -->
+<!-- BEGIN: Specialized Styles -->
+<style data-purpose="glassmorphism">
+    .pure-glass {
+      background: rgba(255, 255, 255, 0.01);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    }
+    
+    .glass-hover:hover {
+      border: 0.5px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.03);
+      transition: all 0.4s ease;
+    }
+
+    .luminescent-text {
+      color: #FFFFFF;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .specular-reflection {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
+  </style>
+<style data-purpose="background-layers">
+    body {
+      background-color: #000000;
+      overflow-x: hidden;
+    }
+
+    .space-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Smoke / Nebula effect using radial gradients */
+    .nebula {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(50, 50, 50, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(30, 30, 30, 0.1) 0%, transparent 40%);
+      z-index: -2;
+    }
+  </style>
+<!-- END: Specialized Styles -->
+<style>
+    .perspective-container {
+      perspective: 1000px;
+    }
+    
+    .glass-card-3d {
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.6s ease;
+      transform-style: preserve-3d;
+    }
+
+    .glass-card-3d:hover {
+      transform: translateY(-15px) rotateX(4deg) rotateY(-2deg);
+      box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    @keyframes float-alt-1 {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-12px) rotate(0.5deg); }
+      66% { transform: translateY(-5px) rotate(-0.5deg); }
+    }
+
+    @keyframes float-alt-2 {
+      0%, 100% { transform: translateY(-5px) rotate(-0.3deg); }
+      50% { transform: translateY(-18px) rotate(0.3deg); }
+    }
+
+    .animate-float-1 { animation: float-alt-1 8s ease-in-out infinite; }
+    .animate-float-2 { animation: float-alt-2 11s ease-in-out infinite; }
+    .animate-float-3 { animation: float 7s ease-in-out infinite reverse; }
+  </style></head>
+<body class="text-silver-gray font-sans selection:bg-white selection:text-black">
+<!-- BEGIN: Cosmic Background -->
+<div class="nebula"></div>
+<canvas class="space-canvas" data-purpose="star-animation" id="starfield"></canvas>
+<!-- END: Cosmic Background -->
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl" data-purpose="main-navigation">
+<div class="pure-glass rounded-full px-8 py-4 flex items-center justify-between relative overflow-hidden">
+<div class="specular-reflection"></div>
+<div class="text-white font-bold text-xl tracking-tighter">C.A.</div>
+<div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+<a class="hover:text-white transition-colors" href="#accueil">Accueil</a>
+<a class="hover:text-white transition-colors" href="#parcours">Parcours</a>
+<a class="hover:text-white transition-colors" href="#projets">Projets</a>
+<a class="hover:text-white transition-colors" href="#arsenal">Arsenal</a>
+<a class="hover:text-white transition-colors" href="#contact">Contact</a>
+</div>
+<div class="md:hidden">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+</div>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: Hero Section -->
+<section class="min-h-screen flex flex-col items-center justify-center relative px-6 py-20" data-purpose="hero" id="accueil">
+<div class="absolute w-[500px] h-[500px] rounded-full border border-white/5 animate-orbit pointer-events-none"></div>
+<div class="absolute w-[800px] h-[800px] rounded-full border border-white/5 animate-pulse-slow pointer-events-none"></div>
+<div class="text-center z-10 animate-float">
+<span class="inline-block py-1 px-3 rounded-full border border-white/20 text-[10px] uppercase tracking-[0.3em] mb-6">Orbiting Earth Since 199X</span>
+<h1 class="text-6xl md:text-8xl font-bold luminescent-text mb-4">Crédo ADJIGNON</h1>
+<p class="text-xl md:text-2xl font-light tracking-widest uppercase">Ingénieur IA &amp; Big Data</p>
+<div class="mt-12 flex space-x-4 justify-center">
+<a class="pure-glass glass-hover px-8 py-3 rounded-full text-white text-sm font-medium transition-all" href="#projets">Explorer l'Espace</a>
+<a class="border border-white/20 px-8 py-3 rounded-full text-white text-sm font-medium hover:bg-white hover:text-black transition-all" href="#contact">Lancer un Signal</a>
+</div>
+</div>
+</section>
+<!-- END: Hero Section -->
+<main class="max-w-7xl mx-auto px-6 space-y-32 pb-32">
+<!-- BEGIN: Parcours Section -->
+<section data-purpose="experience-timeline" id="parcours">
+<div class="flex items-center space-x-4 mb-12">
+<div class="h-[1px] w-12 bg-white/20"></div>
+<h2 class="text-3xl font-bold text-white tracking-tight">Parcours</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<!-- Experience Card 1 -->
+<div class="pure-glass p-8 rounded-[40px] relative overflow-hidden group transition-transform duration-500 glass-card-3d animate-float-1">
+<div class="specular-reflection"></div>
+<span class="text-xs text-white/40 font-mono mb-2 block">2022 - Présent</span>
+<h3 class="text-2xl font-semibold text-white mb-2">Senior Data Engineer</h3>
+<p class="text-silver-gray leading-relaxed mb-6">Expertise en architectures distribuées et traitement de données massives en temps réel.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full border border-white/10 text-[10px]">SPARK</span>
+<span class="px-3 py-1 rounded-full border border-white/10 text-[10px]">KAFKA</span>
+<span class="px-3 py-1 rounded-full border border-white/10 text-[10px]">PYTHON</span>
+</div>
+</div>
+<!-- Experience Card 2 -->
+<div class="pure-glass p-8 rounded-[40px] relative overflow-hidden group transition-transform duration-500 glass-card-3d animate-float-2">
+<div class="specular-reflection"></div>
+<span class="text-xs text-white/40 font-mono mb-2 block">2020 - 2022</span>
+<h3 class="text-2xl font-semibold text-white mb-2">Architecte Solutions IA</h3>
+<p class="text-silver-gray leading-relaxed mb-6">Conception et déploiement de modèles prédictifs haute performance pour le secteur bancaire.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full border border-white/10 text-[10px]">PYTORCH</span>
+<span class="px-3 py-1 rounded-full border border-white/10 text-[10px]">DOCKER</span>
+<span class="px-3 py-1 rounded-full border border-white/10 text-[10px]">AWS</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Parcours Section -->
+<!-- BEGIN: Projets Section -->
+<section data-purpose="project-gallery" id="projets">
+<div class="flex items-center space-x-4 mb-12">
+<div class="h-[1px] w-12 bg-white/20"></div>
+<h2 class="text-3xl font-bold text-white tracking-tight">Projets Stellaires</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="pure-glass group rounded-[40px] overflow-hidden relative glass-card-3d animate-float-2">
+<div class="h-64 bg-zinc-900 flex items-center justify-center overflow-hidden">
+<img alt="Neural Network Project" class="opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMAB9niTAkOz7hg36TDuWr-i3BOdlkLF_MT5kHWjblLCbe1zLAapnHFbu280i_QC8F7AuAbVZDlbIytfJ5kpzRRoXEzWCR9iUVHUzVNOUoD86RVi03EdDN6gB-8Ai_xcJ0sNx9_jBPOJo-bzM_khdoCHm9PkhQXc4ax_-p_qXhHW5tWVKDs29aTqD6X8YU4THnydpc3pXXDj3t0NWwPlPO12g7kfMUghxXbDtTA3Y0_mnhjc6Vv5KzbbE7o6KTTHFYF1WtB_77oYkg"/>
+</div>
+<div class="p-8">
+<h3 class="text-xl font-bold text-white mb-2">Neural Sky Explorer</h3>
+<p class="text-sm text-silver-gray mb-4">Moteur d'analyse spectrale par Deep Learning pour l'astrophotographie amateur.</p>
+<div class="flex justify-between items-center">
+<span class="text-[10px] tracking-widest uppercase border-b border-white/20 pb-1">Case Study</span>
+<svg class="w-5 h-5 text-white/50 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="pure-glass group rounded-[40px] overflow-hidden relative glass-card-3d animate-float-3">
+<div class="h-64 bg-zinc-900 flex items-center justify-center overflow-hidden">
+<img alt="Data Visualization Project" class="opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXjDpjCJ96AIRCQU45QgPlKGhMg3_6PV3NEK92HnYZFXUwCtEaIMZT3H2tvcijFHZz6pPUDbpIIFlynUFCbUf05pmUyjhVOSBYAb8eNolRUl6tFoWWpdIN-rs3HAPhcKHdCuT4XXzuiX2XGMfEKC8klb8c0LHbpaEluYCfit3mdbSnJ5dBEOHZBOM5AVLJCjPOnfVhnGImyhiRaqWF51vXyGbR4b50csiEI8DSYlhu18qQc-cGes6Yl76HOp_Fb2TiOOSiKFJDVF53"/>
+</div>
+<div class="p-8">
+<h3 class="text-xl font-bold text-white mb-2">Data Quasar</h3>
+<p class="text-sm text-silver-gray mb-4">Pipeline ETL ultra-rapide traitant 2TB de logs/seconde avec une latence nulle.</p>
+<div class="flex justify-between items-center">
+<span class="text-[10px] tracking-widest uppercase border-b border-white/20 pb-1">Architecture</span>
+<svg class="w-5 h-5 text-white/50 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="pure-glass group rounded-[40px] overflow-hidden relative glass-card-3d animate-float-1">
+<div class="h-64 bg-zinc-900 flex items-center justify-center overflow-hidden">
+<img alt="AI Sentinel Project" class="opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy3qHKCwxgIzJOTFcZ24P29a0Q_aiGymsKWkKHRLF1Z38plvRj1Tite4ZvqiWJGa2i70HkQKQBONiCKD4B3aGTEIdUoHq50xifYhr21uaWC3yLo5FwpmkJrFl7Mq_7ShYaDCx-qO8UDcNgxqaAqt0nOG6_wC-SZEXheKrA6DLURrwRN4JFZWiEYUgsCQxObxCwJKOf1YEqCLNcmC8KskaQbeDKW74iTHuePjZwqdf1kuQj-E_NxsUDDuyaHgHLkFK9ibLEIxOLpugr"/>
+</div>
+<div class="p-8">
+<h3 class="text-xl font-bold text-white mb-2">Sentinel AI</h3>
+<p class="text-sm text-silver-gray mb-4">Système de détection d'anomalies multi-agent pour la cybersécurité spatiale.</p>
+<div class="flex justify-between items-center">
+<span class="text-[10px] tracking-widest uppercase border-b border-white/20 pb-1">Research</span>
+<svg class="w-5 h-5 text-white/50 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Projets Section -->
+<!-- BEGIN: Arsenal Section -->
+<section data-purpose="skills-grid" id="arsenal">
+<div class="flex items-center space-x-4 mb-12">
+<div class="h-[1px] w-12 bg-white/20"></div>
+<h2 class="text-3xl font-bold text-white tracking-tight">Arsenal 2026</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<!-- Tech Icon Item -->
+<div class="pure-glass p-6 rounded-3xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform animate-float-1">
+<div class="w-12 h-12 mb-4 border border-white/20 rounded-xl flex items-center justify-center">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="1.5"></path></svg>
+</div>
+<span class="text-white font-medium">Big Data</span>
+</div>
+<!-- Tech Icon Item -->
+<div class="pure-glass p-6 rounded-3xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform animate-float-3">
+<div class="w-12 h-12 mb-4 border border-white/20 rounded-xl flex items-center justify-center">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-width="1.5"></path></svg>
+</div>
+<span class="text-white font-medium">Deep Learning</span>
+</div>
+<!-- Tech Icon Item -->
+<div class="pure-glass p-6 rounded-3xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform animate-float-1">
+<div class="w-12 h-12 mb-4 border border-white/20 rounded-xl flex items-center justify-center">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-width="1.5"></path></svg>
+</div>
+<span class="text-white font-medium">Data Science</span>
+</div>
+<!-- Tech Icon Item -->
+<div class="pure-glass p-6 rounded-3xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform animate-float-3">
+<div class="w-12 h-12 mb-4 border border-white/20 rounded-xl flex items-center justify-center">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-width="1.5"></path></svg>
+</div>
+<span class="text-white font-medium">MLOps</span>
+</div>
+</div>
+</section>
+<!-- END: Arsenal Section -->
+<!-- BEGIN: Contact Section -->
+<section class="pt-16" data-purpose="contact-form" id="contact">
+<div class="pure-glass p-12 rounded-[40px] max-w-4xl mx-auto relative overflow-hidden">
+<div class="specular-reflection"></div>
+<div class="text-center mb-12">
+<h2 class="text-4xl font-bold text-white mb-4">Transmission Directe</h2>
+<p class="text-silver-gray">Prêt à collaborer sur la prochaine frontière technologique ?</p>
+</div>
+<form action="#" class="space-y-6">
+<div class="grid md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest text-white/60 ml-2">Nom</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/40 focus:ring-0 transition-all" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest text-white/60 ml-2">Signal (Email)</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/40 focus:ring-0 transition-all" placeholder="john@nebula.space" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest text-white/60 ml-2">Fréquence (Message)</label>
+<textarea class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/40 focus:ring-0 transition-all" placeholder="Dites-moi tout..." rows="4"></textarea>
+</div>
+<button class="w-full bg-white text-black font-bold py-5 rounded-2xl hover:bg-silver-gray transition-colors uppercase tracking-widest text-sm" type="submit">Envoyer la Pulsation</button>
+</form>
+</div>
+</section>
+<!-- END: Contact Section -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="py-12 border-t border-white/10">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:row justify-between items-center text-xs tracking-widest uppercase text-white/40">
+<div>© 2024 Crédo ADJIGNON - Tous droits réservés.</div>
+<div class="flex space-x-6 mt-6 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-white transition-colors" href="#">GitHub</a>
+<a class="hover:text-white transition-colors" href="#">Twitter</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<!-- BEGIN: Starfield Script -->
+<script data-purpose="canvas-animation">
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function init() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      for (let i = 0; i < 400; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.5,
+          speed: Math.random() * 0.2
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#FFFFFF';
+      stars.forEach(star => {
+        ctx.globalAlpha = Math.random() * 0.5 + 0.3; // Twinkle
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        star.y -= star.speed;
+        if (star.y < 0) star.y = canvas.height;
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', init);
+    init();
+    animate();
+  </script>
+<!-- END: Starfield Script -->
+</body></html>
