@@ -142,22 +142,22 @@
         /* Badge pill */
         .badge-pill {
             display: inline-block;
-            padding: 2px 10px;
+            padding: 4px 12px;
             border-radius: 9999px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            font-size: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-size: 11px;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(255, 255, 255, 0.75);
             letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
         /* Project card tag */
         .proj-tag {
-            font-size: 9px;
+            font-size: 11px;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
@@ -169,19 +169,19 @@
         }
 
         .subtle-link:hover {
-            border-bottom-color: rgba(255, 255, 255, 0.3);
+            border-bottom-color: rgba(255, 255, 255, 0.6);
         }
 
         /* AI disclaimer badge */
         .ai-disclaimer {
-            background: rgba(255, 255, 255, 0.04);
-            border: 0.5px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border: 0.5px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 8px 16px;
-            font-size: 9px;
+            font-size: 11px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             display: inline-flex;
             align-items: center;
@@ -201,6 +201,38 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
         }
+
+        /* ── Mobile-first overrides ── */
+        @media (max-width: 640px) {
+            /* Disable heavy 3D hover on touch devices */
+            .glass-card-3d:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.7);
+            }
+
+            /* Reduce orbit ring on small screens */
+            .animate-orbit {
+                display: none;
+            }
+
+            /* Ensure all text wraps properly */
+            h1, h2, h3, h4, p, span, a {
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+
+            /* Reduce blob sizes to avoid horizontal scroll */
+            .nebula {
+                opacity: 0.5;
+            }
+        }
+
+        /* Tiny screens (< 360px) safety net */
+        @media (max-width: 360px) {
+            .luminescent-text {
+                font-size: 2rem !important;
+            }
+        }
     </style>
 </head>
 
@@ -210,28 +242,28 @@
 
     <!-- Navigation -->
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl">
-        <div class="pure-glass rounded-full px-8 py-4 flex items-center justify-between relative overflow-hidden">
+        <div class="pure-glass rounded-full px-6 md:px-8 py-3 md:py-4 flex items-center justify-between relative overflow-hidden">
             <div class="specular-reflection"></div>
             <div class="text-white font-bold text-xl tracking-tighter">Crédo.ai</div>
             <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
-                <a class="hover:text-white transition-colors" href="#accueil">Accueil</a>
-                <a class="hover:text-white transition-colors" href="#parcours">Parcours</a>
-                <a class="hover:text-white transition-colors" href="#projets">Projets</a>
-                <a class="hover:text-white transition-colors" href="#arsenal">Arsenal</a>
-                <a class="hover:text-white transition-colors" href="#contact">Contact</a>
+                <a class="hover:text-white transition-colors text-white/70" href="#accueil">Accueil</a>
+                <a class="hover:text-white transition-colors text-white/70" href="#parcours">Parcours</a>
+                <a class="hover:text-white transition-colors text-white/70" href="#projets">Projets</a>
+                <a class="hover:text-white transition-colors text-white/70" href="#arsenal">Arsenal</a>
+                <a class="hover:text-white transition-colors text-white/70" href="#contact">Contact</a>
             </div>
-            <button id="menu-toggle" class="md:hidden text-white focus:outline-none" aria-label="Menu">
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none p-2" aria-label="Menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
         <!-- Mobile menu -->
         <div id="mobile-nav"
-            class="flex-col items-center gap-4 pure-glass rounded-3xl mt-2 py-6 px-8 text-sm uppercase tracking-widest font-medium">
-            <a class="hover:text-white transition-colors" href="#accueil" onclick="closeMobileNav()">Accueil</a>
-            <a class="hover:text-white transition-colors" href="#parcours" onclick="closeMobileNav()">Parcours</a>
-            <a class="hover:text-white transition-colors" href="#projets" onclick="closeMobileNav()">Projets</a>
-            <a class="hover:text-white transition-colors" href="#arsenal" onclick="closeMobileNav()">Arsenal</a>
-            <a class="hover:text-white transition-colors" href="#contact" onclick="closeMobileNav()">Contact</a>
+            class="md:hidden flex-col items-center gap-1 pure-glass rounded-2xl mt-2 py-3 px-4 text-xs sm:text-sm uppercase tracking-widest font-semibold">
+            <a class="w-full text-center py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#accueil" onclick="closeMobileNav()">Accueil</a>
+            <a class="w-full text-center py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#parcours" onclick="closeMobileNav()">Parcours</a>
+            <a class="w-full text-center py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#projets" onclick="closeMobileNav()">Projets</a>
+            <a class="w-full text-center py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#arsenal" onclick="closeMobileNav()">Arsenal</a>
+            <a class="w-full text-center py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-all" href="#contact" onclick="closeMobileNav()">Contact</a>
         </div>
     </nav>
 
@@ -258,43 +290,43 @@
             </div>
 
             <!-- Name -->
-            <h1 class="text-5xl md:text-8xl font-bold luminescent-text mb-3">Crédo ADJIGNON</h1>
+            <h1 class="text-4xl xs:text-5xl md:text-8xl font-bold luminescent-text mb-3">Crédo ADJIGNON</h1>
 
             <!-- Alias -->
-            <p class="text-white/30 text-sm font-bold tracking-[0.4em] uppercase mb-5">alias Credson</p>
+            <p class="text-white/60 text-sm font-bold tracking-[0.4em] uppercase mb-5">alias Credson</p>
 
             <!-- Subtitle -->
             <p
-                class="text-base md:text-lg font-light tracking-widest uppercase mb-3 max-w-2xl mx-auto leading-relaxed opacity-60">
+                class="text-base md:text-lg font-light tracking-widest uppercase mb-3 max-w-2xl mx-auto leading-relaxed opacity-85">
                 1ère Année IA &amp; Big Data — ESGIS Togo, Adidogomé, Lomé
             </p>
 
             <!-- Tagline -->
-            <p class="text-white/40 text-sm italic mb-10 tracking-wider">"J'apprends le jour au jour."</p>
+            <p class="text-white/70 text-sm italic mb-10 tracking-wider">"J'apprends le jour au jour."</p>
 
-            <div class="flex flex-wrap space-x-4 justify-center gap-y-4">
-                <a class="pure-glass glass-hover px-10 py-4 rounded-full text-white text-sm font-bold transition-all"
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a class="pure-glass glass-hover px-6 sm:px-10 py-3 sm:py-4 rounded-full text-white text-sm font-bold transition-all text-center"
                     href="#projets">Découvrir mes projets</a>
-                <a class="border border-white/20 px-10 py-4 rounded-full text-white text-sm font-bold hover:bg-white hover:text-black transition-all flex items-center gap-3"
+                <a class="border border-white/20 px-6 sm:px-10 py-3 sm:py-4 rounded-full text-white text-sm font-bold hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 text-center"
                     href="images/CV Professionnel credo.jpg" target="_blank">
                     <i class="fas fa-file-pdf"></i> Mon CV
                 </a>
-                <a class="border border-white/10 bg-white/5 px-10 py-4 rounded-full text-white/60 text-sm font-bold hover:bg-white hover:text-black transition-all"
+                <a class="border border-white/10 bg-white/5 px-6 sm:px-10 py-3 sm:py-4 rounded-full text-white/70 text-sm font-bold hover:bg-white hover:text-black transition-all text-center"
                     href="#contact">Discutons</a>
             </div>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-6 space-y-32 pb-32">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 space-y-20 sm:space-y-32 pb-20 sm:pb-32">
         <!-- Parcours / Vision -->
         <section id="parcours">
             <div class="flex items-center space-x-4 mb-16">
                 <div class="h-[1px] w-12 bg-white/20"></div>
-                <h2 class="text-3xl font-bold text-white tracking-tight uppercase tracking-widest">Vision &amp;
+                <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-widest">Vision &amp;
                     Apprentissage</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-12">
-                <div class="pure-glass p-10 rounded-[40px] glass-card-3d">
+                <div class="pure-glass p-6 sm:p-10 rounded-3xl sm:rounded-[40px] glass-card-3d">
                     <p class="text-lg text-silver-gray leading-relaxed mb-8">
                         Dans un monde en constante mutation, je crois fermement que l'adaptabilité est la clé. Mon
                         approche repose sur deux piliers fondamentaux :
@@ -304,7 +336,7 @@
                             <i class="fas fa-brain text-white mt-1"></i>
                             <div>
                                 <strong class="text-white block">Intelligence Artificielle</strong>
-                                <span class="text-sm opacity-60">LLMs, agents autonomes et pipelines IA — explorer les
+                                <span class="text-sm opacity-80">LLMs, agents autonomes et pipelines IA — explorer les
                                     frontières du possible au quotidien.</span>
                             </div>
                         </li>
@@ -312,32 +344,32 @@
                             <i class="fas fa-mobile-alt text-white mt-1"></i>
                             <div>
                                 <strong class="text-white block">Développement Mobile</strong>
-                                <span class="text-sm opacity-60">Android &amp; Kotlin — concevoir des expériences
+                                <span class="text-sm opacity-80">Android &amp; Kotlin — concevoir des expériences
                                     mobiles solides, élégantes et utiles.</span>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid grid-cols-2 gap-4 sm:gap-6">
                     <!-- Stat 1 : projets actifs -->
-                    <div class="pure-glass p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-                        <span class="text-4xl font-bold text-white mb-2">2+</span>
-                        <span class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Projets Actifs</span>
+                    <div class="pure-glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl sm:text-4xl font-bold text-white mb-2">2+</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 font-bold">Projets Actifs</span>
                     </div>
                     <!-- Stat 2 : projets achevés -->
-                    <div class="pure-glass p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-                        <span class="text-4xl font-bold text-white mb-2">7</span>
-                        <span class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Projets Achevés</span>
+                    <div class="pure-glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl sm:text-4xl font-bold text-white mb-2">7</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 font-bold">Projets Achevés</span>
                     </div>
                     <!-- Stat 3 : jours -->
-                    <div class="pure-glass p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-                        <span class="text-4xl font-bold text-white mb-2">365</span>
-                        <span class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Jours d'Innovation</span>
+                    <div class="pure-glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl sm:text-4xl font-bold text-white mb-2">365</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 font-bold">Jours d'Innovation</span>
                     </div>
                     <!-- Stat 4 : école -->
-                    <div class="pure-glass p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-                        <span class="text-xl font-bold text-white mb-2">ESGIS Togo</span>
-                        <span class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Adidogomé · Lomé · 2025–2026</span>
+                    <div class="pure-glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center text-center">
+                        <span class="text-lg sm:text-xl font-bold text-white mb-2">ESGIS Togo</span>
+                        <span class="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-bold">Adidogomé · Lomé · 2025–2026</span>
                     </div>
                 </div>
             </div>
@@ -345,18 +377,18 @@
 
         <!-- Projets -->
         <section id="projets">
-            <div class="flex items-center space-x-4 mb-16">
+            <div class="flex items-center space-x-4 mb-10 sm:mb-16">
                 <div class="h-[1px] w-12 bg-white/20"></div>
-                <h2 class="text-3xl font-bold text-white tracking-tight uppercase tracking-widest">Mes Projets</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-widest">Mes Projets</h2>
             </div>
 
             <!-- 3 Projets actifs -->
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
                 <!-- Projet 1 : SoundGroove -->
-                <div class="pure-glass group rounded-[40px] overflow-hidden relative glass-card-3d animate-float-1">
+                <div class="pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d animate-float-1">
                     <div class="specular-reflection"></div>
-                    <div class="p-10 flex flex-col h-full">
+                    <div class="p-6 sm:p-10 flex flex-col h-full">
                         <div class="flex items-center justify-between mb-6">
                             <i
                                 class="fas fa-music text-3xl opacity-40 group-hover:opacity-100 transition-opacity text-white"></i>
@@ -379,9 +411,9 @@
                 </div>
 
                 <!-- Projet 2 : EduConnect -->
-                <div class="pure-glass group rounded-[40px] overflow-hidden relative glass-card-3d">
+                <div class="pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d">
                     <div class="specular-reflection"></div>
-                    <div class="p-10 flex flex-col h-full">
+                    <div class="p-6 sm:p-10 flex flex-col h-full">
                         <div class="flex items-center justify-between mb-6">
                             <i
                                 class="fas fa-graduation-cap text-3xl opacity-40 group-hover:opacity-100 transition-opacity text-white"></i>
@@ -400,9 +432,9 @@
                 </div>
 
                 <!-- Projet 3 : Le Debout -->
-                <div class="pure-glass group rounded-[40px] overflow-hidden relative glass-card-3d animate-float-1">
+                <div class="pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d animate-float-1">
                     <div class="specular-reflection"></div>
-                    <div class="p-10 flex flex-col h-full">
+                    <div class="p-6 sm:p-10 flex flex-col h-full">
                         <div class="flex items-center justify-between mb-6">
                             <i
                                 class="fas fa-utensils text-3xl opacity-40 group-hover:opacity-100 transition-opacity text-white"></i>
@@ -414,10 +446,10 @@
                             interactif et interface de commande fluide — une <strong class="text-white/70">création
                                 personnelle</strong> de A à Z.
                         </p>
-                        <div class="flex items-center justify-between mt-auto">
+                        <div class="flex items-center justify-between mt-auto flex-wrap gap-2">
                             <span class="proj-tag">HTML · CSS · JS · Supabase</span>
                             <a href="https://ledebout.netlify.app" target="_blank" rel="noopener noreferrer"
-                                class="text-white/20 group-hover:text-white transition-colors ml-3 text-sm font-bold uppercase tracking-widest flex items-center gap-1">
+                                class="text-white/50 group-hover:text-white transition-colors ml-auto text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-1">
                                 Voir <i class="fas fa-arrow-right ml-1"></i>
                             </a>
                         </div>
@@ -426,80 +458,80 @@
             </div>
 
             <!-- Micro-Labs & Expérimentations -->
-            <div class="pure-glass rounded-[40px] p-8 md:p-12 mt-16">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="size-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
+            <div class="pure-glass rounded-3xl sm:rounded-[40px] p-5 sm:p-8 md:p-12 mt-10 sm:mt-16">
+                <div class="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
+                    <div class="size-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0">
                         <i class="fas fa-flask"></i>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-white">Micro-Labs &amp; Expérimentations</h3>
-                        <p class="text-[10px] uppercase tracking-widest text-white/30">7 Projets Secondaires • Analyse &amp; Logiciels</p>
+                    <div class="min-w-0">
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Micro-Labs &amp; Expérimentations</h3>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-white/60">7 Projets Secondaires • Analyse &amp; Logiciels</p>
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     <!-- Mini Proj 1 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Code Explorer
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">C / .EXE</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">C / .EXE</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Audit de code : mesure complexité, DOC ratio et stats de fichiers source.</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Windows CLI Ready</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Audit de code : mesure complexité, DOC ratio et stats de fichiers source.</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Windows CLI Ready</div>
                     </div>
                     <!-- Mini Proj 2 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Data-Viz Python
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">Python / DS</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">Python / DS</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Visualisation auto de résultats académiques via Pandas &amp; Matplotlib.</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Script-Only</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Visualisation auto de résultats académiques via Pandas &amp; Matplotlib.</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Script-Only</div>
                     </div>
                     <!-- Mini Proj 3 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Finance Analyzer
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">C / .EXE</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">C / .EXE</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Suivi de dépenses dynamique avec alertes budget (Seuil 60k FCFA).</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Windows CLI Ready</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Suivi de dépenses dynamique avec alertes budget (Seuil 60k FCFA).</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Windows CLI Ready</div>
                     </div>
                     <!-- Mini Proj 4 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Sentiment IA
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">Python / NLP</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">Python / NLP</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Classification de l'humeur du web (polarité textuelle) via NLP moteur.</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Script-Only</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Classification de l'humeur du web (polarité textuelle) via NLP moteur.</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Script-Only</div>
                     </div>
                     <!-- Mini Proj 5 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Student Manager
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">C / .EXE</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">C / .EXE</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Tri par mérite (Bubble Sort) et validation de résultats avec feedback.</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Windows CLI Ready</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Tri par mérite (Bubble Sort) et validation de résultats avec feedback.</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Windows CLI Ready</div>
                     </div>
                     <!-- Mini Proj 6 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Tontine App
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">C / .EXE</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">C / .EXE</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Gestion de cycles financiers cycliques avec algorithme modulo.</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Windows CLI Ready</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Gestion de cycles financiers cycliques avec algorithme modulo.</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Windows CLI Ready</div>
                     </div>
                     <!-- Mini Proj 7 -->
-                    <div class="border border-white/5 p-6 rounded-2xl hover:bg-white/5 transition-all lg:col-start-2">
-                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between">
+                    <div class="border border-white/10 p-4 sm:p-6 rounded-2xl hover:bg-white/5 transition-all lg:col-start-2">
+                        <h4 class="text-white font-bold text-sm mb-2 flex items-center justify-between gap-2">
                             Web Scraper
-                            <span class="text-[8px] px-2 py-0.5 rounded-full border border-white/20 opacity-40">Python / Automate</span>
+                            <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/25 text-white/60 shrink-0">Python / Automate</span>
                         </h4>
-                        <p class="text-[11px] opacity-60 mb-3">Extraction temps réel Hacker News via BeautifulSoup4 &amp; DOM Parsing.</p>
-                        <div class="text-[9px] font-bold text-white/40 uppercase tracking-tighter">Status: Script-Only</div>
+                        <p class="text-xs sm:text-[11px] text-white/70 mb-3">Extraction temps réel Hacker News via BeautifulSoup4 &amp; DOM Parsing.</p>
+                        <div class="text-[10px] font-bold text-white/50 uppercase tracking-tight">Status: Script-Only</div>
                     </div>
                 </div>
             </div>
@@ -508,198 +540,198 @@
         <!-- Arsenal Section -->
 
         <section id="arsenal">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6">
                 <div class="flex items-center space-x-4">
                     <div class="h-[1px] w-12 bg-white/20"></div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight uppercase tracking-widest">Arsenal Tech
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-widest">Arsenal Tech
                         &amp; Domination</h2>
                 </div>
-                <div class="text-[10px] uppercase tracking-[0.3em] text-white/40 italic">
+                <div class="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 italic pl-16 md:pl-0">
                     Source : DeepSearch multi-IA (Claude, GPT-4, Gemini 1.5 Pro)
                 </div>
             </div>
 
             <!-- Niveau Licence 1 & 2 -->
-            <div class="mb-24">
-                <h3 class="text-white/30 text-xs uppercase tracking-[0.4em] mb-10 pl-16">Cursus Licence 1 &amp; 2</h3>
+            <div class="mb-16 sm:mb-24">
+                <h3 class="text-white/60 text-xs uppercase tracking-widest mb-8 sm:mb-10 pl-4 sm:pl-16">Cursus Licence 1 &amp; 2</h3>
                 <div class="max-w-4xl">
                     <a href="ARSENAL-IA-BIG-DATA-and-DEVELOPPEMENT.pdf" target="_blank"
-                        class="pure-glass p-10 rounded-[40px] flex flex-col md:flex-row items-center gap-8 group hover:bg-white/5 transition-all glass-card-3d">
+                        class="pure-glass p-6 sm:p-10 rounded-3xl sm:rounded-[40px] flex flex-col md:flex-row items-center gap-6 sm:gap-8 group hover:bg-white/5 transition-all glass-card-3d">
                         <div
-                            class="size-20 rounded-3xl bg-white/5 flex items-center justify-center text-3xl text-white group-hover:scale-110 transition-transform">
+                            class="size-16 sm:size-20 rounded-2xl sm:rounded-3xl bg-white/5 flex items-center justify-center text-2xl sm:text-3xl text-white group-hover:scale-110 transition-transform shrink-0">
                             <i class="fas fa-file-pdf"></i>
                         </div>
-                        <div>
-                            <h4 class="text-2xl font-bold text-white mb-2">Manuel de Survie : IA, Big Data &amp;
+                        <div class="text-center md:text-left">
+                            <h4 class="text-xl sm:text-2xl font-bold text-white mb-2">Manuel de Survie : IA, Big Data &amp;
                                 Développement</h4>
                             <p class="text-silver-gray text-sm leading-relaxed mb-4">Le socle fondamental pour maîtriser
                                 les concepts clés et les outils de demain. Un guide complet pour les deux premières
                                 années d'études.</p>
-                            <span class="text-[10px] font-bold text-white/40 tracking-widest uppercase">Format PDF •
+                            <span class="text-[10px] sm:text-xs font-bold text-white/60 tracking-wider uppercase">Format PDF •
                                 250+ Pages de connaissances</span>
                         </div>
                         <i
-                            class="fas fa-arrow-right text-white/20 group-hover:text-white transition-colors ml-auto hidden md:block"></i>
+                            class="fas fa-arrow-right text-white/40 group-hover:text-white transition-colors ml-auto hidden md:block"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Niveau Master (Chapters) -->
             <div>
-                <div class="flex flex-wrap items-center gap-4 mb-4 pl-16">
-                    <h3 class="text-white/30 text-xs uppercase tracking-[0.4em]">Cursus Master (Elite 2026)</h3>
+                <div class="flex flex-wrap items-center gap-4 mb-4 pl-4 sm:pl-16">
+                    <h3 class="text-white/60 text-xs uppercase tracking-widest">Cursus Master (Elite 2026)</h3>
                 </div>
                 <!-- AI Disclaimer -->
-                <div class="mb-10 pl-16">
+                <div class="mb-8 sm:mb-10 pl-4 sm:pl-16">
                     <span class="ai-disclaimer">
-                        <i class="fas fa-robot opacity-50"></i>
+                        <i class="fas fa-robot opacity-70"></i>
                         Compilé par synthèse multi-IA &nbsp;·&nbsp; Non rédigé personnellement
                     </span>
-                    <p class="text-[10px] text-white/20 mt-2 pl-1 max-w-xl leading-relaxed">
+                    <p class="text-[10px] sm:text-xs text-white/50 mt-2 pl-1 max-w-xl leading-relaxed">
                         Les ressources et documents de ce cursus sont le fruit de recherches croisées compilées par
                         plusieurs intelligences artificielles — pas des créations personnelles.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     <!-- Chapitre 1 -->
                     <a href="TECH/Arsenal Tech Chapitre1 Elite2026.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all animate-float-1">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all animate-float-1">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-crown text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 01</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 01</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">Elite 2026</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Perspectives stratégiques et fondamentaux de
+                        <p class="text-xs text-silver-gray mb-4">Perspectives stratégiques et fondamentaux de
                             l'ingénierie d'élite.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 2 -->
                     <a href="TECH/Arsenal Tech Chapitre2 Souverainete Cloud Afrique.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-cloud text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 02</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 02</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">Souveraineté Cloud</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Enjeux et infrastructures cloud spécifiques au
+                        <p class="text-xs text-silver-gray mb-4">Enjeux et infrastructures cloud spécifiques au
                             continent africain.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 3 -->
                     <a href="TECH/Arsenal Tech Chapitre3 Pipelines GodMode.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all animate-float-1">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all animate-float-1">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-vial text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 03</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 03</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">Pipelines GodMode</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Architectures de données massives et flux temps
+                        <p class="text-xs text-silver-gray mb-4">Architectures de données massives et flux temps
                             réel optimisés.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 4 -->
                     <a href="TECH/Arsenal Tech Chapitre4 IA Generative.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-robot text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 04</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 04</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">IA Générative</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Maîtrise avancée des LLMs, agents autonomes et RAG.
+                        <p class="text-xs text-silver-gray mb-4">Maîtrise avancée des LLMs, agents autonomes et RAG.
                         </p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 5 -->
                     <a href="TECH/Arsenal Tech Chapitre5 CleanCode Patterns.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all animate-float-1">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all animate-float-1">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-code text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 05</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 05</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">CleanCode Patterns</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Patterns d'architecture et standards de codage
+                        <p class="text-xs text-silver-gray mb-4">Patterns d'architecture et standards de codage
                             industriels.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 6 -->
                     <a href="TECH/Arsenal Tech Chapitre6 Langages HautePerformance.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-microchip text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 06</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 06</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">High Performance</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Optimisation système et langages à bas niveau de
+                        <p class="text-xs text-silver-gray mb-4">Optimisation système et langages à bas niveau de
                             latence.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 7 -->
                     <a href="TECH/Arsenal Tech Chapitre7 Design Premium LiquidGlass.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all animate-float-1">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all animate-float-1">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-palette text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 07</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 07</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">Liquid Glass UI</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Principes avancés de HMI et design d'interfaces de
+                        <p class="text-xs text-silver-gray mb-4">Principes avancés de HMI et design d'interfaces de
                             luxe.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 8 -->
                     <a href="TECH/Arsenal Tech Chapitre8 Visualisation BigData.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-chart-line text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 08</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 08</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">Visualisation Data</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Transformer des pétaoctets de données en insights
+                        <p class="text-xs text-silver-gray mb-4">Transformer des pétaoctets de données en insights
                             visuels.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 9 -->
                     <a href="TECH/Arsenal Tech Chapitre9 DevSecOps.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all animate-float-1">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all animate-float-1">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-shield-alt text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 09</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 09</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">DevSecOps</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Automatisation, sécurité et livraison continue à
+                        <p class="text-xs text-silver-gray mb-4">Automatisation, sécurité et livraison continue à
                             l'échelle.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                     <!-- Chapitre 10 -->
                     <a href="TECH/Arsenal Tech Chapitre10 Mental Elite FINAL.pdf" target="_blank"
-                        class="pure-glass p-8 rounded-3xl group hover:border-white/30 transition-all lg:col-start-2">
+                        class="pure-glass p-5 sm:p-8 rounded-2xl sm:rounded-3xl group hover:border-white/30 transition-all lg:col-start-2">
                         <div class="flex justify-between items-start mb-6">
                             <i class="fas fa-brain text-white opacity-40 group-hover:opacity-100"></i>
-                            <span class="text-[9px] text-white/20 font-bold tracking-widest">CHAP 10</span>
+                            <span class="text-[10px] sm:text-xs text-white/50 font-bold tracking-wider">CHAP 10</span>
                         </div>
                         <h4 class="text-white font-bold mb-2">Mental Elite</h4>
-                        <p class="text-[11px] text-silver-gray mb-4">Psychologie de la performance et management
+                        <p class="text-xs text-silver-gray mb-4">Psychologie de la performance et management
                             technologique.</p>
                         <span
-                            class="text-[9px] text-white/20 group-hover:text-white transition-colors uppercase font-bold tracking-tighter">Accéder
+                            class="text-[10px] sm:text-xs text-white/50 group-hover:text-white transition-colors uppercase font-bold tracking-tight">Accéder
                             au PDF →</span>
                     </a>
                 </div>
@@ -708,42 +740,42 @@
 
         <!-- Contact / CTA -->
         <section id="contact">
-            <div class="pure-glass p-16 md:p-20 rounded-[80px] text-center relative overflow-hidden">
+            <div class="pure-glass p-8 sm:p-12 md:p-20 rounded-3xl sm:rounded-[50px] md:rounded-[80px] text-center relative overflow-hidden">
                 <div class="specular-reflection"></div>
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 luminescent-text">Prêt pour le prochain défi ?
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 luminescent-text">Prêt pour le prochain défi ?
                 </h2>
-                <p class="text-silver-gray mb-12 max-w-xl mx-auto">Je suis ouvert aux opportunités en IA, Développement
+                <p class="text-silver-gray mb-8 sm:mb-12 max-w-xl mx-auto text-sm sm:text-base">Je suis ouvert aux opportunités en IA, Développement
                     Mobile et Data Science à Lomé ou à l'international.</p>
-                <div class="flex flex-wrap justify-center gap-6">
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
                     <a id="contact-email" href="mailto:creedemmanuel7@gmail.com"
-                        class="pure-glass px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest flex items-center gap-2 text-white/80">
                         <i class="fas fa-envelope"></i> Email
                     </a>
                     <a id="contact-whatsapp" href="https://wa.me/22896569761" target="_blank" rel="noopener noreferrer"
-                        class="pure-glass px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest flex items-center gap-2 text-white/80">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                     <a id="contact-linkedin" href="https://www.linkedin.com/in/crédo-adjignon-1a15b4382" target="_blank"
                         rel="noopener noreferrer"
-                        class="pure-glass px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest flex items-center gap-2 text-white/80">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
                     <a id="contact-github" href="https://github.com/creedemmanuel7-sketch" target="_blank"
                         rel="noopener noreferrer"
-                        class="pure-glass px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest flex items-center gap-2 text-white/80">
                         <i class="fab fa-github"></i> GitHub
                     </a>
                 </div>
-                <div class="mt-12 text-[10px] uppercase tracking-[0.5em] text-white/20">Lomé, Togo · Adidogomé</div>
+                <div class="mt-8 sm:mt-12 text-[10px] sm:text-xs uppercase tracking-widest sm:tracking-[0.5em] text-white/50">Lomé, Togo · Adidogomé</div>
             </div>
         </section>
     </main>
 
-    <footer class="py-16 text-center border-t border-white/5 px-6">
+    <footer class="py-10 sm:py-16 text-center border-t border-white/5 px-4 sm:px-6">
         <!-- Le Debout link -->
         <div class="mb-6">
             <a href="https://ledeboutrooftop.netlify.app" target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center gap-3 pure-glass px-6 py-3 rounded-full text-white/40 text-xs font-bold uppercase tracking-widest hover:text-white hover:bg-white/5 transition-all">
+                class="inline-flex items-center gap-2 sm:gap-3 pure-glass px-4 sm:px-6 py-3 rounded-full text-white/60 text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:text-white hover:bg-white/5 transition-all">
                 <i class="fas fa-utensils text-sm"></i>
                 Voir le site Le Debout
                 <i class="fas fa-external-link-alt text-xs"></i>
@@ -753,14 +785,14 @@
         <!-- Portfolio self-credit -->
         <div class="mb-4">
             <a href="https://github.com/creedemmanuel7-sketch" target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-white/20 text-[10px] uppercase tracking-widest hover:text-white/40 transition-colors">
+                class="inline-flex items-center gap-2 text-white/40 text-[10px] sm:text-xs uppercase tracking-wider hover:text-white/60 transition-colors">
                 <i class="fas fa-code text-xs"></i>
-                Ce site est une création de <span class="font-bold text-white/30 ml-1">Crédo ADJIGNON</span>
+                Ce site est une création de <span class="font-bold text-white/50 ml-1">Crédo ADJIGNON</span>
                 <i class="fab fa-github ml-1"></i>
             </a>
         </div>
 
-        <p class="text-[10px] uppercase tracking-[0.8em] text-white/20">© 2026 CRÉDO ADJIGNON — Conçu pour l'Excellence
+        <p class="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-white/40">© 2026 CRÉDO ADJIGNON — Conçu pour l'Excellence
         </p>
     </footer>
 
