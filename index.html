@@ -358,7 +358,7 @@
                     </div>
                     <!-- Stat 2 : projets achevés -->
                     <div class="pure-glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center text-center">
-                        <span class="text-3xl sm:text-4xl font-bold text-white mb-2">7</span>
+                        <span class="text-3xl sm:text-4xl font-bold text-white mb-2">8</span>
                         <span class="text-[10px] sm:text-xs uppercase tracking-wider text-white/60 font-bold">Projets Achevés</span>
                     </div>
                     <!-- Stat 3 : jours -->
@@ -382,8 +382,8 @@
                 <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-widest">Mes Projets</h2>
             </div>
 
-            <!-- 3 Projets actifs -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- 4 Projets principaux -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
 
                 <!-- Projet 1 : SoundGroove -->
                 <div class="pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d animate-float-1">
@@ -452,6 +452,35 @@
                                 class="text-white/50 group-hover:text-white transition-colors ml-auto text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-1">
                                 Voir <i class="fas fa-arrow-right ml-1"></i>
                             </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 4 : JPA Demo -->
+                <div class="pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d">
+                    <div class="specular-reflection"></div>
+                    <div class="p-6 sm:p-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-6">
+                            <i
+                                class="fas fa-database text-3xl opacity-40 group-hover:opacity-100 transition-opacity text-white"></i>
+                            <span class="badge-pill">Backend</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">JPA Demo</h3>
+                        <p class="text-sm text-silver-gray leading-relaxed mb-6 flex-grow">
+                            Application de persistance d'objets (ORM) construite avec <strong class="text-white/70">Spring Boot &amp; Spring Data JPA</strong>. Elle gère les inscriptions universitaires avec des relations Many-to-Many complexes et un système de requêtes JPQL personnalisées.
+                        </p>
+                        <div class="flex items-center justify-between mt-auto flex-wrap gap-3">
+                            <span class="proj-tag">Spring Boot · JPA · H2 · Thymeleaf</span>
+                            <div class="flex items-center gap-3 ml-auto">
+                                <button onclick="openJpaDemoModal()"
+                                    class="text-white/50 hover:text-white transition-colors text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-1 cursor-pointer">
+                                    Aperçu <i class="fas fa-eye ml-0.5"></i>
+                                </button>
+                                <a href="https://github.com/creedemmanuel7-sketch/JPAdemo-SansCom" target="_blank" rel="noopener noreferrer"
+                                    class="text-white/20 hover:text-white transition-colors">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -771,6 +800,82 @@
         </section>
     </main>
 
+    <!-- Modal Preview JPA Demo -->
+    <div id="jpa-demo-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity duration-300 opacity-0">
+        <div class="pure-glass rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative flex flex-col md:flex-row gap-6 p-6 sm:p-8 animate-float-1">
+            <div class="specular-reflection"></div>
+            
+            <!-- Close button -->
+            <button onclick="closeJpaDemoModal()" class="absolute top-4 right-4 text-white/50 hover:text-white text-2xl focus:outline-none z-10 cursor-pointer" aria-label="Fermer">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Left column: Screenshots Slider -->
+            <div class="flex-1 flex flex-col gap-4 min-w-0">
+                <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-video bg-black/40 flex items-center justify-center">
+                    <img id="jpa-modal-img" src="images/jpa_demo_students.png" alt="Aperçu JPA Demo" class="w-full h-full object-contain transition-opacity duration-300">
+                </div>
+                
+                <!-- Thumbnails -->
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="selectJpaImage(0)" class="jpa-thumb border-2 border-white rounded-lg overflow-hidden aspect-video bg-black/20 focus:outline-none cursor-pointer">
+                        <img src="images/jpa_demo_students.png" alt="Dashboard" class="w-full h-full object-cover">
+                    </button>
+                    <button onclick="selectJpaImage(1)" class="jpa-thumb border-2 border-transparent hover:border-white/50 rounded-lg overflow-hidden aspect-video bg-black/20 focus:outline-none cursor-pointer">
+                        <img src="images/jpa_demo_details.png" alt="Détails" class="w-full h-full object-cover">
+                    </button>
+                    <button onclick="selectJpaImage(2)" class="jpa-thumb border-2 border-transparent hover:border-white/50 rounded-lg overflow-hidden aspect-video bg-black/20 focus:outline-none cursor-pointer">
+                        <img src="images/jpa_demo_jpql.png" alt="JPQL Console" class="w-full h-full object-cover">
+                    </button>
+                    <button onclick="selectJpaImage(3)" class="jpa-thumb border-2 border-transparent hover:border-white/50 rounded-lg overflow-hidden aspect-video bg-black/20 focus:outline-none cursor-pointer">
+                        <img src="images/jpa_demo_h2.png" alt="Console H2" class="w-full h-full object-cover">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right column: Details -->
+            <div class="w-full md:w-[320px] flex flex-col justify-between gap-6 shrink-0">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="badge-pill">Backend</span>
+                        <span class="text-white/40 text-[10px] uppercase tracking-wider font-bold">Projet Universitaire</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">JPA Demo — Inscriptions</h3>
+                    
+                    <p id="jpa-modal-desc" class="text-sm text-silver-gray leading-relaxed mb-6">
+                        Tableau de bord principal listant les étudiants inscrits avec recherche, filières, et affichage dynamique de répartition.
+                    </p>
+
+                    <h4 class="text-xs font-bold text-white uppercase tracking-widest mb-3">Fonctionnalités Clés :</h4>
+                    <ul class="text-xs text-silver-gray space-y-2 mb-6">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-white/60"></i> ORM & Persistance Hibernate (H2 Database)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-white/60"></i> Relation Many-to-Many bidirectionnelle
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-white/60"></i> Logique métier sécurisée via Transactions
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-white/60"></i> Requêtes JPQL dynamiques en temps réel
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-white/60"></i> UI dynamique propulsée par Thymeleaf
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <a href="https://github.com/creedemmanuel7-sketch/JPAdemo-SansCom" target="_blank" rel="noopener noreferrer" 
+                       class="border border-white/20 hover:bg-white hover:text-black py-3 rounded-xl text-center text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-white">
+                        <i class="fab fa-github text-sm"></i> Code Source GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="py-10 sm:py-16 text-center border-t border-white/5 px-4 sm:px-6">
         <!-- Le Debout link -->
         <div class="mb-6">
@@ -797,6 +902,79 @@
     </footer>
 
     <script>
+        // ── JPA Demo Modal ──────────────────────────────────────────
+        const jpaModal = document.getElementById('jpa-demo-modal');
+        const jpaModalImg = document.getElementById('jpa-modal-img');
+        const jpaModalDesc = document.getElementById('jpa-modal-desc');
+        const jpaThumbs = document.querySelectorAll('.jpa-thumb');
+
+        const jpaImages = [
+            {
+                src: 'images/jpa_demo_students.png',
+                desc: 'Tableau de bord principal listant les étudiants inscrits avec recherche, filières, et affichage dynamique de répartition.'
+            },
+            {
+                src: 'images/jpa_demo_details.png',
+                desc: "Interface de gestion détaillée permettant d'inscrire/désinscrire un étudiant à des cours spécifiques, garantissant la cohérence bidirectionnelle Many-to-Many."
+            },
+            {
+                src: 'images/jpa_demo_jpql.png',
+                desc: "Console d'évaluation JPQL en temps réel pour tester des requêtes orientées objet personnalisées sans écrire de code SQL brut."
+            },
+            {
+                src: 'images/jpa_demo_h2.png',
+                desc: "Console d'accès direct à la base de données en mémoire H2 pour visualiser la structure physique des tables SQL générées."
+            }
+        ];
+
+        function openJpaDemoModal() {
+            jpaModal.classList.remove('hidden');
+            setTimeout(() => {
+                jpaModal.classList.remove('opacity-0');
+            }, 50);
+            document.body.style.overflow = 'hidden';
+            selectJpaImage(0);
+        }
+
+        function closeJpaDemoModal() {
+            jpaModal.classList.add('opacity-0');
+            setTimeout(() => {
+                jpaModal.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        function selectJpaImage(index) {
+            jpaThumbs.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('border-white');
+                    thumb.classList.remove('border-transparent', 'hover:border-white/50');
+                } else {
+                    thumb.classList.remove('border-white');
+                    thumb.classList.add('border-transparent', 'hover:border-white/50');
+                }
+            });
+
+            jpaModalImg.classList.add('opacity-0');
+            setTimeout(() => {
+                jpaModalImg.src = jpaImages[index].src;
+                jpaModalDesc.textContent = jpaImages[index].desc;
+                jpaModalImg.classList.remove('opacity-0');
+            }, 150);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !jpaModal.classList.contains('hidden')) {
+                closeJpaDemoModal();
+            }
+        });
+
+        jpaModal.addEventListener('click', (e) => {
+            if (e.target === jpaModal) {
+                closeJpaDemoModal();
+            }
+        });
+
         // ── Starfield ──────────────────────────────────────────────
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
