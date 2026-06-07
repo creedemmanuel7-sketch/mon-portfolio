@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Apercu MesPensees</title>
+  <desc id="desc">Visuel principal sombre et intimiste pour la carte projet MesPensees.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="78%">
+      <stop offset="0%" stop-color="#21172e"/>
+      <stop offset="45%" stop-color="#0f1329"/>
+      <stop offset="100%" stop-color="#050509"/>
+    </radialGradient>
+    <linearGradient id="rose" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffd6cb"/>
+      <stop offset="45%" stop-color="#f29a87"/>
+      <stop offset="100%" stop-color="#c86890"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <circle cx="965" cy="92" r="2" fill="#ffd6cb" opacity=".9"/>
+  <circle cx="236" cy="110" r="3" fill="#ffd6cb" opacity=".75"/>
+  <circle cx="575" cy="74" r="2" fill="#ffffff" opacity=".65"/>
+  <circle cx="934" cy="216" r="1.8" fill="#ffffff" opacity=".45"/>
+  <path d="M-70 190 C120 124 213 278 343 270 C525 258 495 63 704 102 C944 147 813 403 1032 350 C1136 325 1184 249 1247 178" fill="none" stroke="#f6a6bd" stroke-width="2" opacity=".42" filter="url(#glow)"/>
+  <path d="M78 638 C246 520 159 357 358 342 C563 326 616 509 768 427 C899 356 831 175 1044 116" fill="none" stroke="#b68cff" stroke-width="2.2" opacity=".45" filter="url(#glow)"/>
+  <path d="M256 588 C394 487 415 390 548 394 C733 399 682 180 905 164" fill="none" stroke="#f6a6bd" stroke-width="1.4" opacity=".32"/>
+  <g transform="translate(118 88)">
+    <rect x="0" y="0" width="330" height="544" rx="42" fill="#09090d" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+    <rect x="28" y="34" width="274" height="476" rx="30" fill="#13131a"/>
+    <rect x="57" y="72" width="154" height="14" rx="7" fill="#ffffff" opacity=".16"/>
+    <rect x="57" y="118" width="216" height="16" rx="8" fill="#ffffff" opacity=".08"/>
+    <rect x="57" y="158" width="216" height="128" rx="20" fill="#ffffff" opacity=".05" stroke="#ffffff" stroke-opacity=".08"/>
+    <text x="165" y="232" text-anchor="middle" fill="#f7ded8" font-family="Georgia, serif" font-size="34">MesPensees</text>
+    <text x="165" y="264" text-anchor="middle" fill="#ffffff" opacity=".45" font-family="Arial, sans-serif" font-size="13">Journal intime prive</text>
+    <rect x="57" y="326" width="216" height="38" rx="19" fill="#ffffff" opacity=".08"/>
+    <rect x="57" y="384" width="145" height="12" rx="6" fill="#ffffff" opacity=".12"/>
+    <rect x="57" y="414" width="196" height="12" rx="6" fill="#ffffff" opacity=".08"/>
+    <rect x="57" y="444" width="172" height="12" rx="6" fill="#ffffff" opacity=".08"/>
+  </g>
+  <g transform="translate(560 154)">
+    <rect x="0" y="0" width="428" height="428" rx="92" fill="#111116" stroke="#ffffff" stroke-opacity=".12"/>
+    <path d="M214 119c-50 0-91 40-91 90v22h46v-22a45 45 0 0 1 90 0v22h46v-22c0-50-41-90-91-90Z" fill="url(#rose)"/>
+    <path d="M122 242c49 0 75-28 122-28s73 28 122 28v98c-49 0-75-28-122-28s-73 28-122 28V242Z" fill="url(#rose)"/>
+    <circle cx="244" cy="276" r="18" fill="#111116"/>
+    <path d="M234 292h20l13 62h-46l13-62Z" fill="#111116"/>
+  </g>
+  <g transform="translate(590 610)">
+    <text x="0" y="0" fill="#ffffff" font-family="Arial, sans-serif" font-size="26" font-weight="700">Site vitrine MesPensees</text>
+    <text x="0" y="34" fill="#ffffff" opacity=".58" font-family="Arial, sans-serif" font-size="16">Application mobile locale, chiffree, pensee pour ecrire en confiance.</text>
+  </g>
+</svg>

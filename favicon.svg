@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Credo ADJIGNON">
+  <rect width="64" height="64" rx="18" fill="#050505"/>
+  <path d="M45 21.5A17 17 0 1 0 45 42.5" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M34 18L46 32L34 46" fill="none" stroke="#a1a1aa" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
