@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Analytics — Dashboard Privé · Crédo ADJIGNON</title>
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,25 +57,43 @@
             overflow-x: hidden;
         }
 
-        /* ── Nebula background ────────────────────────────────── */
+        /* ── Nebula background ───────────────────────────────── */
         .nebula {
             position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
             background:
-                radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.06) 0%, transparent 45%),
-                radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.03) 0%, transparent 60%);
+                radial-gradient(circle at 20% 30%, rgba(50, 50, 50, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 30, 30, 0.10) 0%, transparent 40%);
+            z-index: -2;
+            pointer-events: none;
         }
 
-        /* ── Glass ────────────────────────────────────────────── */
+        /* ── Starfield canvas ─────────────────────────────── */
+        .space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ── Glass (identique à .pure-glass du portfolio) ───── */
         .glass {
-            background: var(--surface);
+            background: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
-            border: 1px solid var(--border);
+            border: 0.5px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
             border-radius: 24px;
+        }
+
+        .glass:hover {
+            border: 0.5px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.4s ease;
         }
 
         .glass-sm {
@@ -680,8 +699,9 @@
     </style>
 </head>
 
-<body>
+<body class="text-silver-gray font-sans selection:bg-white selection:text-black">
     <div class="nebula"></div>
+    <canvas class="space-canvas" id="starfield"></canvas>
 
     <!-- ═══════════════════════════════════════════
          ÉCRAN DE CONNEXION
@@ -1360,6 +1380,53 @@
                 </tr>`;
             }).join('');
         }
+    </script>
+
+    <!-- ── Starfield (identique au portfolio principal) ── -->
+    <script>
+        (function () {
+            const canvas = document.getElementById('starfield');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const isSmall = () => window.matchMedia('(max-width: 640px)').matches;
+            let stars = [];
+
+            function init() {
+                canvas.width  = window.innerWidth;
+                canvas.height = window.innerHeight;
+                stars = [];
+                const count = isSmall() ? 120 : 260;
+                for (let i = 0; i < count; i++) {
+                    stars.push({
+                        x:     Math.random() * canvas.width,
+                        y:     Math.random() * canvas.height,
+                        size:  Math.random() * 1.5,
+                        speed: Math.random() * 0.1
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#FFFFFF';
+                stars.forEach(star => {
+                    ctx.globalAlpha = Math.random() * 0.5 + 0.3;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    star.y -= star.speed;
+                    if (star.y < 0) star.y = canvas.height;
+                });
+                requestAnimationFrame(animate);
+            }
+
+            if (!motionQuery.matches) {
+                init();
+                animate();
+                window.addEventListener('resize', init);
+            }
+        })();
     </script>
 </body>
 
