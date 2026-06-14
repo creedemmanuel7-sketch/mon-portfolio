@@ -1284,6 +1284,106 @@
 
         sections.forEach(section => observer.observe(section));
     </script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         ANALYTICS — Tracking des visites (Firebase Firestore)
+         Pour NE PAS compter vos propres visites, ouvrez la console
+         du navigateur et tapez :
+           localStorage.setItem('portfolio_owner', 'true')
+         Pour réactiver le tracking :
+           localStorage.removeItem('portfolio_owner')
+    ════════════════════════════════════════════════════════════════ -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getFirestore, collection, addDoc, serverTimestamp }
+            from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        const FIREBASE_CONFIG = {
+            apiKey: "AIzaSyDSEWHWkRLwOLq6kqaFkdKhAjORCmqqxzg",
+            authDomain: "portfolio-analytics-a4568.firebaseapp.com",
+            projectId: "portfolio-analytics-a4568",
+            storageBucket: "portfolio-analytics-a4568.firebasestorage.app",
+            messagingSenderId: "607854662918",
+            appId: "1:607854662918:web:66069b8d4f666e70f67a87",
+            measurementId: "G-9DVR99VE8S"
+        };
+
+        // ── Ne pas compter le propriétaire ni les visites déjà loggées ──
+        if (localStorage.getItem('portfolio_owner') === 'true') {
+            console.log('%c[Portfolio Analytics] Mode propriétaire actif — visite non comptée.', 'color:#888');
+        } else if (!sessionStorage.getItem('_visit_logged')) {
+            sessionStorage.setItem('_visit_logged', '1');
+
+            const app = initializeApp(FIREBASE_CONFIG);
+            const db  = getFirestore(app);
+
+            /** Détecte le type d'appareil */
+            function detectDevice() {
+                const ua = navigator.userAgent;
+                if (/tablet|ipad|playbook|silk/i.test(ua))                         return 'Tablette';
+                if (/mobile|iphone|ipod|blackberry|android.*mobile|windows.*phone/i.test(ua)) return 'Mobile';
+                return 'Desktop';
+            }
+
+            /** Détecte le navigateur */
+            function detectBrowser() {
+                const ua = navigator.userAgent;
+                if (ua.includes('Edg/'))                             return 'Edge';
+                if (ua.includes('OPR/') || ua.includes('Opera/'))    return 'Opera';
+                if (ua.includes('Firefox/'))                         return 'Firefox';
+                if (ua.includes('Chrome/'))                          return 'Chrome';
+                if (ua.includes('Safari/'))                          return 'Safari';
+                return 'Autre';
+            }
+
+            /** Génère un ID de session unique */
+            const sessionId = crypto.randomUUID
+                ? crypto.randomUUID()
+                : Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+            async function logVisit() {
+                let geoData = {
+                    country: 'Inconnu', countryCode: 'XX',
+                    city: 'Inconnue', isp: 'Inconnu'
+                };
+
+                try {
+                    const geoRes = await fetch('https://ipapi.co/json/', {
+                        signal: AbortSignal.timeout(4000)
+                    });
+                    if (geoRes.ok) {
+                        const g = await geoRes.json();
+                        if (!g.error) {
+                            geoData = {
+                                country:     g.country_name  || 'Inconnu',
+                                countryCode: g.country_code  || 'XX',
+                                city:        g.city          || 'Inconnue',
+                                isp:         g.org           || 'Inconnu'
+                            };
+                        }
+                    }
+                } catch { /* silencieux si géoloc indisponible */ }
+
+                await addDoc(collection(db, 'visits'), {
+                    timestamp:  serverTimestamp(),
+                    sessionId,
+                    deviceType: detectDevice(),
+                    browser:    detectBrowser(),
+                    language:   navigator.language || 'Inconnu',
+                    screenSize: `${screen.width}×${screen.height}`,
+                    timezone:   Intl.DateTimeFormat().resolvedOptions().timeZone || 'Inconnu',
+                    referrer:   document.referrer || 'direct',
+                    ...geoData
+                });
+
+                console.log('%c[Portfolio Analytics] Visite enregistrée ✓', 'color:#22c55e');
+            }
+
+            logVisit().catch(err =>
+                console.warn('[Portfolio Analytics] Erreur :', err)
+            );
+        }
+    </script>
 </body>
 
 </html>

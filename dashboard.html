@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics — Dashboard Privé · Crédo ADJIGNON</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+    <style>
+        /* ── Reset & Base ─────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #000000;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.10);
+            --border-h: rgba(255, 255, 255, 0.25);
+            --text: #A1A1AA;
+            --text-bright: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.45);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+            --orange: #f97316;
+            --pink: #ec4899;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Nebula background ────────────────────────────────── */
+        .nebula {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.03) 0%, transparent 60%);
+        }
+
+        /* ── Glass ────────────────────────────────────────────── */
+        .glass {
+            background: var(--surface);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+        }
+
+        .glass-sm {
+            border-radius: 16px;
+        }
+
+        /* ── Scrollbar ────────────────────────────────────────── */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           LOGIN SCREEN
+        ════════════════════════════════════════════════════════ */
+        #login-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .login-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.375rem;
+        }
+
+        .login-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text-bright);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--border-h);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-group .toggle-pw {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .input-group .toggle-pw:hover {
+            color: var(--text-bright);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--text-bright);
+            color: #000;
+            border: none;
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-login:hover {
+            opacity: 0.85;
+        }
+
+        .login-error {
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: #ef4444;
+            display: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           DASHBOARD LAYOUT
+        ════════════════════════════════════════════════════════ */
+        #dashboard {
+            display: none;
+        }
+
+        #dashboard.visible {
+            display: block;
+        }
+
+        .dashboard-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-bright);
+            font-size: 0.875rem;
+        }
+
+        .header-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .header-badge {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .header-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .btn-sm {
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .btn-sm:hover {
+            border-color: var(--border-h);
+            color: var(--text-bright);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .btn-sm.active {
+            background: var(--text-bright);
+            color: #000;
+            border-color: var(--text-bright);
+        }
+
+        .btn-danger {
+            border-color: rgba(239, 68, 68, 0.3);
+            color: rgba(239, 68, 68, 0.7);
+        }
+
+        .btn-danger:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        /* ── Main Content ─────────────────────────────────────── */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ── Section heading ──────────────────────────────────── */
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── Stat Cards ───────────────────────────────────────── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stat-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .stat-icon.green {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+        }
+
+        .stat-icon.blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--blue);
+        }
+
+        .stat-icon.purple {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--purple);
+        }
+
+        .stat-icon.orange {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--orange);
+        }
+
+        .stat-delta {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+        }
+
+        .stat-delta.up {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+        }
+
+        .stat-delta.down {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .stat-delta.neu {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* ── Charts Grid ──────────────────────────────────────── */
+        .charts-main {
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-card {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .chart-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+
+        .chart-subtitle {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            margin-top: 0.125rem;
+        }
+
+        .charts-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            position: relative;
+        }
+
+        .chart-container canvas {
+            max-height: 260px;
+        }
+
+        /* ── Table ────────────────────────────────────────────── */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8125rem;
+        }
+
+        thead th {
+            text-align: left;
+            padding: 0.625rem 0.875rem;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: background 0.15s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody td {
+            padding: 0.75rem 0.875rem;
+            color: var(--text);
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .flag {
+            margin-right: 0.375rem;
+        }
+
+        .device-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid var(--border);
+        }
+
+        .referrer-chip {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+        }
+
+        /* ── Loading / Empty states ───────────────────────────── */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-top-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ── Period selector ──────────────────────────────────── */
+        .period-selector {
+            display: flex;
+            gap: 0.375rem;
+            flex-wrap: wrap;
+        }
+
+        /* ── Top countries / referrers list ───────────────────── */
+        .rank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .rank-bar-wrap {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .rank-bar {
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.15));
+            transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .rank-label {
+            font-size: 0.8125rem;
+            color: var(--text);
+            min-width: 110px;
+        }
+
+        .rank-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 28px;
+            text-align: right;
+        }
+
+        /* ── Live dot ─────────────────────────────────────────── */
+        .live-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.7);
+            }
+        }
+
+        /* ── Responsive ───────────────────────────────────────── */
+        @media (max-width: 640px) {
+            .dashboard-header {
+                padding: 0.875rem 1rem;
+            }
+
+            .content {
+                padding: 1.25rem 0.875rem 3rem;
+            }
+
+            .stat-value {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nebula"></div>
+
+    <!-- ═══════════════════════════════════════════
+         ÉCRAN DE CONNEXION
+    ════════════════════════════════════════════ -->
+    <div id="login-screen">
+        <div class="login-card glass">
+            <div class="login-icon"><i class="fas fa-chart-line"></i></div>
+            <h1 class="login-title">Dashboard Privé</h1>
+            <p class="login-subtitle">Portfolio Analytics · Accès Restreint</p>
+
+            <form id="login-form" autocomplete="off">
+                <div class="input-group">
+                    <input id="pw-input" type="password" placeholder="Mot de passe" autocomplete="current-password"
+                        spellcheck="false" />
+                    <button type="button" class="toggle-pw" id="toggle-pw"
+                        aria-label="Afficher/masquer le mot de passe">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-unlock-alt" style="margin-right:0.5rem"></i>Accéder au Dashboard
+                </button>
+                <p class="login-error" id="login-error">
+                    <i class="fas fa-exclamation-triangle"></i> Mot de passe incorrect
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         DASHBOARD
+    ════════════════════════════════════════════ -->
+    <div id="dashboard">
+
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="header-logo"><i class="fas fa-chart-line"></i></div>
+                <div>
+                    <div class="header-title">Portfolio Analytics</div>
+                    <div class="header-badge">Crédo ADJIGNON · Privé</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="header-date" id="header-date"></span>
+                <div class="period-selector">
+                    <button class="btn-sm active" data-period="7" id="btn-7j">7 jours</button>
+                    <button class="btn-sm" data-period="30" id="btn-30j">30 jours</button>
+                    <button class="btn-sm" data-period="90" id="btn-90j">90 jours</button>
+                    <button class="btn-sm" data-period="0" id="btn-all">Tout</button>
+                </div>
+                <button class="btn-sm" id="btn-refresh">
+                    <i class="fas fa-sync-alt"></i> Rafraîchir
+                </button>
+                <button class="btn-sm btn-danger" id="btn-owner-mode">
+                    <i class="fas fa-eye-slash"></i> <span id="owner-label">Mode proprio</span>
+                </button>
+                <button class="btn-sm" id="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- Live indicator -->
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.75rem">
+                <span class="live-dot"></span>
+                <span
+                    style="font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;">
+                    Données en direct
+                </span>
+                <span style="font-size:0.6875rem;color:var(--text-muted);margin-left:auto" id="last-updated"></span>
+            </div>
+
+            <!-- ── Stat Cards ── -->
+            <div class="section-label"><i class="fas fa-tachometer-alt"></i> Vue d'ensemble</div>
+            <div class="stats-grid" id="stats-grid">
+                <div class="stat-card glass loading-state">
+                    <div class="spinner"></div><span>Chargement…</span>
+                </div>
+            </div>
+
+            <!-- ── Main Chart ── -->
+            <div class="section-label"><i class="fas fa-chart-area"></i> Visites dans le temps</div>
+            <div class="chart-card glass charts-main">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Visites par jour</div>
+                        <div class="chart-subtitle" id="chart-range-label"></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-visits"></canvas>
+                </div>
+            </div>
+
+            <!-- ── Charts Row ── -->
+            <div class="section-label"><i class="fas fa-globe"></i> Répartition</div>
+            <div class="charts-row">
+                <div class="chart-card glass">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Appareils</div>
+                            <div class="chart-subtitle">Mobile · Desktop · Tablette</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-devices"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card glass">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Navigateurs</div>
+                            <div class="chart-subtitle">Chrome · Firefox · Safari…</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-browsers"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card glass">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Pays</div>
+                            <div class="chart-subtitle">Top origines</div>
+                        </div>
+                    </div>
+                    <div id="country-list" class="rank-list" style="padding:0.25rem 0">
+                        <div class="loading-state" style="padding:1.5rem">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Sources ── -->
+            <div class="section-label"><i class="fas fa-share-alt"></i> Sources de trafic</div>
+            <div class="chart-card glass" style="margin-bottom:1.5rem">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">D'où viennent vos visiteurs ?</div>
+                        <div class="chart-subtitle">Référents & accès directs</div>
+                    </div>
+                </div>
+                <div id="referrer-list" class="rank-list">
+                    <div class="loading-state" style="padding:1.5rem">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Visits Table ── -->
+            <div class="section-label"><i class="fas fa-list"></i> Visites récentes</div>
+            <div class="chart-card glass">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Dernières visites</div>
+                        <div class="chart-subtitle" id="table-count"></div>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table id="visits-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date &amp; Heure</th>
+                                <th>Pays</th>
+                                <th>Ville</th>
+                                <th>Appareil</th>
+                                <th>Navigateur</th>
+                                <th>Langue</th>
+                                <th>Source</th>
+                                <th>Fuseau</th>
+                                <th>FAI / Réseau</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visits-tbody">
+                            <tr>
+                                <td colspan="10">
+                                    <div class="loading-state">
+                                        <div class="spinner"></div>
+                                        <span>Chargement des données…</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /dashboard -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         SCRIPTS
+    ════════════════════════════════════════════════════════ -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getFirestore, collection, getDocs, orderBy, query }
+            from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        /* ─────────────────────────────────────────────────────────
+           ⚙️  CONFIGURATION — Changez le mot de passe ici
+        ───────────────────────────────────────────────────────── */
+        const DASHBOARD_PASSWORD = 'g1di4la42'; // ← Votre mot de passe
+
+        const FIREBASE_CONFIG = {
+            apiKey: "AIzaSyDSEWHWkRLwOLq6kqaFkdKhAjORCmqqxzg",
+            authDomain: "portfolio-analytics-a4568.firebaseapp.com",
+            projectId: "portfolio-analytics-a4568",
+            storageBucket: "portfolio-analytics-a4568.firebasestorage.app",
+            messagingSenderId: "607854662918",
+            appId: "1:607854662918:web:66069b8d4f666e70f67a87",
+            measurementId: "G-9DVR99VE8S"
+        };
+        /* ───────────────────────────────────────────────────────── */
+
+        // ── Firebase init ──────────────────────────────────────
+        const app = initializeApp(FIREBASE_CONFIG);
+        const db = getFirestore(app);
+
+        // ── State ──────────────────────────────────────────────
+        let allVisits = [];
+        let currentDays = 7;
+        let chartVisits = null;
+        let chartDevices = null;
+        let chartBrowsers = null;
+
+        // ── DOM refs ───────────────────────────────────────────
+        const loginScreen = document.getElementById('login-screen');
+        const dashboard = document.getElementById('dashboard');
+        const pwInput = document.getElementById('pw-input');
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const togglePw = document.getElementById('toggle-pw');
+        const btnRefresh = document.getElementById('btn-refresh');
+        const btnOwner = document.getElementById('btn-owner-mode');
+        const btnLogout = document.getElementById('btn-logout');
+        const ownerLabel = document.getElementById('owner-label');
+        const lastUpdated = document.getElementById('last-updated');
+
+        /* ── Helpers ── */
+        function flag(code) {
+            if (!code || code === 'XX') return '🌐';
+            return String.fromCodePoint(
+                ...Array.from((code || 'XX').toUpperCase())
+                    .map(c => 127397 + c.charCodeAt(0))
+            );
+        }
+
+        function formatDate(ts) {
+            if (!ts) return '—';
+            const d = ts.toDate ? ts.toDate() : new Date(ts);
+            return d.toLocaleDateString('fr-FR', {
+                day: '2-digit', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function dayKey(ts) {
+            if (!ts) return '';
+            const d = ts.toDate ? ts.toDate() : new Date(ts);
+            return d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
+        }
+
+        function filterByPeriod(visits, days) {
+            if (days === 0) return visits;
+            const cutoff = Date.now() - days * 86400000;
+            return visits.filter(v => {
+                if (!v.timestamp) return false;
+                const ms = (v.timestamp.toDate ? v.timestamp.toDate() : new Date(v.timestamp)).getTime();
+                return ms >= cutoff;
+            });
+        }
+
+        function topN(arr, key, n = 8) {
+            const counts = {};
+            arr.forEach(v => { const k = v[key] || 'Inconnu'; counts[k] = (counts[k] || 0) + 1; });
+            return Object.entries(counts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, n);
+        }
+
+        /* ── Auth ── */
+        const SESSION_KEY = '_dash_auth';
+
+        loginForm.addEventListener('submit', e => {
+            e.preventDefault();
+            if (pwInput.value === DASHBOARD_PASSWORD) {
+                sessionStorage.setItem(SESSION_KEY, '1');
+                loginScreen.classList.add('hidden');
+                dashboard.classList.add('visible');
+                loadDashboard();
+            } else {
+                loginError.style.display = 'block';
+                pwInput.value = '';
+                pwInput.focus();
+            }
+        });
+
+        togglePw.addEventListener('click', () => {
+            const show = pwInput.type === 'password';
+            pwInput.type = show ? 'text' : 'password';
+            togglePw.innerHTML = show ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        });
+
+        btnLogout.addEventListener('click', () => {
+            sessionStorage.removeItem(SESSION_KEY);
+            loginScreen.classList.remove('hidden');
+            dashboard.classList.remove('visible');
+            pwInput.value = '';
+        });
+
+        // Auto-login if same session
+        if (sessionStorage.getItem(SESSION_KEY) === '1') {
+            loginScreen.classList.add('hidden');
+            dashboard.classList.add('visible');
+            loadDashboard();
+        }
+
+        /* ── Header date ── */
+        document.getElementById('header-date').textContent =
+            new Date().toLocaleDateString('fr-FR', {
+                weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+            });
+
+        /* ── Period selector ── */
+        document.querySelectorAll('[data-period]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-period]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentDays = parseInt(btn.dataset.period);
+                renderAll();
+            });
+        });
+
+        /* ── Refresh ── */
+        btnRefresh.addEventListener('click', () => {
+            btnRefresh.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> …';
+            btnRefresh.disabled = true;
+            loadDashboard().finally(() => {
+                btnRefresh.innerHTML = '<i class="fas fa-sync-alt"></i> Rafraîchir';
+                btnRefresh.disabled = false;
+            });
+        });
+
+        /* ── Owner mode toggle ── */
+        function updateOwnerBtn() {
+            const isOwner = localStorage.getItem('portfolio_owner') === 'true';
+            ownerLabel.textContent = isOwner ? 'Modo proprio ON' : 'Mode proprio';
+            btnOwner.style.opacity = isOwner ? '1' : '';
+            btnOwner.style.color = isOwner ? 'var(--green)' : '';
+        }
+        updateOwnerBtn();
+        btnOwner.addEventListener('click', () => {
+            const isOwner = localStorage.getItem('portfolio_owner') === 'true';
+            if (isOwner) {
+                localStorage.removeItem('portfolio_owner');
+                ownerLabel.textContent = 'Mode proprio OFF';
+                setTimeout(updateOwnerBtn, 1000);
+            } else {
+                localStorage.setItem('portfolio_owner', 'true');
+                updateOwnerBtn();
+            }
+        });
+
+        /* ══════════════════════════════════════════
+           LOAD DATA
+        ══════════════════════════════════════════ */
+        async function loadDashboard() {
+            const q = query(collection(db, 'visits'), orderBy('timestamp', 'desc'));
+            const snap = await getDocs(q);
+            allVisits = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            lastUpdated.textContent = 'Mis à jour : ' + new Date().toLocaleTimeString('fr-FR');
+            renderAll();
+        }
+
+        /* ══════════════════════════════════════════
+           RENDER ALL
+        ══════════════════════════════════════════ */
+        function renderAll() {
+            const visits = filterByPeriod(allVisits, currentDays);
+
+            // Range label
+            const label = currentDays === 0
+                ? `Total : ${allVisits.length} visite${allVisits.length !== 1 ? 's' : ''}`
+                : `${visits.length} visite${visits.length !== 1 ? 's' : ''} sur ${currentDays} jours`;
+            document.getElementById('chart-range-label').textContent = label;
+
+            renderStats(visits);
+            renderLineChart(visits);
+            renderDonutChart(visits);
+            renderCountries(visits);
+            renderReferrers(visits);
+            renderTable(visits);
+        }
+
+        /* ── Stat Cards ── */
+        function renderStats(visits) {
+            const now = Date.now();
+            const day = visits.filter(v => v.timestamp && (now - (v.timestamp.toDate ? v.timestamp.toDate() : new Date(v.timestamp)).getTime()) < 86400000).length;
+            const week = visits.filter(v => v.timestamp && (now - (v.timestamp.toDate ? v.timestamp.toDate() : new Date(v.timestamp)).getTime()) < 7 * 86400000).length;
+            const month = visits.filter(v => v.timestamp && (now - (v.timestamp.toDate ? v.timestamp.toDate() : new Date(v.timestamp)).getTime()) < 30 * 86400000).length;
+
+            const cards = [
+                { icon: 'fa-users', color: 'green', value: allVisits.length, label: 'Total visites' },
+                { icon: 'fa-sun', color: 'blue', value: day, label: "Aujourd'hui" },
+                { icon: 'fa-calendar-week', color: 'purple', value: week, label: 'Cette semaine' },
+                { icon: 'fa-calendar-alt', color: 'orange', value: month, label: 'Ce mois' },
+            ];
+
+            document.getElementById('stats-grid').innerHTML = cards.map(c => `
+                <div class="stat-card glass">
+                    <div class="stat-card-top">
+                        <div class="stat-icon ${c.color}"><i class="fas ${c.icon}"></i></div>
+                    </div>
+                    <div class="stat-value">${c.value}</div>
+                    <div class="stat-label">${c.label}</div>
+                </div>
+            `).join('');
+        }
+
+        /* ── Line Chart ── */
+        function renderLineChart(visits) {
+            // Build daily counts for last N days (or all)
+            const days = currentDays > 0 ? currentDays : 90;
+            const labels = [];
+            const data = [];
+            for (let i = days - 1; i >= 0; i--) {
+                const d = new Date(Date.now() - i * 86400000);
+                const key = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
+                labels.push(key);
+                data.push(0);
+            }
+            visits.forEach(v => {
+                if (!v.timestamp) return;
+                const k = dayKey(v.timestamp);
+                const idx = labels.indexOf(k);
+                if (idx !== -1) data[idx]++;
+            });
+
+            const ctx = document.getElementById('chart-visits').getContext('2d');
+            if (chartVisits) chartVisits.destroy();
+            chartVisits = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Visites',
+                        data,
+                        borderColor: 'rgba(255,255,255,0.7)',
+                        backgroundColor: ctx => {
+                            const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 220);
+                            g.addColorStop(0, 'rgba(255,255,255,0.12)');
+                            g.addColorStop(1, 'rgba(255,255,255,0)');
+                            return g;
+                        },
+                        fill: true,
+                        tension: 0.45,
+                        pointRadius: days <= 30 ? 4 : 2,
+                        pointBackgroundColor: 'rgba(255,255,255,0.9)',
+                        pointBorderColor: 'transparent',
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(10,10,10,0.9)',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            titleColor: '#fff',
+                            bodyColor: '#A1A1AA',
+                            callbacks: {
+                                label: ctx => ` ${ctx.raw} visite${ctx.raw !== 1 ? 's' : ''}`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.04)' },
+                            ticks: {
+                                color: 'rgba(255,255,255,0.35)',
+                                font: { family: 'Space Grotesk', size: 11 },
+                                maxTicksLimit: 10,
+                                maxRotation: 0
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: 'rgba(255,255,255,0.35)',
+                                font: { family: 'Space Grotesk', size: 11 },
+                                stepSize: 1,
+                                precision: 0
+                            },
+                            grid: { color: 'rgba(255,255,255,0.04)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        /* ── Donut Charts ── */
+        const PALETTE = [
+            'rgba(255,255,255,0.75)', 'rgba(59,130,246,0.75)',
+            'rgba(168,85,247,0.75)', 'rgba(34,197,94,0.75)',
+            'rgba(249,115,22,0.75)', 'rgba(236,72,153,0.75)',
+            'rgba(234,179,8,0.75)', 'rgba(20,184,166,0.75)'
+        ];
+
+        function makeDonut(canvasId, labels, data, existing) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            if (existing) existing.destroy();
+            return new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels,
+                    datasets: [{
+                        data,
+                        backgroundColor: PALETTE.slice(0, labels.length),
+                        borderColor: '#000',
+                        borderWidth: 2,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '65%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'rgba(255,255,255,0.55)',
+                                font: { family: 'Space Grotesk', size: 11 },
+                                padding: 14,
+                                usePointStyle: true,
+                                pointStyleWidth: 8
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(10,10,10,0.9)',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            titleColor: '#fff',
+                            bodyColor: '#A1A1AA',
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderDonutChart(visits) {
+            const devData = topN(visits, 'deviceType', 6);
+            chartDevices = makeDonut('chart-devices', devData.map(d => d[0]), devData.map(d => d[1]), chartDevices);
+
+            const brData = topN(visits, 'browser', 6);
+            chartBrowsers = makeDonut('chart-browsers', brData.map(d => d[0]), brData.map(d => d[1]), chartBrowsers);
+        }
+
+        /* ── Country list ── */
+        function renderCountries(visits) {
+            const top = topN(visits, 'country', 10);
+            const max = top[0]?.[1] || 1;
+            const el = document.getElementById('country-list');
+
+            if (!top.length) { el.innerHTML = '<p style="color:var(--text-muted);font-size:0.8rem;padding:0.5rem 0">Aucune donnée</p>'; return; }
+
+            el.innerHTML = top.map(([country, count]) => {
+                const code = (visits.find(v => v.country === country)?.countryCode) || 'XX';
+                const pct = Math.round((count / max) * 100);
+                return `
+                <div class="rank-item">
+                    <span class="rank-label">${flag(code)} ${country}</span>
+                    <div class="rank-bar-wrap">
+                        <div class="rank-bar" style="width:${pct}%"></div>
+                    </div>
+                    <span class="rank-count">${count}</span>
+                </div>`;
+            }).join('');
+        }
+
+        /* ── Referrers list ── */
+        function formatReferrer(ref) {
+            if (!ref || ref === 'direct') return '🔗 Accès direct';
+            try {
+                const h = new URL(ref).hostname.replace(/^www\./, '');
+                if (h.includes('google')) return '🔍 Google';
+                if (h.includes('github')) return '🐙 GitHub';
+                if (h.includes('linkedin')) return '💼 LinkedIn';
+                if (h.includes('twitter') || h.includes('t.co')) return '🐦 Twitter/X';
+                if (h.includes('facebook')) return '📘 Facebook';
+                if (h.includes('whatsapp')) return '💬 WhatsApp';
+                return '🌐 ' + h;
+            } catch { return '🔗 ' + ref; }
+        }
+
+        function renderReferrers(visits) {
+            const refs = {};
+            visits.forEach(v => {
+                const k = formatReferrer(v.referrer);
+                refs[k] = (refs[k] || 0) + 1;
+            });
+            const sorted = Object.entries(refs).sort((a, b) => b[1] - a[1]).slice(0, 8);
+            const max = sorted[0]?.[1] || 1;
+            const el = document.getElementById('referrer-list');
+
+            if (!sorted.length) { el.innerHTML = '<p style="color:var(--text-muted);font-size:0.8rem">Aucune donnée</p>'; return; }
+
+            el.innerHTML = sorted.map(([ref, count]) => {
+                const pct = Math.round((count / max) * 100);
+                return `
+                <div class="rank-item">
+                    <span class="rank-label" style="min-width:180px">${ref}</span>
+                    <div class="rank-bar-wrap">
+                        <div class="rank-bar" style="width:${pct}%"></div>
+                    </div>
+                    <span class="rank-count">${count}</span>
+                </div>`;
+            }).join('');
+        }
+
+        /* ── Visits Table ── */
+        function renderTable(visits) {
+            document.getElementById('table-count').textContent =
+                `${Math.min(visits.length, 100)} sur ${visits.length} affiché${visits.length !== 1 ? 's' : ''}`;
+
+            const tbody = document.getElementById('visits-tbody');
+
+            if (!visits.length) {
+                tbody.innerHTML = `
+                    <tr><td colspan="10" style="text-align:center;padding:2.5rem;color:var(--text-muted)">
+                        <i class="fas fa-inbox" style="font-size:1.5rem;margin-bottom:0.75rem;display:block;opacity:0.4"></i>
+                        Aucune visite pour cette période
+                    </td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = visits.slice(0, 100).map((v, i) => {
+                const deviceIcons = { 'Mobile': 'fa-mobile-alt', 'Tablette': 'fa-tablet-alt', 'Desktop': 'fa-desktop' };
+                const icon = deviceIcons[v.deviceType] || 'fa-globe';
+                const src = formatReferrer(v.referrer);
+
+                return `
+                <tr>
+                    <td style="color:var(--text-muted);font-size:0.6875rem">${i + 1}</td>
+                    <td style="color:var(--text-bright)">${formatDate(v.timestamp)}</td>
+                    <td><span class="flag">${flag(v.countryCode)}</span>${v.country || '—'}</td>
+                    <td style="color:var(--text-muted)">${v.city || '—'}</td>
+                    <td>
+                        <span class="device-badge">
+                            <i class="fas ${icon}" style="font-size:0.6rem"></i>
+                            ${v.deviceType || '—'}
+                        </span>
+                    </td>
+                    <td>${v.browser || '—'}</td>
+                    <td style="color:var(--text-muted)">${v.language || '—'}</td>
+                    <td><span class="referrer-chip" title="${v.referrer || ''}">${src}</span></td>
+                    <td style="color:var(--text-muted);font-size:0.6875rem">${(v.timezone || '—').replace('/', ' / ')}</td>
+                    <td style="color:var(--text-muted);font-size:0.6875rem;max-width:140px;overflow:hidden;text-overflow:ellipsis" title="${v.isp || ''}">${v.isp || '—'}</td>
+                </tr>`;
+            }).join('');
+        }
+    </script>
+</body>
+
+</html>
