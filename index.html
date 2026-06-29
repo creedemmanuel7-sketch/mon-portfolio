@@ -339,7 +339,7 @@
                 </div>
                 <div
                     class="relative size-40 md:size-52 rounded-full overflow-hidden border-2 border-white/10 pure-glass">
-                    <img src="images/credson.jpeg" alt="Portrait de Crédo ADJIGNON" class="w-full h-full object-cover"
+                    <img src="images/Credson.png" alt="Portrait de Crédo ADJIGNON" class="w-full h-full object-cover"
                         decoding="async" fetchpriority="high">
                 </div>
             </div>
@@ -369,7 +369,7 @@
                 <a class="pure-glass glass-hover px-6 sm:px-10 py-3 sm:py-4 rounded-full text-white text-sm font-bold transition-all text-center"
                     href="#projets">Découvrir mes projets</a>
                 <a class="border border-white/20 px-6 sm:px-10 py-3 sm:py-4 rounded-full text-white text-sm font-bold hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 text-center"
-                    href="images/CV Professionnel credo.jpg" target="_blank" rel="noopener noreferrer">
+                    href="CV_Credo_ADJIGNON (2).pdf" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-file-pdf"></i> Mon CV
                 </a>
                 <a class="border border-white/10 bg-white/5 px-6 sm:px-10 py-3 sm:py-4 rounded-full text-white/70 text-sm font-bold hover:bg-white hover:text-black transition-all text-center"
@@ -757,8 +757,8 @@
                         class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest flex items-center gap-2 text-white/80">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a id="contact-linkedin" href="https://www.linkedin.com/in/crédo-credson-adjignon-1a15b4382"
-                        target="_blank" rel="noopener noreferrer"
+                    <a id="contact-linkedin" href="https://www.linkedin.com/in/credo-credson-adjignon" target="_blank"
+                        rel="noopener noreferrer"
                         class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest flex items-center gap-2 text-white/80">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
@@ -1106,12 +1106,12 @@
             sessionStorage.setItem('_visit_logged', '1');
 
             const app = initializeApp(FIREBASE_CONFIG);
-            const db  = getFirestore(app);
+            const db = getFirestore(app);
 
             /** Détecte le type d'appareil */
             function detectDevice() {
                 const ua = navigator.userAgent;
-                if (/tablet|ipad|playbook|silk/i.test(ua))                         return 'Tablette';
+                if (/tablet|ipad|playbook|silk/i.test(ua)) return 'Tablette';
                 if (/mobile|iphone|ipod|blackberry|android.*mobile|windows.*phone/i.test(ua)) return 'Mobile';
                 return 'Desktop';
             }
@@ -1119,11 +1119,11 @@
             /** Détecte le navigateur */
             function detectBrowser() {
                 const ua = navigator.userAgent;
-                if (ua.includes('Edg/'))                             return 'Edge';
-                if (ua.includes('OPR/') || ua.includes('Opera/'))    return 'Opera';
-                if (ua.includes('Firefox/'))                         return 'Firefox';
-                if (ua.includes('Chrome/'))                          return 'Chrome';
-                if (ua.includes('Safari/'))                          return 'Safari';
+                if (ua.includes('Edg/')) return 'Edge';
+                if (ua.includes('OPR/') || ua.includes('Opera/')) return 'Opera';
+                if (ua.includes('Firefox/')) return 'Firefox';
+                if (ua.includes('Chrome/')) return 'Chrome';
+                if (ua.includes('Safari/')) return 'Safari';
                 return 'Autre';
             }
 
@@ -1146,24 +1146,24 @@
                         const g = await geoRes.json();
                         if (!g.error) {
                             geoData = {
-                                country:     g.country_name  || 'Inconnu',
-                                countryCode: g.country_code  || 'XX',
-                                city:        g.city          || 'Inconnue',
-                                isp:         g.org           || 'Inconnu'
+                                country: g.country_name || 'Inconnu',
+                                countryCode: g.country_code || 'XX',
+                                city: g.city || 'Inconnue',
+                                isp: g.org || 'Inconnu'
                             };
                         }
                     }
                 } catch { /* silencieux si géoloc indisponible */ }
 
                 await addDoc(collection(db, 'visits'), {
-                    timestamp:  serverTimestamp(),
+                    timestamp: serverTimestamp(),
                     sessionId,
                     deviceType: detectDevice(),
-                    browser:    detectBrowser(),
-                    language:   navigator.language || 'Inconnu',
+                    browser: detectBrowser(),
+                    language: navigator.language || 'Inconnu',
                     screenSize: `${screen.width}×${screen.height}`,
-                    timezone:   Intl.DateTimeFormat().resolvedOptions().timeZone || 'Inconnu',
-                    referrer:   document.referrer || 'direct',
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Inconnu',
+                    referrer: document.referrer || 'direct',
                     ...geoData
                 });
 
