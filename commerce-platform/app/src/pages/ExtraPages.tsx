@@ -47,7 +47,7 @@ export function ConfirmationPage() {
           setSaveMsg(
             result.ok
               ? `Commande enregistrée · ${result.id.slice(0, 8)}…`
-              : `Paiement OK, enregistrement Supabase : ${result.error}. Exécute orders.sql dans le SQL Editor.`,
+              : `Paiement OK, enregistrement Supabase : ${result.error}`,
           )
         }
         if (result.ok) sessionStorage.removeItem('sika_checkout_draft')
