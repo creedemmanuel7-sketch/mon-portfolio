@@ -23,9 +23,16 @@ function loadEnv() {
 
 loadEnv()
 
-const secret = process.env.STRIPE_SECRET_KEY
+// Secret serveur uniquement — jamais VITE_ (Vite expose tout VITE_* au navigateur).
+// Fallback VITE_STRIPE_SECRET_KEY pour les .env.local mal nommés (à corriger).
+const secret = process.env.STRIPE_SECRET_KEY || process.env.VITE_STRIPE_SECRET_KEY
+if (process.env.VITE_STRIPE_SECRET_KEY && !process.env.STRIPE_SECRET_KEY) {
+  console.warn(
+    '[sika] Renomme VITE_STRIPE_SECRET_KEY → STRIPE_SECRET_KEY dans .env.local (la clé secrète ne doit pas être VITE_).',
+  )
+}
 if (!secret || !secret.startsWith('sk_')) {
-  console.error('STRIPE_SECRET_KEY manquante dans .env.local')
+  console.error('STRIPE_SECRET_KEY manquante dans .env.local (pas VITE_STRIPE_SECRET_KEY)')
   process.exit(1)
 }
 
