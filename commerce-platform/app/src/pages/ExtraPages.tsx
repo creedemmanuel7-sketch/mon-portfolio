@@ -11,6 +11,7 @@ export { CheckoutPage } from './CheckoutPage'
 export function ConfirmationPage() {
   const { clearCart } = useCart()
   const [saveMsg, setSaveMsg] = useState('Enregistrement de la commande…')
+  const [savedOk, setSavedOk] = useState<boolean | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -20,7 +21,10 @@ export function ConfirmationPage() {
       const session = params.get('session_id')
 
       if (!raw) {
-        if (!cancelled) setSaveMsg(supabaseConfigured ? 'Commande confirmée.' : 'Stripe OK — Supabase non configuré.')
+        if (!cancelled) {
+          setSaveMsg(supabaseConfigured ? 'Commande confirmée.' : 'Stripe OK — Supabase non configuré.')
+          setSavedOk(true)
+        }
         clearCart()
         return
       }
@@ -44,6 +48,7 @@ export function ConfirmationPage() {
           stripeSessionId: session,
         })
         if (!cancelled) {
+          setSavedOk(result.ok)
           setSaveMsg(
             result.ok
               ? `Commande enregistrée · ${result.id.slice(0, 8)}…`
@@ -53,7 +58,10 @@ export function ConfirmationPage() {
         if (result.ok) sessionStorage.removeItem('sika_checkout_draft')
         if (draft.email) localStorage.setItem('sika_last_email', draft.email)
       } catch {
-        if (!cancelled) setSaveMsg('Commande confirmée (brouillon local).')
+        if (!cancelled) {
+          setSavedOk(false)
+          setSaveMsg('Commande confirmée (brouillon local).')
+        }
       }
       clearCart()
     }
@@ -65,15 +73,23 @@ export function ConfirmationPage() {
 
   const params = new URLSearchParams(window.location.hash.split('?')[1] || '')
   const session = params.get('session_id')
+  const simulated = params.get('simulated') === '1'
 
   return (
     <div className="mx-auto max-w-lg px-4 py-16 text-center">
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-copper">Merci</p>
       <h1 className="font-display mt-2 text-4xl font-bold">Votre commande est confirmée</h1>
       <p className="mt-3 text-muted">Bienvenue dans la maison Sika.</p>
-      <p className="mt-2 text-sm text-muted">{saveMsg}</p>
+      <p
+        className={`mt-4 text-sm ${
+          savedOk === false ? 'text-amber-800' : savedOk === true ? 'text-emerald-800' : 'text-muted'
+        }`}
+      >
+        {saveMsg}
+      </p>
       <p className="mt-2 text-sm text-muted">
         Statut · <span className="font-bold text-emerald-700">paid</span>
+        {simulated ? ' · simulation' : null}
         {session ? <><br /><span className="text-xs break-all">Session {session}</span></> : null}
       </p>
       <div className="mt-8 flex justify-center gap-3">
