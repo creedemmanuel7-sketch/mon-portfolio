@@ -971,58 +971,90 @@
             </div>
         </section>
 
-        <!-- Contact -->
+        <!-- Contact — intake -->
         <section id="contact" class="reveal">
             <div
                 class="pure-glass p-8 sm:p-12 md:p-16 rounded-3xl sm:rounded-[50px] md:rounded-[80px] relative overflow-hidden">
                 <div class="specular-reflection"></div>
-                <div class="text-center mb-10">
+                <div class="text-center mb-8 sm:mb-10">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 luminescent-text">
                         Construisons la suite
                     </h2>
-                    <p class="text-silver-gray max-w-xl mx-auto text-sm sm:text-base">
-                        Stages, collabs, projets Android / web — dites-moi pourquoi vous écrivez,
-                        je reçois le message dans ma boîte Supabase.
+                    <p class="text-silver-gray max-w-2xl mx-auto text-sm sm:text-base">
+                        Dites-moi <strong class="text-white/85">ce dont vous avez besoin</strong> et
+                        <strong class="text-white/85">comment on avance</strong> — le formulaire guide aussi
+                        les infos utiles pour que je puisse répondre concrètement.
                     </p>
                 </div>
 
-                <form id="portfolio-contact-form" class="mx-auto max-w-xl text-left space-y-3 mb-10"
-                    novalidate>
+                <form id="portfolio-contact-form" class="mx-auto max-w-2xl text-left space-y-4 mb-10" novalidate>
                     <div class="grid sm:grid-cols-2 gap-3">
                         <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
-                            Nom
+                            Votre nom
                             <input required name="name" type="text" autocomplete="name"
                                 class="mt-1 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-signal"
-                                placeholder="Votre nom" />
+                                placeholder="Prénom Nom" />
                         </label>
                         <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
-                            Email
+                            Email de réponse
                             <input required name="email" type="email" autocomplete="email"
                                 class="mt-1 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-signal"
                                 placeholder="vous@email.com" />
                         </label>
                     </div>
+
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
+                            Ce dont vous avez besoin
+                            <select required name="reason" id="contact-reason"
+                                class="mt-1 w-full rounded-2xl border border-white/15 bg-black/40 px-4 py-3 text-sm text-white focus:outline-none focus:border-signal">
+                                <option value="stage">Proposer un stage (Android / web)</option>
+                                <option value="mission">Mission / freelance sur un projet</option>
+                                <option value="collab">Collaboration / co-build</option>
+                                <option value="conseil">Avis technique / relecture portfolio</option>
+                                <option value="autre">Autre demande</option>
+                            </select>
+                        </label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
+                            Comment on avance
+                            <select required name="channel" id="contact-channel"
+                                class="mt-1 w-full rounded-2xl border border-white/15 bg-black/40 px-4 py-3 text-sm text-white focus:outline-none focus:border-signal">
+                                <option value="email">Échange par e-mail</option>
+                                <option value="whatsapp">WhatsApp (réponse rapide)</option>
+                                <option value="appel">Appel / visio (15–20 min)</option>
+                                <option value="async">Brief écrit, je réponds quand je peux</option>
+                            </select>
+                        </label>
+                    </div>
+
                     <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
-                        Motif
-                        <select required name="reason"
+                        Délai souhaité
+                        <select name="timeline" id="contact-timeline"
                             class="mt-1 w-full rounded-2xl border border-white/15 bg-black/40 px-4 py-3 text-sm text-white focus:outline-none focus:border-signal">
-                            <option value="stage">Stage Android / web</option>
-                            <option value="collab">Collaboration / freelance</option>
-                            <option value="projet">Parler d’un projet</option>
-                            <option value="feedback">Feedback portfolio</option>
-                            <option value="autre">Autre</option>
+                            <option value="asap">Dès que possible</option>
+                            <option value="2semaines">Dans les 2 semaines</option>
+                            <option value="1mois">Dans le mois</option>
+                            <option value="exploratoire">Juste exploratoire, pas urgent</option>
                         </select>
                     </label>
+
+                    <div id="contact-guide"
+                        class="rounded-2xl border border-signal/25 bg-signal/5 px-4 py-3 text-sm text-silver-gray leading-relaxed">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-signal mb-2">Pour que je puisse vous répondre</p>
+                        <p id="contact-guide-text">Indiquez entreprise / école, durée du stage, stack (Android ou web) et dates.</p>
+                    </div>
+
                     <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
-                        Message
-                        <textarea required name="message" rows="4"
+                        Votre brief
+                        <textarea required name="message" id="contact-message" rows="5"
                             class="mt-1 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-signal"
-                            placeholder="Contexte, délai, lien utile…"></textarea>
+                            placeholder="Ex. : école / entreprise, durée, stack Android ou web, dates…"></textarea>
                     </label>
+
                     <p id="portfolio-contact-status" class="text-sm min-h-5 text-white/60" role="status" aria-live="polite"></p>
                     <button type="submit" id="portfolio-contact-submit"
                         class="w-full sm:w-auto bg-signal text-black px-8 py-3 rounded-full hover:brightness-110 transition-all font-bold text-sm uppercase tracking-wider disabled:opacity-50">
-                        Envoyer le message
+                        Envoyer mon brief
                     </button>
                 </form>
 
@@ -1047,7 +1079,7 @@
                     </a>
                 </div>
                 <div class="mt-8 text-center text-[10px] sm:text-xs uppercase tracking-widest text-white/50">
-                    Lomé, Togo · Adidogomé
+                    Lomé, Togo · Adidogomé · Android &amp; web
                 </div>
             </div>
         </section>
@@ -1395,26 +1427,64 @@
             if (!form) return;
             const status = document.getElementById('portfolio-contact-status');
             const submitBtn = document.getElementById('portfolio-contact-submit');
+            const reasonEl = document.getElementById('contact-reason');
+            const guideEl = document.getElementById('contact-guide-text');
+            const messageEl = document.getElementById('contact-message');
             const SUPABASE_URL = 'https://mgocgzcpqnbcaqtclvsz.supabase.co';
             const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nb2NnemNwcW5iY2FxdGNsdnN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MTE0MzIsImV4cCI6MjEwMDQ4NzQzMn0.G-Jzh3diVxPes998dtAqitzziBbwvLj8wSy4v7QVnVw';
+
+            const GUIDES = {
+                stage: {
+                    tip: 'Indiquez entreprise ou école, durée du stage, stack (Android / web), dates et lieu (Lomé ou remote).',
+                    placeholder: 'Ex. : école X, stage 3 mois, Android Kotlin, à partir de septembre, Lomé…'
+                },
+                mission: {
+                    tip: 'Décrivez le produit, le livrable attendu, la stack, le budget indicatif et la deadline.',
+                    placeholder: 'Ex. : app Android + backend, MVP en 4 semaines, Kotlin / React, budget…'
+                },
+                collab: {
+                    tip: 'Précisez le rôle de chacun, le repo ou l’idée, et ce que vous attendez de moi.',
+                    placeholder: 'Ex. : co-build d’une app, je fais le mobile, vous le design, objectif…'
+                },
+                conseil: {
+                    tip: 'Lien portfolio / GitHub + 2–3 questions précises (stack, UX, recrutement…).',
+                    placeholder: 'Ex. : avis sur mon case study Atelier Sika, points à améliorer pour un stage…'
+                },
+                autre: {
+                    tip: 'Contexte en 4–5 lignes + ce que vous attendez comme réponse de ma part.',
+                    placeholder: 'Contexte, besoin, et la réponse que vous attendez…'
+                }
+            };
+
+            function applyGuide() {
+                const g = GUIDES[reasonEl.value] || GUIDES.autre;
+                guideEl.textContent = g.tip;
+                messageEl.placeholder = g.placeholder;
+            }
+            reasonEl.addEventListener('change', applyGuide);
+            applyGuide();
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const data = new FormData(form);
+                const reason = String(data.get('reason') || 'autre');
+                const channel = String(data.get('channel') || 'email');
+                const timeline = String(data.get('timeline') || 'exploratoire');
                 const payload = {
                     source: 'portfolio',
                     name: String(data.get('name') || '').trim(),
                     email: String(data.get('email') || '').trim().toLowerCase(),
-                    reason: String(data.get('reason') || 'autre'),
+                    reason: reason,
                     message: String(data.get('message') || '').trim(),
+                    meta: { channel: channel, timeline: timeline, kind: 'intake' }
                 };
                 if (!payload.name || !payload.email || !payload.message) {
-                    status.textContent = 'Merci de remplir nom, email et message.';
+                    status.textContent = 'Merci de remplir nom, email et brief.';
                     status.className = 'text-sm min-h-5 text-red-300';
                     return;
                 }
                 submitBtn.disabled = true;
-                status.textContent = 'Envoi en cours…';
+                status.textContent = 'Envoi du brief…';
                 status.className = 'text-sm min-h-5 text-white/60';
                 try {
                     const res = await fetch(SUPABASE_URL + '/rest/v1/contact_messages', {
@@ -1434,9 +1504,10 @@
                         }
                         throw new Error(text.slice(0, 160) || ('Erreur ' + res.status));
                     }
-                    status.textContent = 'Message envoyé. Merci — je vous répondrai bientôt.';
+                    status.textContent = 'Brief reçu. Merci — je reviens vers vous selon le canal choisi.';
                     status.className = 'text-sm min-h-5 text-emerald-300';
                     form.reset();
+                    applyGuide();
                 } catch (err) {
                     status.textContent = err instanceof Error ? err.message : 'Échec d’envoi.';
                     status.className = 'text-sm min-h-5 text-red-300';
@@ -1445,6 +1516,7 @@
                 }
             });
         })();
+
     </script>
 
     <!-- ═══════════════════════════════════════════════════════════
