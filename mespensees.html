@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MesPensees — Case Study | Crédo ADJIGNON</title>
+    <meta name="description"
+        content="Case study de MesPensees : journal intime privé local-first en React Native, chiffrement, biométrie, widgets et UX immersive." />
+    <meta name="author" content="Crédo ADJIGNON" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href="https://creedemmanuel7-sketch.github.io/mon-portfolio/mespensees.html" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="MesPensees — Case Study | Crédo ADJIGNON" />
+    <meta property="og:description"
+        content="Journal privé local-first : chiffrement, PIN/biométrie, mode leurre, capsules temporelles et widgets Android." />
+    <meta property="og:url" content="https://creedemmanuel7-sketch.github.io/mon-portfolio/mespensees.html" />
+    <meta property="og:image"
+        content="https://creedemmanuel7-sketch.github.io/mon-portfolio/images/mespensees-lock.png" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'silver-gray': '#A1A1AA',
+                        'signal': '#2dd4bf',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pure-glass {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 0.5px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .text-signal { color: #2dd4bf; }
+        .bg-signal { background-color: #2dd4bf; }
+
+        body {
+            background-color: #000;
+            overflow-x: hidden;
+        }
+
+        .nebula {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 45% at 50% 0%, rgba(45, 212, 191, 0.1), transparent 55%),
+                radial-gradient(circle at 80% 70%, rgba(30, 30, 30, 0.2) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+
+<body class="text-silver-gray font-sans selection:bg-signal selection:text-black">
+    <div class="nebula"></div>
+
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-4xl">
+        <div class="pure-glass rounded-full px-5 md:px-8 py-3 flex items-center justify-between">
+            <a href="index.html" class="text-white font-bold tracking-tighter">Crédo<span class="text-signal">.ai</span></a>
+            <div class="flex items-center gap-4 text-xs uppercase tracking-widest font-bold">
+                <a href="index.html#projets" class="text-white/60 hover:text-white transition-colors hidden sm:inline">Projets</a>
+                <a href="https://mespensees.vercel.app" target="_blank" rel="noopener noreferrer"
+                    class="bg-signal text-black px-4 py-2 rounded-full hover:brightness-110 transition-all">Live</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-32 pb-24">
+        <a href="index.html#projets"
+            class="reveal inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-white/50 hover:text-signal transition-colors mb-10">
+            <i class="fas fa-arrow-left"></i> Retour au portfolio
+        </a>
+
+        <section class="reveal mb-16">
+            <p class="text-signal text-[11px] font-bold uppercase tracking-[0.3em] mb-4">Case study · Mobile</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">MesPensees</h1>
+            <p class="text-lg text-silver-gray max-w-3xl leading-relaxed mb-8">
+                Un journal intime privé, 100&nbsp;% local, conçu pour que les pensées restent sur l’appareil —
+                chiffrement, biométrie, mode leurre et widgets Android inclus.
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <a href="https://mespensees.vercel.app" target="_blank" rel="noopener noreferrer"
+                    class="bg-signal text-black px-6 py-3 rounded-full text-sm font-bold hover:brightness-110 transition-all">Site vitrine</a>
+                <a href="https://github.com/creedemmanuel7-sketch/journal-pensees" target="_blank" rel="noopener noreferrer"
+                    class="border border-white/20 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-black transition-all inline-flex items-center gap-2">
+                    <i class="fab fa-github"></i> Code source
+                </a>
+            </div>
+        </section>
+
+        <section class="reveal grid sm:grid-cols-3 gap-4 mb-16">
+            <div class="pure-glass rounded-3xl p-5">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-white/45 font-bold mb-2">Rôle</p>
+                <p class="text-white font-bold">Product &amp; Dev solo</p>
+            </div>
+            <div class="pure-glass rounded-3xl p-5">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-white/45 font-bold mb-2">Stack</p>
+                <p class="text-white font-bold">React Native · Jest · Notifee</p>
+            </div>
+            <div class="pure-glass rounded-3xl p-5">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-white/45 font-bold mb-2">Focus</p>
+                <p class="text-white font-bold">Privacy · Local-first · UX</p>
+            </div>
+        </section>
+
+        <section class="reveal mb-16">
+            <div class="grid grid-cols-3 gap-3 sm:gap-5">
+                <img src="images/mespensees-lock.png" alt="Verrouillage MesPensees" class="rounded-2xl sm:rounded-3xl border border-white/10 object-contain object-top bg-white/[0.02] p-2 h-56 sm:h-80 w-full" loading="lazy" decoding="async">
+                <img src="images/mespensees-timeline.png" alt="Timeline MesPensees" class="rounded-2xl sm:rounded-3xl border border-white/10 object-contain object-top bg-white/[0.02] p-2 h-56 sm:h-80 w-full" loading="lazy" decoding="async">
+                <img src="images/mespensees-stats.png" alt="Stats MesPensees" class="rounded-2xl sm:rounded-3xl border border-white/10 object-contain object-top bg-white/[0.02] p-2 h-56 sm:h-80 w-full" loading="lazy" decoding="async">
+            </div>
+        </section>
+
+        <section class="reveal space-y-10 mb-16">
+            <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Problème</h2>
+                <p class="leading-relaxed">
+                    Les journaux cloud exposent des notes très personnelles. Sur mobile, il manquait une app claire,
+                    offline, avec un vrai contrôle de la vie privée — sans compte, sans sync forcée.
+                </p>
+            </article>
+            <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Approche</h2>
+                <ul class="space-y-3 text-sm sm:text-base">
+                    <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span>Stockage local-first : les données ne quittent pas l’appareil.</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span>Couche sécurité : PIN / biométrie, chiffrement, mode leurre.</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span>UX immersive : timeline, capsules temporelles, widgets et notifications.</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span>Qualité : architecture contextuelle React Native + tests Jest.</span></li>
+                </ul>
+            </article>
+            <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Fonctionnalités clés</h2>
+                <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                    <div class="border border-white/10 rounded-2xl p-4">Chiffrement + verrouillage biométrique</div>
+                    <div class="border border-white/10 rounded-2xl p-4">Mode leurre pour masquer le vrai journal</div>
+                    <div class="border border-white/10 rounded-2xl p-4">Capsules temporelles (notes différées)</div>
+                    <div class="border border-white/10 rounded-2xl p-4">Widgets Android &amp; notifications Notifee</div>
+                </div>
+            </article>
+            <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Résultat</h2>
+                <p class="leading-relaxed mb-4">
+                    Un produit mobile complet, déployé avec site vitrine, qui démontre ma capacité à mener un projet de
+                    bout en bout : produit, sécurité, UX et engineering.
+                </p>
+                <p class="text-signal text-sm font-bold uppercase tracking-widest">Projet phare du portfolio</p>
+            </article>
+        </section>
+
+        <section class="reveal pure-glass rounded-3xl sm:rounded-[40px] p-8 sm:p-12 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Envie d’en parler ?</h2>
+            <p class="text-silver-gray mb-8 max-w-lg mx-auto">Je cherche un stage IA / mobile / data — Lomé ou remote.</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="index.html#contact" class="bg-signal text-black px-6 py-3 rounded-full text-sm font-bold">Contact</a>
+                <a href="index.html" class="border border-white/20 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-black transition-all">Portfolio</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 text-center border-t border-white/5 text-[10px] uppercase tracking-widest text-white/40">
+        © 2026 Crédo ADJIGNON — MesPensees Case Study
+    </footer>
+
+    <script>
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const reveals = document.querySelectorAll('.reveal');
+        if (motionQuery.matches) {
+            reveals.forEach((el) => el.classList.add('is-visible'));
+        } else {
+            const obs = new IntersectionObserver((entries, o) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        o.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            reveals.forEach((el) => obs.observe(el));
+        }
+    </script>
+</body>
+
+</html>
