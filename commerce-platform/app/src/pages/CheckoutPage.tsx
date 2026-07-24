@@ -1,11 +1,8 @@
 import { type FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../cart'
+import { resolveCheckoutApiUrl } from '../lib/checkoutApi'
 import { imgUrl, money } from '../types'
-
-const API =
-  import.meta.env.VITE_CHECKOUT_API_URL ||
-  'http://127.0.0.1:8787/api/create-checkout'
 
 export function CheckoutPage() {
   const { cart, getProduct, cartTotal } = useCart()
@@ -65,8 +62,9 @@ export function CheckoutPage() {
       })
       .filter(Boolean)
 
+    const api = resolveCheckoutApiUrl()
     try {
-      const res = await fetch(API, {
+      const res = await fetch(api, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -84,11 +82,10 @@ export function CheckoutPage() {
       window.location.href = data.url
     } catch (err) {
       setBusy(false)
-      setError(
-        err instanceof Error
-          ? `${err.message} — Lancez l’API locale : npm run stripe:api`
-          : 'Erreur paiement',
-      )
+      const localHint = /127\.0\.0\.1|localhost/.test(api)
+        ? ' — Lancez l’API locale : npm run stripe:api'
+        : ' — Ou utilisez « Simuler succès » (GitHub Pages n’héberge pas Stripe).'
+      setError(err instanceof Error ? `${err.message}${localHint}` : 'Erreur paiement')
     }
   }
 

@@ -10,3 +10,6 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# SPA hash : pas de rewrite HTML nécessaire.
+# /api/create-checkout est déclaré via Config.path dans la function.

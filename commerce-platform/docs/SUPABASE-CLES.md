@@ -30,6 +30,16 @@ VITE_SUPABASE_URL=https://mgocgzcpqnbcaqtclvsz.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
+## Stripe — même règle pour le secret
+
+```env
+VITE_STRIPE_PUBLISHABLE_KEY=pk_test_…   # OK (public)
+STRIPE_SECRET_KEY=sk_test_…             # OK (serveur seul)
+# PAS : VITE_STRIPE_SECRET_KEY=sk_…     # Vite l’enverrait au navigateur
+```
+
+L’API locale (`npm run stripe:api`) lit `STRIPE_SECRET_KEY`.
+
 ## Activer les tables
 
 1. Supabase Dashboard → **SQL Editor**

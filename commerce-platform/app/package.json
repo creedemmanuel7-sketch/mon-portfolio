@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "stripe:api": "node server/checkout-api.mjs",
+    "env:check": "node scripts/check-env.mjs",
     "dev:full": "node server/checkout-api.mjs & vite"
   },
   "dependencies": {

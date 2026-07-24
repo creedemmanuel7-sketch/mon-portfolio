@@ -50,6 +50,16 @@ export async function savePaidOrder(input: {
     .select('id')
     .single()
 
+  // Refresh confirmation / double-submit : session Stripe déjà enregistrée → succès
+  if (error && input.stripeSessionId && /duplicate key|orders_stripe_session_id/i.test(error.message)) {
+    const existing = await supabase
+      .from('orders')
+      .select('id')
+      .eq('stripe_session_id', input.stripeSessionId)
+      .maybeSingle()
+    if (existing.data?.id) return { ok: true, id: existing.data.id as string }
+  }
+
   if (error) return { ok: false, error: error.message }
   return { ok: true, id: data.id as string }
 }
