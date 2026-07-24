@@ -82,7 +82,7 @@
   </footer>
   <script src="js/sika.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('sika:ready',()=>{
   const run=()=>{
     const q = document.getElementById('q').value.trim().toLowerCase();
     Sika.renderProducts('#search-grid', p => !q || p.name.toLowerCase().includes(q) || p.cat.includes(q) || p.desc.toLowerCase().includes(q));

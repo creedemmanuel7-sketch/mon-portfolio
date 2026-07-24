@@ -1,50 +1,40 @@
 # Atelier Sika — E-commerce démo (portfolio)
 
-Boutique lifestyle **cliente fictive** (pas une marque personnelle).  
-Objectif : démontrer frontend riche, backend, paiement Stripe et data.
+Boutique lifestyle **cliente fictive**.  
+**40 produits** · prototype UI + app React (Étape 3).
 
-## Marque
+## Preview
 
-**Atelier Sika** — « Objets justes, pour le quotidien. »  
-Thème dédié : indigo · cuivre · ivoire (≠ portfolio Crédo.ai).
+| Surface | Lien |
+|---------|------|
+| Prototype HTML (20 écrans) | [`ui/index.html`](ui/index.html) |
+| App React (build) | [`app/dist/index.html`](app/dist/index.html) |
+| Live UI | https://creedemmanuel7-sketch.github.io/mon-portfolio/commerce-platform/ui/ |
+| Live React | https://creedemmanuel7-sketch.github.io/mon-portfolio/commerce-platform/app/dist/ |
 
-## État
+## Stack Étape 3
 
-| Étape | Statut |
-|------|--------|
-| 1. Cadrage & UX | ✅ |
-| 2. Design UI & Prototypage | ✅ Prototype HD 20 écrans + images |
-| 3. Développement (Vite/React/Supabase/Stripe) | À venir |
-| 4. QA | À venir |
-| 5. Déploiement + lien portfolio | Partiel (prototype en ligne) |
+- Vite + React + TypeScript + Tailwind
+- Data : `data/products.json` (40 items)
+- Panier / favoris : localStorage
+- Prochain : Supabase + Stripe (voir `app/.env.example`)
 
-## Preview UI (maintenant)
+```bash
+cd commerce-platform/app
+npm install
+npm run dev
+npm run build
+```
 
-Ouvre : [`ui/index.html`](ui/index.html)
-
-Live (après deploy) :  
-https://creedemmanuel7-sketch.github.io/mon-portfolio/commerce-platform/ui/
-
-## Stack choisie (Étape 3)
-
-- **Vite + React + TypeScript + Tailwind**
-- **Supabase** (Auth, Postgres, RLS)
-- **Stripe Checkout** + webhooks
-- **Netlify ou Vercel**
-
-## Contenu livré Étape 2
-
-- Design system : `docs/ui/DESIGN-SYSTEM.md`
-- Topo : `docs/TOPO-ETAPE-2.md`
-- 10 images produits + hero/about générées : `assets/`
-- 20 écrans prototype : `ui/`
-- Panier / favoris en `localStorage` (simulation)
-
-## Cloner sur Windows
+## Windows
 
 ```powershell
 cd C:\Users\credo\Projects
 git clone https://github.com/creedemmanuel7-sketch/mon-portfolio.git
 cd mon-portfolio\commerce-platform
 start ui\index.html
+# ou app React :
+cd app
+npm install
+npm run dev
 ```

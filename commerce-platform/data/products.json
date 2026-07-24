@@ -1,0 +1,322 @@
+[
+  {
+    "id": "pulse",
+    "name": "Écouteurs Pulse",
+    "price": 15000,
+    "cat": "tech",
+    "img": "product-ecouteurs.jpg",
+    "desc": "Son clair, confort longue durée. Finition matte et détails cuivre."
+  },
+  {
+    "id": "kota",
+    "name": "Sac Kota",
+    "price": 22000,
+    "cat": "accessoires",
+    "img": "product-sac.jpg",
+    "desc": "Cabas tressé indigo, porté main ou épaule. Pièce artisanale."
+  },
+  {
+    "id": "desk",
+    "name": "Lampe Desk",
+    "price": 18500,
+    "cat": "maison",
+    "img": "product-lampe.jpg",
+    "desc": "Lumière douce pour le bureau. Base céramique, abat-jour courbe."
+  },
+  {
+    "id": "mug",
+    "name": "Mug Sika",
+    "price": 5000,
+    "cat": "maison",
+    "img": "product-mug.jpg",
+    "desc": "Grès moucheté, lèvre indigo. Pour le café du matin."
+  },
+  {
+    "id": "keys",
+    "name": "Clavier Mini",
+    "price": 35000,
+    "cat": "tech",
+    "img": "product-clavier.jpg",
+    "desc": "Compact, tactile, touches cuivre. Idéal bureau nomade."
+  },
+  {
+    "id": "coque",
+    "name": "Coque Studio",
+    "price": 7500,
+    "cat": "tech",
+    "img": "product-coque.jpg",
+    "desc": "Cuir indigo texturé, coutures cuivre. Protection élégante."
+  },
+  {
+    "id": "sandales",
+    "name": "Sandales Cognac",
+    "price": 28000,
+    "cat": "accessoires",
+    "img": "product-sandales.jpg",
+    "desc": "Cuir cognac, boucle cuivre. Confort ville et voyage."
+  },
+  {
+    "id": "encens",
+    "name": "Rituel Encens",
+    "price": 9500,
+    "cat": "maison",
+    "img": "product-encens.jpg",
+    "desc": "Support sculpté et bougies. Une pause sensorielle chez soi."
+  },
+  {
+    "id": "plaid",
+    "name": "Plaid Indigo",
+    "price": 32000,
+    "cat": "maison",
+    "img": "product-plaid.jpg",
+    "desc": "Coton teint indigo, franges cuivre. Canapé ou voyage."
+  },
+  {
+    "id": "bijoux",
+    "name": "Créoles Douces",
+    "price": 12000,
+    "cat": "accessoires",
+    "img": "product-bijoux.jpg",
+    "desc": "Anneaux délicats et vide-poche céramique. Le détail qui compte."
+  },
+  {
+    "id": "vase",
+    "name": "Vase Abyss",
+    "price": 16000,
+    "cat": "maison",
+    "img": "product-vase.jpg",
+    "desc": "Céramique indigo profond. Une présence sobre sur la console."
+  },
+  {
+    "id": "chaise",
+    "name": "Tabouret Tressé",
+    "price": 45000,
+    "cat": "maison",
+    "img": "product-chaise.jpg",
+    "desc": "Assise tressée, pieds cuivre. Assise d’appoint élégante."
+  },
+  {
+    "id": "montre",
+    "name": "Montre Cognac",
+    "price": 65000,
+    "cat": "accessoires",
+    "img": "product-montre.jpg",
+    "desc": "Boîtier cuivre, bracelet cuir. Le temps, sans bruit."
+  },
+  {
+    "id": "lunettes",
+    "name": "Lunettes Harmattan",
+    "price": 24000,
+    "cat": "accessoires",
+    "img": "product-lunettes.jpg",
+    "desc": "Monture écaille chaude. Soleil de Lomé inclus."
+  },
+  {
+    "id": "enceinte",
+    "name": "Enceinte Ember",
+    "price": 42000,
+    "cat": "tech",
+    "img": "product-casque.jpg",
+    "desc": "Bluetooth compacte, grille cuivre. La bande-son du salon."
+  },
+  {
+    "id": "carnet",
+    "name": "Carnet Indigo",
+    "price": 6500,
+    "cat": "accessoires",
+    "img": "product-carnet.jpg",
+    "desc": "Couverture tissu, signet cuivre. Pour les idées qui restent."
+  },
+  {
+    "id": "assiettes",
+    "name": "Assiettes Lèvre",
+    "price": 28000,
+    "cat": "maison",
+    "img": "product-assiettes.jpg",
+    "desc": "Service moucheté, lèvre indigo. Table du dimanche."
+  },
+  {
+    "id": "tablier",
+    "name": "Tablier Atelier",
+    "price": 14000,
+    "cat": "maison",
+    "img": "product-tablier.jpg",
+    "desc": "Lin sable, ferrures cuivre. Cuisine ou atelier."
+  },
+  {
+    "id": "panier",
+    "name": "Corbeille Raffia",
+    "price": 11000,
+    "cat": "maison",
+    "img": "product-panier.jpg",
+    "desc": "Tressage naturel, accents indigo. Fruits ou courrier."
+  },
+  {
+    "id": "organiseur",
+    "name": "Plateau Bureau",
+    "price": 13500,
+    "cat": "tech",
+    "img": "product-organiseur.jpg",
+    "desc": "Chêne et cuivre. Remet de l’ordre sans effort."
+  },
+  {
+    "id": "coussin",
+    "name": "Coussin Géométrie",
+    "price": 17000,
+    "cat": "maison",
+    "img": "product-coussin.jpg",
+    "desc": "Motifs indigo contemporains. Un point de couleur."
+  },
+  {
+    "id": "carafe",
+    "name": "Carafe Collier",
+    "price": 19000,
+    "cat": "maison",
+    "img": "product-carafe.jpg",
+    "desc": "Verre clair, collier cuivre. Eau et présence."
+  },
+  {
+    "id": "portecartes",
+    "name": "Porte-cartes Cognac",
+    "price": 9500,
+    "cat": "accessoires",
+    "img": "product-portecartes.jpg",
+    "desc": "Cuir fin, bordure cuivre. Poche minimale."
+  },
+  {
+    "id": "lampadaire",
+    "name": "Lampadaire Lin",
+    "price": 78000,
+    "cat": "maison",
+    "img": "product-lampadaire.jpg",
+    "desc": "Abat-jour lin, tige cuivre. Lumière d’angle."
+  },
+  {
+    "id": "bracelet",
+    "name": "Bracelets Duo",
+    "price": 8500,
+    "cat": "accessoires",
+    "img": "product-bracelet.jpg",
+    "desc": "Perles indigo et cuivre. Portés ensemble ou seuls."
+  },
+  {
+    "id": "trousse",
+    "name": "Trousse Voyage",
+    "price": 12500,
+    "cat": "accessoires",
+    "img": "product-trousse.jpg",
+    "desc": "Canvas indigo, zip cuivre. Essentiels en route."
+  },
+  {
+    "id": "dripper",
+    "name": "Dripper Terra",
+    "price": 15500,
+    "cat": "maison",
+    "img": "product-dripper.jpg",
+    "desc": "Céramique et filtre. Café lent du matin."
+  },
+  {
+    "id": "kimono",
+    "name": "Kimono Rayures",
+    "price": 38000,
+    "cat": "accessoires",
+    "img": "product-kimono.jpg",
+    "desc": "Coton sable et indigo. Maison ou plage."
+  },
+  {
+    "id": "miroir",
+    "name": "Miroir Ovale",
+    "price": 29000,
+    "cat": "maison",
+    "img": "product-miroir.jpg",
+    "desc": "Cadre cuivre fin. Entrée ou chambre."
+  },
+  {
+    "id": "bougies",
+    "name": "Trio Bougies",
+    "price": 10500,
+    "cat": "maison",
+    "img": "product-bougies.jpg",
+    "desc": "Cire d’abeille, hauteurs variées. Soirées calmes."
+  },
+  {
+    "id": "chargeur",
+    "name": "Pad Charge Ember",
+    "price": 18000,
+    "cat": "tech",
+    "img": "product-chargeur.jpg",
+    "desc": "Charge sans fil, anneau cuivre. Bureau épuré."
+  },
+  {
+    "id": "sacados",
+    "name": "Sac à dos Nomade",
+    "price": 52000,
+    "cat": "accessoires",
+    "img": "product-sacados.jpg",
+    "desc": "Canvas olive/indigo, boucles cuivre. Jour comme voyage."
+  },
+  {
+    "id": "mortier",
+    "name": "Mortier Grès",
+    "price": 14000,
+    "cat": "maison",
+    "img": "product-mortier.jpg",
+    "desc": "Grès moucheté. Épices et gestes lents."
+  },
+  {
+    "id": "foulard",
+    "name": "Foulard Abyss",
+    "price": 16000,
+    "cat": "accessoires",
+    "img": "product-foulard.jpg",
+    "desc": "Soie indigo abstraite. Cou ou sac."
+  },
+  {
+    "id": "plante",
+    "name": "Jardinière Cuivre",
+    "price": 21000,
+    "cat": "maison",
+    "img": "product-plante.jpg",
+    "desc": "Pot cuivre et plante verte. Vie sur le bureau."
+  },
+  {
+    "id": "espresso",
+    "name": "Tasses Espresso",
+    "price": 9000,
+    "cat": "maison",
+    "img": "product-espresso.jpg",
+    "desc": "Duo ivoire / indigo. Double shot de style."
+  },
+  {
+    "id": "portecles",
+    "name": "Porte-clés Indigo",
+    "price": 4500,
+    "cat": "accessoires",
+    "img": "product-portecles.jpg",
+    "desc": "Cuir, anneau cuivre, pompon indigo."
+  },
+  {
+    "id": "horloge",
+    "name": "Horloge Murale",
+    "price": 26000,
+    "cat": "maison",
+    "img": "product-horloge.jpg",
+    "desc": "Cadran ivoire, aiguilles cuivre. Mur indigo."
+  },
+  {
+    "id": "yoga",
+    "name": "Tapis Yoga Sable",
+    "price": 30000,
+    "cat": "accessoires",
+    "img": "product-yoga.jpg",
+    "desc": "Rouleau sable, sangle cuivre. Corps et souffle."
+  },
+  {
+    "id": "serviettes",
+    "name": "Serviettes Indigo",
+    "price": 13000,
+    "cat": "maison",
+    "img": "product-serviettes.jpg",
+    "desc": "Lin teint, ronds de serviette cuivre. Table dressée."
+  }
+]

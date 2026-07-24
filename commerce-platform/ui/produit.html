@@ -79,7 +79,7 @@
   </footer>
   <script src="js/sika.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('sika:ready',()=>{
   const id = new URLSearchParams(location.search).get('id') || 'pulse';
   const p = Sika.getProduct(id) || Sika.PRODUCTS[0];
   document.title = p.name + ' — Atelier Sika';

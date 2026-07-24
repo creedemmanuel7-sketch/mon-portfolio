@@ -94,7 +94,7 @@
   </footer>
   <script src="js/sika.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('sika:ready',()=>{
   const cart = Sika.getCart();
   let total=0;
   const lines = cart.map(r=>{const p=Sika.getProduct(r.id); if(!p)return ''; total+=p.price*r.qty; return `<div class="summary-row"><span>${r.qty}× ${p.name}</span><span>${Sika.money(p.price*r.qty)}</span></div>`;}).join('') || '<p class="section-sub">Panier vide — <a href="catalogue.html">boutique</a></p>';

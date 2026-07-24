@@ -82,7 +82,7 @@
   </footer>
   <script src="js/sika.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('sika:ready',()=>{
   const cat = new URLSearchParams(location.search).get('cat') || 'tech';
   const labels = {tech:['Tech','Outils sobres pour le quotidien numérique.'], maison:['Maison','Lumière, textile, rituel.'], accessoires:['Accessoires','Détails qui portent le style.']};
   const [title, sub] = labels[cat] || ['Sélection','Pièces choisies.'];

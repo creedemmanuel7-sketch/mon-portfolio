@@ -1,17 +1,7 @@
-/* Atelier Sika — catalogue + panier + wishlist (prototype Étape 2) */
+/* Atelier Sika — catalogue 40 produits + panier + wishlist */
 window.Sika = (() => {
-  const PRODUCTS = [
-    { id: 'pulse', name: 'Écouteurs Pulse', price: 15000, cat: 'tech', img: '../assets/products/product-ecouteurs.jpg', desc: 'Son clair, confort longue durée. Finition matte et détails cuivre.' },
-    { id: 'kota', name: 'Sac Kota', price: 22000, cat: 'accessoires', img: '../assets/products/product-sac.jpg', desc: 'Cabas tressé indigo, porté main ou épaule. Pièce artisanale.' },
-    { id: 'desk', name: 'Lampe Desk', price: 18500, cat: 'maison', img: '../assets/products/product-lampe.jpg', desc: 'Lumière douce pour le bureau. Base céramique, abat-jour courbe.' },
-    { id: 'mug', name: 'Mug Sika', price: 5000, cat: 'maison', img: '../assets/products/product-mug.jpg', desc: 'Grès moucheté, lèvre indigo. Pour le café du matin.' },
-    { id: 'keys', name: 'Clavier Mini', price: 35000, cat: 'tech', img: '../assets/products/product-clavier.jpg', desc: 'Compact, tactile, touches cuivre. Idéal bureau nomade.' },
-    { id: 'coque', name: 'Coque Studio', price: 7500, cat: 'tech', img: '../assets/products/product-coque.jpg', desc: 'Cuir indigo texturé, coutures cuivre. Protection élégante.' },
-    { id: 'sandales', name: 'Sandales Cognac', price: 28000, cat: 'accessoires', img: '../assets/products/product-sandales.jpg', desc: 'Cuir cognac, boucle cuivre. Confort ville et voyage.' },
-    { id: 'encens', name: 'Rituel Encens', price: 9500, cat: 'maison', img: '../assets/products/product-encens.jpg', desc: 'Support sculpté et bougies. Une pause sensorielle chez soi.' },
-    { id: 'plaid', name: 'Plaid Indigo', price: 32000, cat: 'maison', img: '../assets/products/product-plaid.jpg', desc: 'Coton teint indigo, franges cuivre. Canapé ou voyage.' },
-    { id: 'bijoux', name: 'Créoles Douces', price: 12000, cat: 'accessoires', img: '../assets/products/product-bijoux.jpg', desc: 'Anneaux délicats et vide-poche céramique. Le détail qui compte.' },
-  ];
+  const ASSET = '../assets/products/';
+  let PRODUCTS = [];
 
   const money = (n) => new Intl.NumberFormat('fr-FR').format(n) + ' XOF';
 
@@ -25,6 +15,25 @@ window.Sika = (() => {
   const setCart = (cart) => { write('sika_cart', cart); updateBadges(); };
   const getWish = () => read('sika_wish', []);
   const setWish = (w) => { write('sika_wish', w); updateBadges(); };
+
+  function normalize(list) {
+    return list.map((p) => ({
+      ...p,
+      img: p.img.startsWith('http') || p.img.includes('/') ? p.img : ASSET + p.img,
+    }));
+  }
+
+  async function loadProducts() {
+    if (PRODUCTS.length) return PRODUCTS;
+    try {
+      const res = await fetch('../data/products.json', { cache: 'no-store' });
+      PRODUCTS = normalize(await res.json());
+    } catch (e) {
+      console.warn('Catalogue JSON indisponible', e);
+      PRODUCTS = [];
+    }
+    return PRODUCTS;
+  }
 
   function addToCart(id, qty = 1) {
     const cart = getCart();
@@ -122,10 +131,15 @@ window.Sika = (() => {
   }
 
   return {
-    PRODUCTS, money, getCart, setCart, getWish, setWish,
+    get PRODUCTS() { return PRODUCTS; },
+    money, getCart, setCart, getWish, setWish,
     addToCart, toggleWish, cartCount, updateBadges, toast,
-    renderProducts, productCard, initChrome, getProduct, observeReveals,
+    renderProducts, productCard, initChrome, getProduct, observeReveals, loadProducts,
   };
 })();
 
-document.addEventListener('DOMContentLoaded', () => Sika.initChrome());
+document.addEventListener('DOMContentLoaded', async () => {
+  Sika.initChrome();
+  await Sika.loadProducts();
+  document.dispatchEvent(new Event('sika:ready'));
+});

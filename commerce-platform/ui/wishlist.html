@@ -82,7 +82,7 @@
   </footer>
   <script src="js/sika.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('sika:ready',()=>{
   const ids = Sika.getWish();
   if(!ids.length){ document.getElementById('wish-empty').hidden=false; return; }
   Sika.renderProducts('#wish-grid', p => ids.includes(p.id));

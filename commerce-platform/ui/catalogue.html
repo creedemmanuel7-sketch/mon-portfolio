@@ -88,7 +88,7 @@
   </footer>
   <script src="js/sika.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('sika:ready',()=>{
   const render=(cat)=>{
     Sika.renderProducts('#catalog', p => cat==='all' || p.cat===cat);
   };
