@@ -38,3 +38,17 @@ cd app
 npm install
 npm run dev
 ```
+
+
+## Stripe (test)
+
+```bash
+cd app
+cp .env.example .env.local   # puis coller sk/pk
+npm run stripe:api           # terminal 1
+npm run dev                  # terminal 2
+```
+
+Carte test : `4242 4242 4242 4242`
+
+La clé **secrète** ne doit jamais être commitée. Voir aussi `docs/SUPABASE-CLES.md`.

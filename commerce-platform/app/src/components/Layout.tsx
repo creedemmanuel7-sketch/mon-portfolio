@@ -10,7 +10,7 @@ export function Layout() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="bg-indigo text-white text-center text-xs tracking-wide py-2 px-3">
-        Livraison offerte dès 50 000 XOF · 40 pièces · Paiement Stripe (bientôt)
+        Livraison offerte dès 50 000 XOF · Paiement Stripe sécurisé · Retours 14 jours
       </div>
       <header className="sticky top-0 z-40 border-b border-sand bg-bone/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
