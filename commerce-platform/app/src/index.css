@@ -21,3 +21,17 @@ body {
   color: var(--color-ink);
   background: var(--color-bone);
 }
+
+@keyframes sikaToast {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sikaCartBump {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+}
+
+.cart-bump {
+  animation: sikaCartBump 0.45s ease;
+}

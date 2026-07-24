@@ -2,11 +2,13 @@ import { type FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../cart'
 import { resolveCheckoutApiUrl } from '../lib/checkoutApi'
+import { useToast } from '../toast'
 import { imgUrl, money } from '../types'
 
 export function CheckoutPage() {
   const { cart, getProduct, cartTotal } = useCart()
   const navigate = useNavigate()
+  const { push } = useToast()
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [form, setForm] = useState({
@@ -21,6 +23,7 @@ export function CheckoutPage() {
     setError('')
     if (!cart.length) {
       setError('Votre panier est vide.')
+      push('Votre panier est vide.', 'error')
       return
     }
     setBusy(true)
@@ -78,14 +81,16 @@ export function CheckoutPage() {
       if (!res.ok || !data.url) {
         throw new Error(data.error || 'Impossible de créer la session Stripe')
       }
-      // Panier vidé après redirection succès ; on garde tant que paiement en cours
+      push('Redirection vers Stripe…', 'info')
       window.location.href = data.url
     } catch (err) {
       setBusy(false)
       const localHint = /127\.0\.0\.1|localhost/.test(api)
         ? ' — Lancez l’API locale : npm run stripe:api'
         : ' — Ou utilisez « Simuler succès » (GitHub Pages n’héberge pas Stripe).'
-      setError(err instanceof Error ? `${err.message}${localHint}` : 'Erreur paiement')
+      const msg = err instanceof Error ? `${err.message}${localHint}` : 'Erreur paiement'
+      setError(msg)
+      push(msg, 'error')
     }
   }
 
@@ -154,6 +159,10 @@ export function CheckoutPage() {
           type="button"
           className="mt-2 block text-xs text-muted underline"
           onClick={() => {
+            if (!form.email.trim() || !form.name.trim()) {
+              push('Renseignez au moins nom et email pour la simulation.', 'error')
+              return
+            }
             const lineItems = cart
               .map((row) => {
                 const p = getProduct(row.id)
@@ -170,6 +179,7 @@ export function CheckoutPage() {
                 items: lineItems,
               }),
             )
+            push('Paiement simulé — enregistrement de la commande…', 'info')
             navigate('/confirmation?simulated=1')
           }}
         >

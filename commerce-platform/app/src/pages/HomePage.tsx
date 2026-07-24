@@ -8,50 +8,42 @@ export function HomePage() {
 
   return (
     <>
-      <section className="relative min-h-[70vh] overflow-hidden text-white">
+      <section className="relative min-h-[78vh] overflow-hidden text-white">
         <img
           src="./assets/brand/hero-atelier.jpg"
-          alt=""
+          alt="Intérieur Atelier Sika — textiles et lumière"
           className="absolute inset-0 h-full w-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/40 to-ink/10" />
-        <div className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-end px-4 pb-14 pt-24">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-copper">Nouvelle sélection · 40 pièces</p>
-          <h1 className="font-display max-w-[14ch] text-4xl font-bold leading-tight sm:text-6xl">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/45 to-ink/15" />
+        <div className="relative mx-auto flex min-h-[78vh] max-w-6xl flex-col justify-end px-4 pb-14 pt-24">
+          <p className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Atelier <span className="text-copper">Sika</span>
+          </p>
+          <p className="mt-3 text-xs font-bold uppercase tracking-[0.22em] text-copper">
+            Boutique en ligne · Lifestyle
+          </p>
+          <h1 className="font-display mt-3 max-w-[16ch] text-4xl font-bold leading-tight sm:text-6xl">
             Objets justes, pour le quotidien.
           </h1>
-          <p className="mt-4 max-w-md text-white/90">
-            Maison lifestyle contemporaine : tech douce, maison et accessoires.
-            Peu d’objets. Beaucoup de présence.
+          <p className="mt-4 max-w-lg text-base text-white/90 sm:text-lg">
+            Achetez en ligne tech douce, maison et accessoires — panier, paiement sécurisé, livraison démo.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link to="/boutique" className="rounded-full bg-copper px-6 py-3 text-sm font-bold text-white hover:bg-copper-dark">
-              Entrer dans la boutique
+              Voir la boutique
             </Link>
             <Link to="/a-propos" className="rounded-full border border-white px-6 py-3 text-sm font-bold text-white">
-              Lire notre histoire
+              Notre histoire
             </Link>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-12">
-        <div className="mb-6 grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-sand bg-chalk p-4 text-center">
-            <div className="font-display text-2xl font-bold">{loading ? '…' : products.length}</div>
-            <div className="text-xs uppercase tracking-wider text-muted">Produits</div>
-          </div>
-          <div className="rounded-2xl border border-sand bg-chalk p-4 text-center">
-            <div className="font-display text-2xl font-bold">3</div>
-            <div className="text-xs uppercase tracking-wider text-muted">Univers</div>
-          </div>
-          <div className="rounded-2xl border border-sand bg-chalk p-4 text-center">
-            <div className="font-display text-2xl font-bold">XOF</div>
-            <div className="text-xs uppercase tracking-wider text-muted">Devise</div>
-          </div>
-        </div>
         <h2 className="font-display text-3xl font-bold">Coups de cœur de l’atelier</h2>
-        <p className="mb-6 text-muted">Des pièces pour le matin, le soir, et le chemin entre les deux.</p>
+        <p className="mb-6 text-muted">
+          {loading ? 'Chargement du catalogue…' : `${products.length} pièces — choisissez une quantité, ajoutez au panier.`}
+        </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} />
@@ -59,7 +51,7 @@ export function HomePage() {
         </div>
         <div className="mt-8 text-center">
           <Link to="/boutique" className="rounded-full bg-indigo px-6 py-3 text-sm font-bold text-white">
-            Voir les {products.length || 40} produits
+            Voir tout le catalogue
           </Link>
         </div>
       </section>

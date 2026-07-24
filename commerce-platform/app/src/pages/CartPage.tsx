@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../cart'
+import { useToast } from '../toast'
 import { imgUrl, money } from '../types'
 
 export function CartPage() {
   const { cart, getProduct, setQty, removeFromCart, cartTotal } = useCart()
+  const { push } = useToast()
 
   if (!cart.length) {
     return (
       <div className="mx-auto max-w-xl px-4 py-16 text-center">
         <h1 className="font-display text-3xl font-bold">Panier vide</h1>
+        <p className="mt-2 text-muted">Ajoutez des pièces depuis la boutique pour commencer.</p>
         <Link to="/boutique" className="mt-6 inline-block rounded-full bg-copper px-6 py-3 text-sm font-bold text-white">
           Voir la boutique
         </Link>
@@ -30,14 +33,21 @@ export function CartPage() {
                 <div className="font-bold">{p.name}</div>
                 <div className="text-sm text-muted">{money(p.price)}</div>
                 <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-sand px-2 py-1">
-                  <button type="button" onClick={() => setQty(row.id, row.qty - 1)}>−</button>
+                  <button type="button" aria-label="Diminuer" onClick={() => setQty(row.id, row.qty - 1)}>−</button>
                   <span className="min-w-6 text-center text-sm font-bold">{row.qty}</span>
-                  <button type="button" onClick={() => setQty(row.id, row.qty + 1)}>+</button>
+                  <button type="button" aria-label="Augmenter" onClick={() => setQty(row.id, row.qty + 1)}>+</button>
                 </div>
               </div>
               <div className="text-right">
                 <div className="font-bold">{money(p.price * row.qty)}</div>
-                <button type="button" className="text-xs text-red-700" onClick={() => removeFromCart(row.id)}>
+                <button
+                  type="button"
+                  className="text-xs text-red-700"
+                  onClick={() => {
+                    removeFromCart(row.id)
+                    push(`${p.name} retiré du panier`, 'info')
+                  }}
+                >
                   Retirer
                 </button>
               </div>
