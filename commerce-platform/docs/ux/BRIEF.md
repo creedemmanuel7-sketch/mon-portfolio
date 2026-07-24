@@ -1,8 +1,8 @@
-# Brief produit — CredoShop
+# Brief produit — Atelier Sika
 
 ## Vision (1 phrase)
 
-**CredoShop** est une boutique en ligne démo qui montre qu’un développeur peut livrer un parcours d’achat complet : catalogue, panier, paiement test, commandes et données persistantes.
+**Atelier Sika** est une boutique lifestyle cliente (fiction) qui montre qu’un développeur peut livrer un parcours d’achat complet : catalogue, panier, paiement test, commandes et données persistantes.
 
 ## Pourquoi ce projet (portfolio)
 
@@ -57,6 +57,6 @@ Un acheteur veut trouver un produit, le payer en ligne, et retrouver sa commande
 
 ## Nom & positionnement
 
-- **Nom** : CredoShop  
-- **Tagline** : « Acheter en démo, comprendre le full-stack. »  
-- **Public démo** : recruteurs, mentors, toi-même pour stages Android/web
+- **Nom** : Atelier Sika (marque cliente — *sika* = or en akan ; aucune allusion personnelle)  
+- **Tagline** : « Objets justes, pour le quotidien. »  
+- **Public démo** : recruteurs (parcours e-commerce full-stack), et toi pour stages Android/web
