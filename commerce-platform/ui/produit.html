@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produit — Atelier Sika</title>
+  <meta name="description" content="Fiche produit Atelier Sika" />
+  <link rel="stylesheet" href="css/sika.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Aller au contenu</a>
+  <div class="announce">Livraison offerte dès 50&nbsp;000 XOF · Paiement sécurisé (démo Stripe)</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">Atelier <span>Sika</span></a>
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <a href="catalogue.html" class="is-active">Boutique</a>
+        <a href="journal.html" class="">Journal</a>
+        <a href="a-propos.html" class="">À propos</a>
+        <a href="contact.html" class="">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-btn" href="recherche.html" aria-label="Recherche">⌕</a>
+        <a class="icon-btn" href="wishlist.html" aria-label="Favoris">♥<span class="badge" data-wish-count hidden>0</span></a>
+        <a class="icon-btn" href="panier.html" aria-label="Panier">🛒<span class="badge" data-cart-count hidden>0</span></a>
+        <a class="icon-btn" href="compte.html" aria-label="Compte">☺</a>
+        <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-label="Menu">☰</button>
+      </div>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="catalogue.html">Boutique</a>
+      <a href="journal.html">Journal</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="commandes.html">Mes commandes</a>
+    </nav>
+  </header>
+
+<main id="main">
+
+<div class="wrap">
+  <div id="product-root"></div>
+  <h2 class="section-title" style="margin-top:3rem">Vous aimerez aussi</h2>
+  <div class="grid-products" id="related"></div>
+</div>
+
+</main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="index.html" style="color:#fff">Atelier <span style="color:#B87333">Sika</span></a>
+        <p style="margin-top:.8rem;max-width:28ch">Objets justes pour le quotidien — curated contemporary West African lifestyle.</p>
+      </div>
+      <div>
+        <h4>Boutique</h4>
+        <a href="catalogue.html">Tous les produits</a>
+        <a href="categorie.html?cat=tech">Tech</a>
+        <a href="categorie.html?cat=maison">Maison</a>
+        <a href="categorie.html?cat=accessoires">Accessoires</a>
+      </div>
+      <div>
+        <h4>Maison</h4>
+        <a href="a-propos.html">Notre histoire</a>
+        <a href="journal.html">Journal</a>
+        <a href="faq.html">FAQ</a>
+        <a href="livraison.html">Livraison & retours</a>
+      </div>
+      <div>
+        <h4>Aide</h4>
+        <a href="contact.html">Contact</a>
+        <a href="compte.html">Mon compte</a>
+        <a href="commandes.html">Suivi commande</a>
+        <a href="404.html">Page 404 (démo)</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Atelier Sika — Prototype UI Étape 2 · Marque cliente démo portfolio</div>
+  </footer>
+  <script src="js/sika.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const id = new URLSearchParams(location.search).get('id') || 'pulse';
+  const p = Sika.getProduct(id) || Sika.PRODUCTS[0];
+  document.title = p.name + ' — Atelier Sika';
+  document.getElementById('product-root').innerHTML = `
+    <p class="breadcrumb"><a href="index.html">Accueil</a> / <a href="catalogue.html">Boutique</a> / ${p.name}</p>
+    <div class="product-detail reveal">
+      <div class="gallery"><img src="${p.img}" alt="${p.name}" /></div>
+      <div>
+        <p class="eyebrow">${p.cat}</p>
+        <h1 class="section-title">${p.name}</h1>
+        <p class="price-lg">${Sika.money(p.price)}</p>
+        <p class="section-sub">${p.desc}</p>
+        <div class="note">Prototype UI — le paiement réel arrive à l’Étape 3 (Stripe test).</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem">
+          <button class="btn btn-primary" id="add" type="button">Ajouter au panier</button>
+          <button class="btn btn-ghost" id="wish" type="button">♥ Favoris</button>
+        </div>
+        <ul style="margin-top:1.5rem;color:var(--muted);padding-left:1.1rem">
+          <li>Expédition sous 48h (démo)</li>
+          <li>Retours 14 jours</li>
+          <li>Paiement sécurisé</li>
+        </ul>
+      </div>
+    </div>`;
+  document.getElementById('add').onclick = () => Sika.addToCart(p.id, 1);
+  document.getElementById('wish').onclick = () => Sika.toggleWish(p.id);
+  Sika.renderProducts('#related', x => x.cat === p.cat && x.id !== p.id);
+  Sika.observeReveals();
+});
+</script>
+</body>
+</html>

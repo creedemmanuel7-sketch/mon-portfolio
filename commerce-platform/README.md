@@ -1,76 +1,50 @@
-# CredoShop — Plateforme e-commerce (démo portfolio)
+# Atelier Sika — E-commerce démo (portfolio)
 
-> Projet pédagogique / portfolio pour démontrer **backend**, **intégrations paiement** et **gestion des données**.
+Boutique lifestyle **cliente fictive** (pas une marque personnelle).  
+Objectif : démontrer frontend riche, backend, paiement Stripe et data.
 
-## État actuel
+## Marque
+
+**Atelier Sika** — « Objets justes, pour le quotidien. »  
+Thème dédié : indigo · cuivre · ivoire (≠ portfolio Crédo.ai).
+
+## État
 
 | Étape | Statut |
 |------|--------|
-| 1. Cadrage & UX | **En cours** |
-| 2. Design UI & Prototypage | À venir |
-| 3. Développement | À venir |
-| 4. Qualification & Recette | À venir |
-| 5. Déploiement | À venir |
+| 1. Cadrage & UX | ✅ |
+| 2. Design UI & Prototypage | ✅ Prototype HD 20 écrans + images |
+| 3. Développement (Vite/React/Supabase/Stripe) | À venir |
+| 4. QA | À venir |
+| 5. Déploiement + lien portfolio | Partiel (prototype en ligne) |
 
-## Structure
+## Preview UI (maintenant)
 
-```
-commerce-platform/
-├── README.md                 ← ce fichier
-├── docs/
-│   ├── PROCESS.md            ← rôles & étapes
-│   ├── ux/
-│   │   ├── BRIEF.md          ← vision produit & MVP
-│   │   ├── PERSONAS.md       ← utilisateurs cibles
-│   │   └── USER-FLOWS.md     ← parcours clés
-│   ├── specs/
-│   │   └── SPEC-FONCTIONNELLE.md
-│   └── wireframes/
-│       └── INDEX.md
-└── wireframes/               ← maquettes basse fidélité (HTML)
-    ├── index.html
-    ├── catalogue.html
-    ├── produit.html
-    ├── panier.html
-    ├── checkout.html
-    └── commandes.html
-```
+Ouvre : [`ui/index.html`](ui/index.html)
 
-## Cloner sur ton PC (Windows)
+Live (après deploy) :  
+https://creedemmanuel7-sketch.github.io/mon-portfolio/commerce-platform/ui/
 
-Ce projet vit pour l’instant **dans** le dépôt portfolio (sous-dossier `commerce-platform/`), faute de pouvoir créer un dépôt GitHub séparé depuis l’agent cloud.
+## Stack choisie (Étape 3)
+
+- **Vite + React + TypeScript + Tailwind**
+- **Supabase** (Auth, Postgres, RLS)
+- **Stripe Checkout** + webhooks
+- **Netlify ou Vercel**
+
+## Contenu livré Étape 2
+
+- Design system : `docs/ui/DESIGN-SYSTEM.md`
+- Topo : `docs/TOPO-ETAPE-2.md`
+- 10 images produits + hero/about générées : `assets/`
+- 20 écrans prototype : `ui/`
+- Panier / favoris en `localStorage` (simulation)
+
+## Cloner sur Windows
 
 ```powershell
-# Dans PowerShell
 cd C:\Users\credo\Projects
 git clone https://github.com/creedemmanuel7-sketch/mon-portfolio.git
 cd mon-portfolio\commerce-platform
-start wireframes\index.html
+start ui\index.html
 ```
-
-### Plus tard : dépôt dédié (recommandé)
-
-Sur ton PC, une fois prêt :
-
-```powershell
-cd C:\Users\credo\Projects
-mkdir credo-shop
-cd credo-shop
-# copier le contenu de commerce-platform, puis :
-git init
-gh repo create creedemmanuel7-sketch/credo-shop --public --source=. --remote=origin --push
-```
-
-## Preview wireframes
-
-Ouvre `wireframes/index.html` dans le navigateur (double-clic ou Live Server).
-
-## Stack prévue (Étape 3 — à valider)
-
-Proposée pour coller au portfolio Android/web + démo backend sérieuse :
-
-- **Front** : HTML/CSS/JS ou Vite + React
-- **Back / data** : Firebase Firestore ou Supabase (Postgres)
-- **Paiement** : Stripe Checkout (mode test)
-- **Auth** : email magique ou compte démo
-- **Hébergement** : Netlify ou Vercel + GitHub Pages pour le lien portfolio
