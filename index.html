@@ -735,26 +735,53 @@
 
                 <!-- Atelier Sika -->
                 <article data-category="web"
-                    class="project-card pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d reveal">
+                    class="project-card pure-glass group rounded-3xl sm:rounded-[40px] overflow-hidden relative glass-card-3d sm:col-span-2 reveal">
                     <div class="specular-reflection"></div>
                     <div class="p-6 sm:p-10 flex flex-col h-full">
                         <div class="flex items-center justify-between mb-6">
-                            <i class="fas fa-shopping-bag text-3xl text-signal/70"></i>
-                            <span class="badge-pill">40 produits · Stripe</span>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="size-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                                    <i class="fas fa-shopping-bag text-2xl text-signal"></i>
+                                </div>
+                                <span class="badge-pill">Case study · Web</span>
+                            </div>
+                            <span class="text-[10px] sm:text-xs text-white/45 font-bold uppercase tracking-widest">E-commerce</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Atelier Sika</h3>
-                        <p class="text-sm text-silver-gray leading-relaxed mb-6 flex-grow">
-                            Boutique cliente lifestyle : histoire de marque, 40 produits, app React, checkout Stripe test.
-                            Supabase (commandes) en prochaine étape.
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-3">Atelier Sika</h3>
+                        <p class="text-sm text-silver-gray leading-relaxed mb-6 max-w-4xl">
+                            Boutique cliente lifestyle : design system indigo/cuivre, <strong class="text-white/70">40 produits</strong>,
+                            app React, checkout Stripe test et commandes Supabase — process Design → Dev → QA → Deploy.
                         </p>
-                        <div class="flex items-center justify-between mt-auto flex-wrap gap-2">
-                            <span class="proj-tag">Vite · React · Stripe · Supabase next</span>
-                            <div class="flex items-center gap-3 ml-auto">
-                                <a href="commerce-platform/ui/index.html"
-                                    class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">UI</a>
+                        <a href="atelier-sika.html"
+                            class="group/preview mb-6 block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-3 sm:p-4"
+                            aria-label="Ouvrir le case study Atelier Sika">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                                <img src="images/atelier-sika-hero.jpg" alt="Hero Atelier Sika"
+                                    loading="lazy" decoding="async"
+                                    class="h-36 sm:h-48 w-full rounded-2xl object-cover opacity-85 transition duration-500 group-hover/preview:scale-[1.02] group-hover/preview:opacity-100 col-span-2">
+                                <img src="images/atelier-sika-produit-1.jpg" alt="Produit carafe Sika"
+                                    loading="lazy" decoding="async"
+                                    class="h-36 sm:h-48 w-full rounded-2xl object-cover opacity-85 transition duration-500 group-hover/preview:scale-[1.02] group-hover/preview:opacity-100">
+                                <img src="images/atelier-sika-about.jpg" alt="Boutique Atelier Sika"
+                                    loading="lazy" decoding="async"
+                                    class="h-36 sm:h-48 w-full rounded-2xl object-cover opacity-85 transition duration-500 group-hover/preview:scale-[1.02] group-hover/preview:opacity-100">
+                            </div>
+                        </a>
+                        <div class="flex items-center justify-between mt-auto flex-wrap gap-3">
+                            <span class="proj-tag">Vite · React · Stripe · Supabase</span>
+                            <div class="flex items-center gap-4 ml-auto">
+                                <a href="atelier-sika.html"
+                                    class="text-signal hover:text-white transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                                    Case study <i class="fas fa-arrow-right ml-0.5"></i>
+                                </a>
                                 <a href="commerce-platform/app/dist/index.html"
-                                    class="text-signal hover:text-white transition-colors text-xs font-bold uppercase tracking-widest flex items-center gap-1">
-                                    App <i class="fas fa-arrow-right ml-0.5"></i>
+                                    class="text-white/50 hover:text-white transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+                                    App
+                                </a>
+                                <a href="commerce-platform/ui/index.html"
+                                    class="text-white/40 hover:text-white transition-colors text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+                                    UI
                                 </a>
                             </div>
                         </div>

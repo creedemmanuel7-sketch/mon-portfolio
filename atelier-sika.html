@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atelier Sika — Case Study | Crédo ADJIGNON</title>
+    <meta name="description"
+        content="Case study Atelier Sika : boutique e-commerce lifestyle — design system, 40 produits, React, Stripe Checkout et commandes Supabase." />
+    <meta name="author" content="Crédo ADJIGNON" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href="https://creedemmanuel7-sketch.github.io/mon-portfolio/atelier-sika.html" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Atelier Sika — Case Study | Crédo ADJIGNON" />
+    <meta property="og:description"
+        content="E-commerce cliente démo : Design → Dev → QA → Deploy. Vite, React, Stripe, Supabase." />
+    <meta property="og:url" content="https://creedemmanuel7-sketch.github.io/mon-portfolio/atelier-sika.html" />
+    <meta property="og:image"
+        content="https://creedemmanuel7-sketch.github.io/mon-portfolio/images/atelier-sika-hero.jpg" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        'silver-gray': '#A1A1AA',
+                        'signal': '#E8B84A',
+                        'sika-indigo': '#1E3A5F',
+                        'sika-copper': '#B87333',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pure-glass {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 0.5px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .text-signal { color: #E8B84A; }
+        .bg-signal { background-color: #E8B84A; }
+
+        body {
+            background-color: #000;
+            overflow-x: hidden;
+        }
+
+        .nebula {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 45% at 50% 0%, rgba(30, 58, 95, 0.35), transparent 55%),
+                radial-gradient(circle at 85% 65%, rgba(184, 115, 51, 0.14) 0%, transparent 42%),
+                radial-gradient(circle at 20% 80%, rgba(232, 184, 74, 0.06) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .hero-bleed {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bleed img {
+            width: 100%;
+            height: min(62vh, 560px);
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-bleed::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #000 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+
+<body class="text-silver-gray font-sans selection:bg-signal selection:text-black">
+    <div class="nebula"></div>
+
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-4xl">
+        <div class="pure-glass rounded-full px-5 md:px-8 py-3 flex items-center justify-between">
+            <a href="index.html" class="text-white font-bold tracking-tighter">Crédo<span class="text-signal">.ai</span></a>
+            <div class="flex items-center gap-4 text-xs uppercase tracking-widest font-bold">
+                <a href="index.html#projets" class="text-white/60 hover:text-white transition-colors hidden sm:inline">Projets</a>
+                <a href="commerce-platform/app/dist/index.html"
+                    class="bg-signal text-black px-4 py-2 rounded-full hover:brightness-110 transition-all">Boutique</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-28 pb-24">
+        <div class="hero-bleed reveal mb-12">
+            <img src="images/atelier-sika-hero.jpg" alt="Atelier Sika — textiles indigo et lumière cuivrée" width="1536" height="1024" />
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <a href="index.html#projets"
+                class="reveal inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-white/50 hover:text-signal transition-colors mb-10">
+                <i class="fas fa-arrow-left"></i> Retour au portfolio
+            </a>
+
+            <section class="reveal mb-16">
+                <p class="text-signal text-[11px] font-bold uppercase tracking-[0.3em] mb-4">Case study · Web / E-commerce</p>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">Atelier Sika</h1>
+                <p class="text-sika-copper text-sm font-bold uppercase tracking-[0.2em] mb-6">Objets justes, pour le quotidien.</p>
+                <p class="text-lg text-silver-gray max-w-3xl leading-relaxed mb-8">
+                    Projet cliente fiction pour le portfolio : une boutique lifestyle pensée de A à Z —
+                    cadrage, design system indigo/cuivre, prototype UI, app React, paiements Stripe test
+                    et commandes persistées sur Supabase.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="commerce-platform/app/dist/index.html"
+                        class="bg-signal text-black px-6 py-3 rounded-full text-sm font-bold hover:brightness-110 transition-all">Ouvrir la boutique</a>
+                    <a href="commerce-platform/ui/index.html"
+                        class="border border-white/20 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-black transition-all">Prototype UI</a>
+                    <a href="https://github.com/creedemmanuel7-sketch/mon-portfolio/tree/main/commerce-platform" target="_blank" rel="noopener noreferrer"
+                        class="border border-white/20 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-black transition-all inline-flex items-center gap-2">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                </div>
+            </section>
+
+            <section class="reveal grid sm:grid-cols-3 gap-4 mb-16">
+                <div class="pure-glass rounded-3xl p-5">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-white/45 font-bold mb-2">Rôle</p>
+                    <p class="text-white font-bold">Design → Dev → QA solo</p>
+                </div>
+                <div class="pure-glass rounded-3xl p-5">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-white/45 font-bold mb-2">Stack</p>
+                    <p class="text-white font-bold">Vite · React · Stripe · Supabase</p>
+                </div>
+                <div class="pure-glass rounded-3xl p-5">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-white/45 font-bold mb-2">Livrable</p>
+                    <p class="text-white font-bold">40 produits · Checkout live test</p>
+                </div>
+            </section>
+
+            <section class="reveal mb-16">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                    <img src="images/atelier-sika-produit-1.jpg" alt="Carafe Atelier Sika" class="rounded-2xl sm:rounded-3xl border border-white/10 object-cover h-40 sm:h-52 w-full" loading="lazy" decoding="async" width="800" height="800">
+                    <img src="images/atelier-sika-produit-2.jpg" alt="Coussin Atelier Sika" class="rounded-2xl sm:rounded-3xl border border-white/10 object-cover h-40 sm:h-52 w-full" loading="lazy" decoding="async" width="800" height="800">
+                    <img src="images/atelier-sika-produit-3.jpg" alt="Assiettes Atelier Sika" class="rounded-2xl sm:rounded-3xl border border-white/10 object-cover h-40 sm:h-52 w-full" loading="lazy" decoding="async" width="800" height="800">
+                    <img src="images/atelier-sika-produit-4.jpg" alt="Bougies Atelier Sika" class="rounded-2xl sm:rounded-3xl border border-white/10 object-cover h-40 sm:h-52 w-full" loading="lazy" decoding="async" width="800" height="800">
+                </div>
+                <p class="mt-4 text-xs uppercase tracking-widest text-white/40 font-bold">Catalogue — matière, lumière, usage</p>
+            </section>
+
+            <section class="reveal mb-16 grid md:grid-cols-2 gap-4">
+                <figure class="overflow-hidden rounded-3xl border border-white/10">
+                    <img src="images/atelier-sika-about.jpg" alt="Intérieur boutique Atelier Sika" class="w-full h-64 sm:h-80 object-cover" loading="lazy" decoding="async" width="1536" height="1024">
+                </figure>
+                <div class="pure-glass rounded-3xl p-6 sm:p-8 flex flex-col justify-center">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-sika-copper font-bold mb-3">Identité</p>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">Une marque cliente, pas un clone perso</h2>
+                    <p class="leading-relaxed text-sm sm:text-base">
+                        <em>Sika</em> signifie « or » en akan. Direction artistique indigo <code class="text-white/70">#1E3A5F</code>,
+                        cuivre <code class="text-white/70">#B87333</code> et os — volontairement distincte du thème sombre ambre du portfolio Crédo.ai.
+                    </p>
+                </div>
+            </section>
+
+            <section class="reveal space-y-10 mb-16">
+                <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Problème</h2>
+                    <p class="leading-relaxed">
+                        Montrer une compétence e-commerce concrète — pas seulement des maquettes.
+                        Il fallait un parcours crédible : marque, catalogue, panier, paiement test, commande en base —
+                        comme pour un vrai client lifestyle.
+                    </p>
+                </article>
+                <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Approche</h2>
+                    <ul class="space-y-3 text-sm sm:text-base">
+                        <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span><strong class="text-white/80">Étape 1</strong> — brief, personas, flows, wireframes HTML.</span></li>
+                        <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span><strong class="text-white/80">Étape 2</strong> — design system + ~20 écrans UI HD (prototype navigable).</span></li>
+                        <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span><strong class="text-white/80">Étape 3</strong> — app Vite/React, 40 produits, panier, Stripe Checkout, Supabase <code class="text-white/60">orders</code>.</span></li>
+                        <li class="flex gap-3"><i class="fas fa-check text-signal mt-1"></i><span><strong class="text-white/80">QA</strong> — paiement carte test 4242…, persistance commande, recherche par email.</span></li>
+                    </ul>
+                </article>
+                <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Ce que j’ai construit</h2>
+                    <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                        <div class="border border-white/10 rounded-2xl p-4">Design system &amp; voix de marque</div>
+                        <div class="border border-white/10 rounded-2xl p-4">Catalogue 40 SKU + images produit</div>
+                        <div class="border border-white/10 rounded-2xl p-4">Checkout Stripe (session + API locale / Netlify)</div>
+                        <div class="border border-white/10 rounded-2xl p-4">Commandes Supabase + page « Mes commandes »</div>
+                    </div>
+                </article>
+                <article class="pure-glass rounded-3xl p-6 sm:p-10">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">Résultat</h2>
+                    <p class="leading-relaxed mb-4">
+                        Une démo bout-en-bout prête pour le portfolio : le process Design → Dev → paiement → data
+                        est visible et rejouable. La boutique est consultable sur GitHub Pages ;
+                        le checkout Stripe réel tourne en local (ou via Netlify Functions).
+                    </p>
+                    <p class="text-signal text-sm font-bold uppercase tracking-widest">Case study web / full-stack léger</p>
+                </article>
+            </section>
+
+            <section class="reveal pure-glass rounded-3xl sm:rounded-[40px] p-8 sm:p-12 text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Envie d’en parler ?</h2>
+                <p class="text-silver-gray mb-8 max-w-lg mx-auto">Stage Android / web — Lomé ou remote. Je peux détailler le process ou une démo live.</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="index.html#contact" class="bg-signal text-black px-6 py-3 rounded-full text-sm font-bold">Contact</a>
+                    <a href="commerce-platform/app/dist/index.html" class="border border-white/20 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-black transition-all">Voir la boutique</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center border-t border-white/5 text-[10px] uppercase tracking-widest text-white/40">
+        © 2026 Crédo ADJIGNON — Atelier Sika Case Study
+    </footer>
+
+    <script>
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const reveals = document.querySelectorAll('.reveal');
+        if (motionQuery.matches) {
+            reveals.forEach((el) => el.classList.add('is-visible'));
+        } else {
+            const obs = new IntersectionObserver((entries, o) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        o.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            reveals.forEach((el) => obs.observe(el));
+        }
+    </script>
+</body>
+
+</html>
