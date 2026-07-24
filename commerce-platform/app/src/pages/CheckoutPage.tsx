@@ -8,7 +8,7 @@ const API =
   'http://127.0.0.1:8787/api/create-checkout'
 
 export function CheckoutPage() {
-  const { cart, getProduct, cartTotal, clearCart } = useCart()
+  const { cart, getProduct, cartTotal } = useCart()
   const navigate = useNavigate()
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -29,6 +29,24 @@ export function CheckoutPage() {
     setBusy(true)
 
     const origin = window.location.href.split('#')[0].replace(/\/$/, '')
+    const lineItems = cart
+      .map((row) => {
+        const p = getProduct(row.id)
+        if (!p) return null
+        return { id: p.id, name: p.name, qty: row.qty, price: p.price }
+      })
+      .filter(Boolean)
+
+    sessionStorage.setItem(
+      'sika_checkout_draft',
+      JSON.stringify({
+        ...form,
+        email: form.email.trim().toLowerCase(),
+        totalCents: cartTotal,
+        items: lineItems,
+      }),
+    )
+
     const items = cart
       .map((row) => {
         const p = getProduct(row.id)
@@ -139,8 +157,23 @@ export function CheckoutPage() {
           type="button"
           className="mt-2 block text-xs text-muted underline"
           onClick={() => {
-            clearCart()
-            navigate('/confirmation')
+            const lineItems = cart
+              .map((row) => {
+                const p = getProduct(row.id)
+                if (!p) return null
+                return { id: p.id, name: p.name, qty: row.qty, price: p.price }
+              })
+              .filter(Boolean)
+            sessionStorage.setItem(
+              'sika_checkout_draft',
+              JSON.stringify({
+                ...form,
+                email: form.email.trim().toLowerCase() || 'demo@atelier-sika.demo',
+                totalCents: cartTotal,
+                items: lineItems,
+              }),
+            )
+            navigate('/confirmation?simulated=1')
           }}
         >
           Simuler succès (sans Stripe)

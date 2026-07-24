@@ -1,14 +1,66 @@
-import { type FormEvent, useEffect } from 'react'
+import { type FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../cart'
 import { ProductCard } from '../components/ProductCard'
+import { fetchOrdersByEmail, savePaidOrder, type OrderRow } from '../lib/orders'
+import { money } from '../types'
+import { supabaseConfigured } from '../lib/supabase'
 
 export { CheckoutPage } from './CheckoutPage'
 
 export function ConfirmationPage() {
   const { clearCart } = useCart()
+  const [saveMsg, setSaveMsg] = useState('Enregistrement de la commande…')
+
   useEffect(() => {
-    clearCart()
+    let cancelled = false
+    async function persist() {
+      const raw = sessionStorage.getItem('sika_checkout_draft')
+      const params = new URLSearchParams(window.location.hash.split('?')[1] || window.location.search.replace(/^\?/, ''))
+      const session = params.get('session_id')
+
+      if (!raw) {
+        if (!cancelled) setSaveMsg(supabaseConfigured ? 'Commande confirmée.' : 'Stripe OK — Supabase non configuré.')
+        clearCart()
+        return
+      }
+
+      try {
+        const draft = JSON.parse(raw) as {
+          email: string
+          name?: string
+          address?: string
+          city?: string
+          totalCents: number
+          items: { id: string; name: string; qty: number; price: number }[]
+        }
+        const result = await savePaidOrder({
+          email: draft.email,
+          customerName: draft.name,
+          address: draft.address,
+          city: draft.city,
+          totalCents: draft.totalCents,
+          items: draft.items,
+          stripeSessionId: session,
+        })
+        if (!cancelled) {
+          setSaveMsg(
+            result.ok
+              ? `Commande enregistrée · ${result.id.slice(0, 8)}…`
+              : `Paiement OK, enregistrement Supabase : ${result.error}. Exécute orders.sql dans le SQL Editor.`,
+          )
+        }
+        if (result.ok) sessionStorage.removeItem('sika_checkout_draft')
+        if (draft.email) localStorage.setItem('sika_last_email', draft.email)
+      } catch {
+        if (!cancelled) setSaveMsg('Commande confirmée (brouillon local).')
+      }
+      clearCart()
+    }
+    void persist()
+    return () => {
+      cancelled = true
+    }
   }, [clearCart])
 
   const params = new URLSearchParams(window.location.hash.split('?')[1] || '')
@@ -18,11 +70,10 @@ export function ConfirmationPage() {
     <div className="mx-auto max-w-lg px-4 py-16 text-center">
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-copper">Merci</p>
       <h1 className="font-display mt-2 text-4xl font-bold">Votre commande est confirmée</h1>
-      <p className="mt-3 text-muted">
-        Bienvenue dans la maison Sika. Un email de confirmation suivra dès que Supabase / webhooks seront branchés.
-      </p>
+      <p className="mt-3 text-muted">Bienvenue dans la maison Sika.</p>
+      <p className="mt-2 text-sm text-muted">{saveMsg}</p>
       <p className="mt-2 text-sm text-muted">
-        Statut · <span className="font-bold text-emerald-700">paid</span> (Stripe test)
+        Statut · <span className="font-bold text-emerald-700">paid</span>
         {session ? <><br /><span className="text-xs break-all">Session {session}</span></> : null}
       </p>
       <div className="mt-8 flex justify-center gap-3">
@@ -154,17 +205,69 @@ export function ContactPage() {
 }
 
 export function OrdersPage() {
+  const [email, setEmail] = useState(() => localStorage.getItem('sika_last_email') || '')
+  const [orders, setOrders] = useState<OrderRow[]>([])
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function load(e?: FormEvent) {
+    e?.preventDefault()
+    setLoading(true)
+    setError('')
+    const res = await fetchOrdersByEmail(email)
+    setLoading(false)
+    if (!res.ok) {
+      setOrders([])
+      setError(res.error)
+      return
+    }
+    setOrders(res.orders)
+    if (email) localStorage.setItem('sika_last_email', email.trim().toLowerCase())
+  }
+
+  useEffect(() => {
+    if (email) void load()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
       <h1 className="font-display text-3xl font-bold">Mes commandes</h1>
-      <p className="mt-2 text-muted">L’historique complet arrivera avec Supabase. Voici l’aperçu démo.</p>
+      <p className="mt-2 text-muted">
+        {supabaseConfigured
+          ? 'Retrouvez vos commandes avec l’email utilisé au checkout.'
+          : 'Configure VITE_SUPABASE_URL + ANON_KEY, puis exécute supabase/orders.sql.'}
+      </p>
+      <form onSubmit={load} className="mt-6 flex flex-wrap gap-2">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(ev) => setEmail(ev.target.value)}
+          placeholder="vous@email.com"
+          className="min-w-[220px] flex-1 rounded-full border border-sand bg-chalk px-4 py-2"
+        />
+        <button type="submit" className="rounded-full bg-indigo px-5 py-2 text-sm font-bold text-white">
+          {loading ? '…' : 'Rechercher'}
+        </button>
+      </form>
+      {error && <p className="mt-3 text-sm text-red-700">{error}</p>}
       <div className="mt-6 overflow-hidden rounded-2xl border border-sand bg-chalk">
         <div className="grid grid-cols-4 gap-2 border-b border-sand px-4 py-3 text-xs font-bold uppercase tracking-wider text-muted">
           <span>N°</span><span>Date</span><span>Total</span><span>Statut</span>
         </div>
-        <div className="grid grid-cols-4 gap-2 px-4 py-3 text-sm">
-          <span>ASK-2026-1042</span><span>24/07/2026</span><span>35 000 XOF</span><span className="font-bold text-emerald-700">paid</span>
-        </div>
+        {!orders.length ? (
+          <p className="px-4 py-6 text-sm text-muted">Aucune commande pour cet email.</p>
+        ) : (
+          orders.map((o) => (
+            <div key={o.id} className="grid grid-cols-4 gap-2 border-b border-sand px-4 py-3 text-sm last:border-0">
+              <span className="truncate font-mono text-xs">{o.id.slice(0, 8)}</span>
+              <span>{new Date(o.created_at).toLocaleDateString('fr-FR')}</span>
+              <span>{money(o.total_cents)}</span>
+              <span className="font-bold text-emerald-700">{o.status}</span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )

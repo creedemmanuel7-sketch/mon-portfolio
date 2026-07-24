@@ -1,38 +1,37 @@
-# Supabase — clés nécessaires pour Atelier Sika
+# Où mettre service_role ? (réponse courte)
 
-## Oui, on en aura besoin (étape suivante)
+## ❌ Ne JAMAIS le mettre dans le dépôt Git
 
-| Clé | Où l’utiliser | Publique ? |
-|-----|----------------|------------|
-| **Project URL** (`VITE_SUPABASE_URL`) | Front React | Oui |
-| **anon public** (`VITE_SUPABASE_ANON_KEY`) | Front React (avec RLS) | Oui (protégée par RLS) |
-| **service_role** | Serveur / fonctions uniquement (admin, webhooks) | **NON — jamais dans le front ni Git** |
+Pas dans :
+- le code source
+- `.env.example`
+- GitHub (même en privé si tu peux l’éviter)
+- `VITE_…` (tout `VITE_` part dans le navigateur)
 
-On n’a **pas** besoin de la database password dans le front.
+## ✅ Où le mettre
 
-## Où les trouver
+| Environnement | Où |
+|---------------|-----|
+| **Local** | `commerce-platform/app/.env.local` → `SUPABASE_SERVICE_ROLE_KEY=...` (déjà gitignored) |
+| **Netlify** | Site settings → Environment variables → `SUPABASE_SERVICE_ROLE_KEY` |
+| **Vercel** | Project → Settings → Environment Variables |
 
-1. Va sur [https://supabase.com](https://supabase.com) → **Sign in** (GitHub OK)
-2. **New project** (ex. `atelier-sika`)
-   - Region proche (ex. Frankfurt / EU)
-   - Mot de passe DB : à garder dans un gestionnaire de mots de passe
-3. Dans le projet : **Project Settings** (icône engrenage) → **API**
-4. Copie :
-   - **Project URL**
-   - **anon public**
-5. (Plus tard, pour le webhook Stripe côté serveur) : **service_role** — à mettre seulement dans Netlify/Vercel env, jamais dans le code client
+Utilisation : **uniquement** dans une fonction serveur (webhook Stripe, admin).  
+Le front n’utilise que **URL + anon**.
 
-## À m’envoyer ensuite (safe)
+## Correction de tes variables
 
-Tu peux coller ici :
-- `VITE_SUPABASE_URL=...`
-- `VITE_SUPABASE_ANON_KEY=...`
+Tu as collé `sb_publishable_…` dans `VITE_SUPABASE_URL` — ce n’est **pas** une URL.
 
-**Ne m’envoie pas** `service_role` dans le chat si possible ; configure-la directement dans le dashboard Netlify/Vercel. Si tu dois la partager, on la mettra uniquement en `.env.local` gitignored.
+La bonne URL (déduite de ton JWT anon) est :
 
-## À quoi ça servira chez Sika
+```env
+VITE_SUPABASE_URL=https://mgocgzcpqnbcaqtclvsz.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
 
-- Auth client (compte / commandes)
-- Tables `products` (optionnel) + `orders` + `order_items`
-- Historique « Mes commandes » réel
-- (Optionnel) Storage pour images
+## Activer les tables
+
+1. Supabase Dashboard → **SQL Editor**
+2. Colle le contenu de `commerce-platform/app/supabase/orders.sql`
+3. **Run**
