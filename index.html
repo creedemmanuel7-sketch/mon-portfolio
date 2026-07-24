@@ -974,36 +974,79 @@
         <!-- Contact -->
         <section id="contact" class="reveal">
             <div
-                class="pure-glass p-8 sm:p-12 md:p-20 rounded-3xl sm:rounded-[50px] md:rounded-[80px] text-center relative overflow-hidden">
+                class="pure-glass p-8 sm:p-12 md:p-16 rounded-3xl sm:rounded-[50px] md:rounded-[80px] relative overflow-hidden">
                 <div class="specular-reflection"></div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 luminescent-text">
-                    Construisons la suite
-                </h2>
-                <p class="text-silver-gray mb-8 sm:mb-12 max-w-xl mx-auto text-sm sm:text-base">
-                    Ouvert aux stages et collabs en <strong class="text-white/80">Android et développement web</strong>
-                    — des projets concrets, à Lomé ou en remote.
-                </p>
-                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 luminescent-text">
+                        Construisons la suite
+                    </h2>
+                    <p class="text-silver-gray max-w-xl mx-auto text-sm sm:text-base">
+                        Stages, collabs, projets Android / web — dites-moi pourquoi vous écrivez,
+                        je reçois le message dans ma boîte Supabase.
+                    </p>
+                </div>
+
+                <form id="portfolio-contact-form" class="mx-auto max-w-xl text-left space-y-3 mb-10"
+                    novalidate>
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
+                            Nom
+                            <input required name="name" type="text" autocomplete="name"
+                                class="mt-1 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-signal"
+                                placeholder="Votre nom" />
+                        </label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
+                            Email
+                            <input required name="email" type="email" autocomplete="email"
+                                class="mt-1 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-signal"
+                                placeholder="vous@email.com" />
+                        </label>
+                    </div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
+                        Motif
+                        <select required name="reason"
+                            class="mt-1 w-full rounded-2xl border border-white/15 bg-black/40 px-4 py-3 text-sm text-white focus:outline-none focus:border-signal">
+                            <option value="stage">Stage Android / web</option>
+                            <option value="collab">Collaboration / freelance</option>
+                            <option value="projet">Parler d’un projet</option>
+                            <option value="feedback">Feedback portfolio</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-white/50">
+                        Message
+                        <textarea required name="message" rows="4"
+                            class="mt-1 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-signal"
+                            placeholder="Contexte, délai, lien utile…"></textarea>
+                    </label>
+                    <p id="portfolio-contact-status" class="text-sm min-h-5 text-white/60" role="status" aria-live="polite"></p>
+                    <button type="submit" id="portfolio-contact-submit"
+                        class="w-full sm:w-auto bg-signal text-black px-8 py-3 rounded-full hover:brightness-110 transition-all font-bold text-sm uppercase tracking-wider disabled:opacity-50">
+                        Envoyer le message
+                    </button>
+                </form>
+
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
                     <a id="contact-email" href="mailto:creedemmanuel7@gmail.com"
-                        class="bg-signal text-black px-5 sm:px-8 py-3 rounded-full hover:brightness-110 transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2">
-                        <i class="fas fa-envelope"></i> Email
+                        class="pure-glass px-5 sm:px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
+                        <i class="fas fa-envelope"></i> Email direct
                     </a>
                     <a id="contact-whatsapp" href="https://wa.me/22896569761" target="_blank" rel="noopener noreferrer"
-                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
+                        class="pure-glass px-5 sm:px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                     <a id="contact-linkedin" href="https://www.linkedin.com/in/credo-credson-adjignon" target="_blank"
                         rel="noopener noreferrer"
-                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
+                        class="pure-glass px-5 sm:px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
                     <a id="contact-github" href="https://github.com/creedemmanuel7-sketch" target="_blank"
                         rel="noopener noreferrer"
-                        class="pure-glass px-5 sm:px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
+                        class="pure-glass px-5 sm:px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 text-white/80">
                         <i class="fab fa-github"></i> GitHub
                     </a>
                 </div>
-                <div class="mt-8 sm:mt-12 text-[10px] sm:text-xs uppercase tracking-widest text-white/50">
+                <div class="mt-8 text-center text-[10px] sm:text-xs uppercase tracking-widest text-white/50">
                     Lomé, Togo · Adidogomé
                 </div>
             </div>
@@ -1344,6 +1387,64 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        (function () {
+            const form = document.getElementById('portfolio-contact-form');
+            if (!form) return;
+            const status = document.getElementById('portfolio-contact-status');
+            const submitBtn = document.getElementById('portfolio-contact-submit');
+            const SUPABASE_URL = 'https://mgocgzcpqnbcaqtclvsz.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nb2NnemNwcW5iY2FxdGNsdnN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5MTE0MzIsImV4cCI6MjEwMDQ4NzQzMn0.G-Jzh3diVxPes998dtAqitzziBbwvLj8wSy4v7QVnVw';
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const data = new FormData(form);
+                const payload = {
+                    source: 'portfolio',
+                    name: String(data.get('name') || '').trim(),
+                    email: String(data.get('email') || '').trim().toLowerCase(),
+                    reason: String(data.get('reason') || 'autre'),
+                    message: String(data.get('message') || '').trim(),
+                };
+                if (!payload.name || !payload.email || !payload.message) {
+                    status.textContent = 'Merci de remplir nom, email et message.';
+                    status.className = 'text-sm min-h-5 text-red-300';
+                    return;
+                }
+                submitBtn.disabled = true;
+                status.textContent = 'Envoi en cours…';
+                status.className = 'text-sm min-h-5 text-white/60';
+                try {
+                    const res = await fetch(SUPABASE_URL + '/rest/v1/contact_messages', {
+                        method: 'POST',
+                        headers: {
+                            apikey: SUPABASE_ANON_KEY,
+                            Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
+                            'Content-Type': 'application/json',
+                            Prefer: 'return=minimal',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                    if (!res.ok) {
+                        const text = await res.text();
+                        if (/contact_messages|PGRST205|schema cache/i.test(text)) {
+                            throw new Error('Table absente — exécute contact_messages.sql dans Supabase SQL Editor.');
+                        }
+                        throw new Error(text.slice(0, 160) || ('Erreur ' + res.status));
+                    }
+                    status.textContent = 'Message envoyé. Merci — je vous répondrai bientôt.';
+                    status.className = 'text-sm min-h-5 text-emerald-300';
+                    form.reset();
+                } catch (err) {
+                    status.textContent = err instanceof Error ? err.message : 'Échec d’envoi.';
+                    status.className = 'text-sm min-h-5 text-red-300';
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        })();
     </script>
 
     <!-- ═══════════════════════════════════════════════════════════

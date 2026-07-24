@@ -42,6 +42,16 @@ L’API locale (`npm run stripe:api`) lit `STRIPE_SECRET_KEY`.
 
 ## Activer les tables
 
+### Commandes (`orders`)
 1. Supabase Dashboard → **SQL Editor**
 2. Colle le contenu de `commerce-platform/app/supabase/orders.sql`
 3. **Run**
+
+### Messages de contact (`contact_messages`)
+1. Même SQL Editor
+2. Colle `commerce-platform/app/supabase/contact_messages.sql`
+3. **Run**
+
+Les messages du portfolio et d’Atelier Sika apparaissent ensuite dans **Table Editor → contact_messages**
+(filtre `source` = `portfolio` ou `atelier-sika`). Ce n’est pas un e-mail automatique : c’est une boîte de réception dans Supabase.
+Pour recevoir aussi un mail, brancher plus tard Formspree / Web3Forms / webhook.

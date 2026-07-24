@@ -2,7 +2,9 @@ import { type FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../cart'
 import { ProductCard } from '../components/ProductCard'
+import { sendContactMessage } from '../lib/contact'
 import { fetchOrdersByEmail, savePaidOrder, type OrderRow } from '../lib/orders'
+import { useToast } from '../toast'
 import { money } from '../types'
 import { supabaseConfigured } from '../lib/supabase'
 
@@ -177,6 +179,34 @@ export function AboutPage() {
 }
 
 export function ContactPage() {
+  const { push } = useToast()
+  const [busy, setBusy] = useState(false)
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    reason: 'commande',
+    message: '',
+  })
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setBusy(true)
+    const result = await sendContactMessage({
+      source: 'atelier-sika',
+      name: form.name,
+      email: form.email,
+      reason: form.reason,
+      message: form.message,
+    })
+    setBusy(false)
+    if (!result.ok) {
+      push(result.error, 'error')
+      return
+    }
+    push('Message envoyé — nous vous répondrons bientôt.', 'success')
+    setForm({ name: '', email: '', reason: 'commande', message: '' })
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="grid gap-8 md:grid-cols-2">
@@ -185,7 +215,7 @@ export function ContactPage() {
           <h1 className="font-display mt-2 text-4xl font-bold">Parlons de votre prochaine pièce</h1>
           <p className="mt-4 text-muted">
             Une question sur une matière, une commande, une collaboration ?
-            L’équipe Sika répond sous 48h (scénario démo).
+            Choisissez le motif — le message est enregistré et consultable côté atelier.
           </p>
           <div className="mt-8 space-y-2 text-sm">
             <p><strong>Email</strong> · hello@atelier-sika.demo</p>
@@ -194,25 +224,53 @@ export function ContactPage() {
             <p className="text-muted">Lun–Sam · 9h–18h</p>
           </div>
         </div>
-        <form
-          className="space-y-3 rounded-2xl border border-sand bg-chalk p-5"
-          onSubmit={(e: FormEvent) => {
-            e.preventDefault()
-            alert('Message reçu — merci de votre intérêt pour Atelier Sika.')
-            ;(e.target as HTMLFormElement).reset()
-          }}
-        >
-          <input required placeholder="Votre nom" className="w-full rounded-xl border border-sand px-3 py-2" />
-          <input required type="email" placeholder="Email" className="w-full rounded-xl border border-sand px-3 py-2" />
-          <select className="w-full rounded-xl border border-sand px-3 py-2" defaultValue="commande">
-            <option value="commande">Suivi de commande</option>
-            <option value="produit">Question produit</option>
-            <option value="presse">Presse / partenariat</option>
-            <option value="autre">Autre</option>
-          </select>
-          <textarea required rows={5} placeholder="Votre message" className="w-full rounded-xl border border-sand px-3 py-2" />
-          <button type="submit" className="rounded-full bg-indigo px-5 py-3 text-sm font-bold text-white">
-            Envoyer le message
+        <form className="space-y-3 rounded-2xl border border-sand bg-chalk p-5" onSubmit={onSubmit}>
+          <input
+            required
+            name="name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            placeholder="Votre nom"
+            className="w-full rounded-xl border border-sand px-3 py-2"
+          />
+          <input
+            required
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            placeholder="Email"
+            className="w-full rounded-xl border border-sand px-3 py-2"
+          />
+          <label className="block text-sm font-bold">
+            Motif
+            <select
+              name="reason"
+              value={form.reason}
+              onChange={(e) => setForm({ ...form, reason: e.target.value })}
+              className="mt-1 w-full rounded-xl border border-sand px-3 py-2 font-normal"
+            >
+              <option value="commande">Suivi de commande</option>
+              <option value="produit">Question produit</option>
+              <option value="presse">Presse / partenariat</option>
+              <option value="autre">Autre</option>
+            </select>
+          </label>
+          <textarea
+            required
+            name="message"
+            rows={5}
+            value={form.message}
+            onChange={(e) => setForm({ ...form, message: e.target.value })}
+            placeholder="Votre message"
+            className="w-full rounded-xl border border-sand px-3 py-2"
+          />
+          <button
+            type="submit"
+            disabled={busy}
+            className="rounded-full bg-indigo px-5 py-3 text-sm font-bold text-white disabled:opacity-50"
+          >
+            {busy ? 'Envoi…' : 'Envoyer le message'}
           </button>
         </form>
       </div>
