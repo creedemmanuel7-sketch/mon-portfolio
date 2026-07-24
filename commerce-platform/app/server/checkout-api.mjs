@@ -52,14 +52,16 @@ function parseEnvText(text) {
     const val = stripQuotes(trimmed.slice(eq + 1).trim())
     if (!key) continue
     found.push(key)
-    if (!process.env[key]) process.env[key] = val
+    // .env.local doit toujours gagner (évite une var Windows/conda vide ou incorrecte)
+    process.env[key] = val
   }
   return found
 }
 
 function loadEnv() {
   const loaded = []
-  for (const name of ['.env.local', '.env']) {
+  // .env d'abord, puis .env.local qui écrase
+  for (const name of ['.env', '.env.local']) {
     const p = resolve(root, name)
     if (!existsSync(p)) continue
     const text = decodeEnvBuffer(readFileSync(p))
