@@ -9,6 +9,7 @@ export type ContactPayload = {
   email: string
   reason: string
   message: string
+  meta?: Record<string, string>
 }
 
 export async function sendContactMessage(
@@ -29,6 +30,7 @@ export async function sendContactMessage(
         email: payload.email.trim().toLowerCase(),
         reason: payload.reason,
         message: payload.message.trim(),
+        meta: payload.meta ?? {},
       }),
     })
     if (!res.ok) {
