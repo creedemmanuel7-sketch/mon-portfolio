@@ -1,0 +1,129 @@
+/* CredoShop — styles wireframe basse fidélité (Étape 1) */
+:root {
+  --ink: #111;
+  --muted: #666;
+  --line: #ccc;
+  --bg: #f4f4f2;
+  --card: #fff;
+  --accent: #111;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.45;
+}
+a { color: inherit; }
+.wf-banner {
+  background: #222;
+  color: #eee;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem;
+}
+.wf-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 5%;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.wf-nav nav { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.95rem; }
+.wf-main { padding: 1.5rem 5% 3rem; max-width: 1100px; margin: 0 auto; }
+.wf-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+.wf-eyebrow { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.75rem; color: var(--muted); }
+.wf-muted { color: var(--muted); }
+.wf-label { color: var(--muted); font-size: 0.85rem; margin: 0; }
+.wf-box {
+  border: 2px dashed var(--line);
+  background: #eaeae6;
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+  border-radius: 8px;
+}
+.wf-box.tall { min-height: 260px; }
+.wf-box.media { min-height: 140px; margin-bottom: 0.75rem; }
+.wf-btn, button.wf-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.wf-btn.secondary { background: #fff; color: var(--ink); border: 1px solid var(--ink); }
+.wf-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.wf-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.75rem;
+  text-decoration: none;
+}
+.wf-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+.wf-chip {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+.wf-chip.active { background: #111; color: #fff; }
+.wf-product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.wf-form { display: grid; gap: 0.75rem; max-width: 420px; }
+.wf-form label { display: grid; gap: 0.25rem; font-size: 0.9rem; }
+.wf-form input, .wf-form select {
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+}
+.wf-table { width: 100%; border-collapse: collapse; background: #fff; }
+.wf-table th, .wf-table td {
+  border: 1px solid var(--line);
+  padding: 0.75rem;
+  text-align: left;
+}
+.wf-aside {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.wf-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+.wf-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+.wf-two { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+@media (max-width: 800px) {
+  .wf-hero, .wf-product, .wf-two, .wf-grid-3 { grid-template-columns: 1fr; }
+}

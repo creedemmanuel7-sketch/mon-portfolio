@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CredoShop — Wireframe Commandes</title>
+  <link rel="stylesheet" href="wireframe.css" />
+</head>
+<body>
+  <div class="wf-banner">WIREFRAME · E7 Mes commandes</div>
+  <header class="wf-nav">
+    <a href="index.html"><strong>CredoShop</strong></a>
+    <nav>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="panier.html">Panier</a>
+      <a href="commandes.html"><strong>Commandes</strong></a>
+    </nav>
+  </header>
+  <main class="wf-main">
+    <h1>Mes commandes</h1>
+    <form class="wf-form" style="margin-bottom:1.5rem;" onsubmit="return false;">
+      <label>Email de commande<input type="email" placeholder="amina@email.com" /></label>
+      <button class="wf-btn secondary" type="submit">Rechercher</button>
+    </form>
+    <table class="wf-table">
+      <thead>
+        <tr><th>N°</th><th>Date</th><th>Total</th><th>Statut</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CMD-1042</td>
+          <td>24/07/2026</td>
+          <td>35 000 XOF</td>
+          <td>paid</td>
+        </tr>
+        <tr>
+          <td>CMD-1038</td>
+          <td>12/07/2026</td>
+          <td>7 500 XOF</td>
+          <td>paid</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <footer class="wf-footer">Wireframe E7 · US-10</footer>
+</body>
+</html>

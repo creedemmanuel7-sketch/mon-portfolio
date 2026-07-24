@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CredoShop — Wireframe Checkout</title>
+  <link rel="stylesheet" href="wireframe.css" />
+</head>
+<body>
+  <div class="wf-banner">WIREFRAME · E5 Checkout (+ confirmation E6 en succès Stripe)</div>
+  <header class="wf-nav">
+    <a href="index.html"><strong>CredoShop</strong></a>
+    <nav>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="panier.html">Panier</a>
+      <a href="commandes.html">Commandes</a>
+    </nav>
+  </header>
+  <main class="wf-main">
+    <h1>Checkout</h1>
+    <div class="wf-two">
+      <form class="wf-form" action="#" onsubmit="return false;">
+        <h2>Coordonnées</h2>
+        <label>Nom complet *<input type="text" placeholder="Amina Mensah" required /></label>
+        <label>Email *<input type="email" placeholder="amina@email.com" required /></label>
+        <label>Téléphone<input type="tel" placeholder="+228 …" /></label>
+        <label>Adresse *<input type="text" placeholder="Quartier, rue…" required /></label>
+        <label>Ville *<input type="text" placeholder="Lomé" required /></label>
+        <button class="wf-btn" type="submit">Payer avec Stripe (test)</button>
+        <p class="wf-muted">Redirection vers Stripe Checkout · carte test 4242…</p>
+      </form>
+      <aside class="wf-aside">
+        <h2>Commande</h2>
+        <p>2 × Écouteurs Pulse — 30 000</p>
+        <p>1 × Mug Crédo — 5 000</p>
+        <hr />
+        <p><strong>Total : 35 000 XOF</strong></p>
+        <p class="wf-muted">Après paiement → page Confirmation (n° commande)</p>
+      </aside>
+    </div>
+  </main>
+  <footer class="wf-footer">Wireframe E5 · US-07 US-08 US-09</footer>
+</body>
+</html>
